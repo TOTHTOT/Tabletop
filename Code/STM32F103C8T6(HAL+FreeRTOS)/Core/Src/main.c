@@ -21,6 +21,8 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "dma.h"
+#include "i2c.h"
+#include "spi.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -91,6 +93,10 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_USART1_UART_Init();
+  MX_I2C1_Init();
+  MX_SPI1_Init();
+  MX_USART2_UART_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
 	delay_init();
 	//HAL_UART_Receive_DMA(&huart1, (uint8_t*)USART_RX_BUF, USART_REC_LEN);     //设置DMA传输，将串口1的数据搬运到recvive_buff中，每次255个字节
