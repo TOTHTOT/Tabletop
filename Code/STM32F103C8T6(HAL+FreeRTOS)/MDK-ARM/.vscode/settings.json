@@ -2,6 +2,7 @@
     "files.associations": {
         "string.h": "c",
         "delay.h": "c",
-        "string": "c"
+        "string": "c",
+        "spi.h": "c"
     }
 }

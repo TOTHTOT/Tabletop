@@ -13,6 +13,7 @@
 "randomtimedisplay\key.o"
 "randomtimedisplay\led.o"
 "randomtimedisplay\sht30.o"
+"randomtimedisplay\w25qxx.o"
 "randomtimedisplay\delay.o"
 "randomtimedisplay\usart1.o"
 "randomtimedisplay\stm32f1xx_hal_gpio_ex.o"
