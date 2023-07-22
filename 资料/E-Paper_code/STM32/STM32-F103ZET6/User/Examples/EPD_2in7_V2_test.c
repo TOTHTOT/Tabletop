@@ -32,9 +32,7 @@
 #include "EPD_2in7_V2.h"
 #include <time.h> 
 
-UBYTE BlackImage[5808];
-   // UWORD Imagesize = ((EPD_2IN7_V2_WIDTH % 8 == 0)? (EPD_2IN7_V2_WIDTH / 8 ): (EPD_2IN7_V2_WIDTH / 8 + 1)) * EPD_2IN7_V2_HEIGHT;
-
+ UBYTE BlackImage[5808];
 int EPD_test(void)
 {
     printf("EPD_2IN7_V2_test Demo\r\n");
@@ -48,8 +46,10 @@ int EPD_test(void)
     EPD_2IN7_V2_Clear();
 
     //Create a new image cache
+   
+//    UWORD Imagesize = ((EPD_2IN7_V2_WIDTH % 8 == 0)? (EPD_2IN7_V2_WIDTH / 8 ): (EPD_2IN7_V2_WIDTH / 8 + 1)) * EPD_2IN7_V2_HEIGHT;
 //    if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
-//        printf("Failed to apply for black memory size(%d)...\r\n", Imagesize);
+//        printf("Failed to apply for black memory...\r\n");
 //        return -1;
 //    }
     printf("Paint_NewImage\r\n");
@@ -205,14 +205,14 @@ int EPD_test(void)
     }
 #endif
 
-#if 0 // show image for array
+#if 1 // show image for array
 		free(BlackImage);
     printf("show Gray------------------------\r\n");
-    Imagesize = ((EPD_2IN7_V2_WIDTH % 4 == 0)? (EPD_2IN7_V2_WIDTH / 4 ): (EPD_2IN7_V2_WIDTH / 4 + 1)) * EPD_2IN7_V2_HEIGHT;
-    if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
-        printf("Failed to apply for black memory...\r\n");
-        return -1;
-    }
+//    Imagesize = ((EPD_2IN7_V2_WIDTH % 4 == 0)? (EPD_2IN7_V2_WIDTH / 4 ): (EPD_2IN7_V2_WIDTH / 4 + 1)) * EPD_2IN7_V2_HEIGHT;
+//    if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
+//        printf("Failed to apply for black memory...\r\n");
+//        return -1;
+//    }
     EPD_2IN7_V2_Init_4GRAY();
     printf("4 grayscale display\r\n");
     Paint_NewImage(BlackImage, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
@@ -257,7 +257,7 @@ int EPD_test(void)
     printf("Goto Sleep...\r\n");
     EPD_2IN7_V2_Sleep();
     free(BlackImage);
-    //BlackImage = NULL;
+//    BlackImage = NULL;
     DEV_Delay_ms(2000);//important, at least 2s
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");

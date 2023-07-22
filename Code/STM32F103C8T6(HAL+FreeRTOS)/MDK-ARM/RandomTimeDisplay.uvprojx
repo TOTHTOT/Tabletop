@@ -627,11 +627,6 @@
               <FilePath>..\HARDWARE\EPaper\EPD_2in7_V2.c</FilePath>
             </File>
             <File>
-              <FileName>DEV_Config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\EPaper\DEV_Config.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_Paint.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\EPaper\GUI_Paint.c</FilePath>

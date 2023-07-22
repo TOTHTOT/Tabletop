@@ -31,47 +31,38 @@
 #include "EPD_Test.h"
 #include "EPD_2in7_V2.h"
 #include <time.h>
-UBYTE BlackImage[5808];
+#include "usart1.h"
+#include <stdio.h>
+
 
 int EPD_test(void)
 {
-    printf("EPD_2IN7_V2_test Demo\r\n");
-    if (DEV_Module_Init() != 0)
-    {
-        return -1;
-    }
+    uint8_t *BlackImage = g_epd_dev.frame_buf;
 
-    printf("e-Paper Init and Clear...\r\n");
-    EPD_2IN7_V2_Init();
+    INFO_PRINT("EPD_2IN7_V2_test Demo\r\n");
+    g_epd_dev.module_start_callback();
 
-    EPD_2IN7_V2_Clear();
-
-    // Create a new image cache
-    //    if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
-    //        printf("Failed to apply for black memory size(%d)...\r\n", Imagesize);
-    //        return -1;
-    //    }
-    printf("Paint_NewImage\r\n");
+    INFO_PRINT("Paint_NewImage\r\n");
     Paint_NewImage(BlackImage, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
     Paint_Clear(WHITE);
 
 #if 1 // Fast Drawing on the image
     // Fast refresh
-    printf("This is followed by a quick refresh demo\r\n");
-    printf("First, clear the screen\r\n");
-    EPD_2IN7_V2_Init();
-    EPD_2IN7_V2_Clear();
+    INFO_PRINT("This is followed by a quick refresh demo\r\n");
+    INFO_PRINT("First, clear the screen\r\n");
+    EPD_2IN7_V2_Init(&g_epd_dev);
+    EPD_2IN7_V2_Clear(&g_epd_dev);
 
-    printf("e-Paper Init Fast\r\n");
-    EPD_2IN7_V2_Init_Fast();
+    INFO_PRINT("e-Paper Init Fast\r\n");
+    EPD_2IN7_V2_Init_Fast(&g_epd_dev);
     Paint_NewImage(BlackImage, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
-    printf("Drawing\r\n");
+    INFO_PRINT("Drawing\r\n");
     // 1.Select Image
     Paint_SelectImage(BlackImage);
 
     // 2.Drawing on the image
     Paint_Clear(WHITE);
-    printf("Drawing:BlackImage\r\n");
+    INFO_PRINT("Drawing:BlackImage\r\n");
     Paint_DrawPoint(10, 80, BLACK, DOT_PIXEL_1X1, DOT_STYLE_DFT);
     Paint_DrawPoint(10, 90, BLACK, DOT_PIXEL_2X2, DOT_STYLE_DFT);
     Paint_DrawPoint(10, 100, BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
@@ -97,33 +88,33 @@ int EPD_test(void)
     Paint_DrawString_CN(130, 0, "���abc", &Font12CN, BLACK, WHITE);
     Paint_DrawString_CN(130, 20, "΢ѩ����", &Font24CN, WHITE, BLACK);
 
-    EPD_2IN7_V2_Display_Fast(BlackImage);
-    DEV_Delay_ms(3000);
+    EPD_2IN7_V2_Display_Fast(&g_epd_dev, BlackImage);
+    g_epd_dev.delay_ms_callback(3000);
 
 #endif
 
 #if 0 // show bmp
 
-    printf("show window BMP-----------------\r\n");
+    INFO_PRINT("show window BMP-----------------\r\n");
 		EPD_2IN7_V2_Init();
 		Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     Paint_DrawBitMap(gImage_2in7);
     EPD_2IN7_V2_Display(BlackImage);
-    DEV_Delay_ms(3000);
+    g_epd_dev.delay_ms_callback(3000);
 
 #endif
 
 #if 0 // Drawing on the image
 		Paint_NewImage(BlackImage, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);  	
-    printf("Drawing\r\n");
+    INFO_PRINT("Drawing\r\n");
     //1.Select Image
 		EPD_2IN7_V2_Init();
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
 	
     // 2.Drawing on the image
-    printf("Drawing:BlackImage\r\n");
+    INFO_PRINT("Drawing:BlackImage\r\n");
     Paint_DrawPoint(10, 80, BLACK, DOT_PIXEL_1X1, DOT_STYLE_DFT);
     Paint_DrawPoint(10, 90, BLACK, DOT_PIXEL_2X2, DOT_STYLE_DFT);
     Paint_DrawPoint(10, 100, BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
@@ -150,7 +141,7 @@ int EPD_test(void)
     Paint_DrawString_CN(130, 20, "΢ѩ����", &Font24CN, WHITE, BLACK);
 
     EPD_2IN7_V2_Display_Base(BlackImage);
-    DEV_Delay_ms(3000);
+    g_epd_dev.delay_ms_callback(3000);
 #endif
 
 #if 0 // Partial refresh, example shows time    	
@@ -161,7 +152,7 @@ int EPD_test(void)
     // EPD_2IN7_V2_Display_Base_color(WHITE);
 		Paint_NewImage(BlackImage, 50, 120, 90, WHITE);
     
-    printf("Partial refresh\r\n");
+    INFO_PRINT("Partial refresh\r\n");
     Paint_SelectImage(BlackImage);
 		Paint_SetScale(2);
     Paint_Clear(WHITE);
@@ -195,22 +186,22 @@ int EPD_test(void)
         if(num == 0) {
             break;
         }
-				printf("Part refresh...\r\n");
+				INFO_PRINT("Part refresh...\r\n");
         EPD_2IN7_V2_Display_Partial(BlackImage, 60, 134, 110, 254); // Xstart must be a multiple of 8
-        DEV_Delay_ms(500);
+        g_epd_dev.delay_ms_callback(500);
     }
 #endif
 
 #if 0 // show image for array
 		free(BlackImage);
-    printf("show Gray------------------------\r\n");
+    INFO_PRINT("show Gray------------------------\r\n");
     Imagesize = ((EPD_2IN7_V2_WIDTH % 4 == 0)? (EPD_2IN7_V2_WIDTH / 4 ): (EPD_2IN7_V2_WIDTH / 4 + 1)) * EPD_2IN7_V2_HEIGHT;
     if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
-        printf("Failed to apply for black memory...\r\n");
+        INFO_PRINT("Failed to apply for black memory...\r\n");
         return -1;
     }
     EPD_2IN7_V2_Init_4GRAY();
-    printf("4 grayscale display\r\n");
+    INFO_PRINT("4 grayscale display\r\n");
     Paint_NewImage(BlackImage, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
     Paint_SetScale(4);
     Paint_Clear(0xff);
@@ -236,27 +227,25 @@ int EPD_test(void)
     Paint_DrawString_CN(150, 60,"���abc", &Font12CN, GRAY1, GRAY4);
     Paint_DrawString_CN(10, 130, "΢ѩ����", &Font24CN, GRAY1, GRAY4);
     EPD_2IN7_V2_4GrayDisplay(BlackImage);
-    DEV_Delay_ms(3000);
+    g_epd_dev.delay_ms_callback(3000);
 		
 		Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     Paint_DrawBitMap(gImage_2in7_4Gray);
     EPD_2IN7_V2_4GrayDisplay(BlackImage);
-    DEV_Delay_ms(3000);
+    g_epd_dev.delay_ms_callback(3000);
 
 #endif
 
-    printf("Clear...\r\n");
-    EPD_2IN7_V2_Init();
+    INFO_PRINT("Clear...\r\n");
+    EPD_2IN7_V2_Init(&g_epd_dev);
     // EPD_2IN7_V2_Clear();
 
-    printf("Goto Sleep...\r\n");
-    EPD_2IN7_V2_Sleep();
-    // free(BlackImage);
-    // BlackImage = NULL;
-    DEV_Delay_ms(2000); // important, at least 2s
-    // close 5V
-    printf("close 5V, Module enters 0 power consumption ...\r\n");
-    DEV_Module_Exit();
+    INFO_PRINT("Goto Sleep...\r\n");
+    EPD_2IN7_V2_Sleep(&g_epd_dev);
+
+    g_epd_dev.delay_ms_callback(2000); // important, at least 2s
+    INFO_PRINT("close 5V, Module enters 0 power consumption ...\r\n");
+    g_epd_dev.module_end_callback();
     return 0;
 }

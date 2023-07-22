@@ -36,6 +36,7 @@
 #include "usart1.h"
 #include "sht30.h"
 #include "EPD_Test.h"
+#include "EPD_2in7_V2.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -68,15 +69,15 @@ osSemaphoreId Usart1_Receive_BinSemaphoreHandle;
 
 /* USER CODE END FunctionPrototypes */
 
-void StartDefaultTask(void const * argument);
-void led_task(void const * argument);
-void key_task(void const * argument);
-void usart1_task(void const * argument);
+void StartDefaultTask(void const *argument);
+void led_task(void const *argument);
+void key_task(void const *argument);
+void usart1_task(void const *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -92,58 +93,58 @@ void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackTyp
 /* USER CODE END GET_IDLE_TASK_MEMORY */
 
 /**
-  * @brief  FreeRTOS initialization
-  * @param  None
-  * @retval None
-  */
-void MX_FREERTOS_Init(void) {
-  /* USER CODE BEGIN Init */
+ * @brief  FreeRTOS initialization
+ * @param  None
+ * @retval None
+ */
+void MX_FREERTOS_Init(void)
+{
+    /* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+    /* USER CODE END Init */
 
-  /* USER CODE BEGIN RTOS_MUTEX */
+    /* USER CODE BEGIN RTOS_MUTEX */
     /* add mutexes, ... */
-  /* USER CODE END RTOS_MUTEX */
+    /* USER CODE END RTOS_MUTEX */
 
-  /* Create the semaphores(s) */
-  /* definition and creation of Usart1_Receive_BinSemaphore */
-  osSemaphoreDef(Usart1_Receive_BinSemaphore);
-  Usart1_Receive_BinSemaphoreHandle = osSemaphoreCreate(osSemaphore(Usart1_Receive_BinSemaphore), 1);
+    /* Create the semaphores(s) */
+    /* definition and creation of Usart1_Receive_BinSemaphore */
+    osSemaphoreDef(Usart1_Receive_BinSemaphore);
+    Usart1_Receive_BinSemaphoreHandle = osSemaphoreCreate(osSemaphore(Usart1_Receive_BinSemaphore), 1);
 
-  /* USER CODE BEGIN RTOS_SEMAPHORES */
+    /* USER CODE BEGIN RTOS_SEMAPHORES */
     /* add semaphores, ... */
     xSemaphoreTake(Usart1_Receive_BinSemaphoreHandle, portMAX_DELAY);
-  /* USER CODE END RTOS_SEMAPHORES */
+    /* USER CODE END RTOS_SEMAPHORES */
 
-  /* USER CODE BEGIN RTOS_TIMERS */
+    /* USER CODE BEGIN RTOS_TIMERS */
     /* start timers, add new ones, ... */
-  /* USER CODE END RTOS_TIMERS */
+    /* USER CODE END RTOS_TIMERS */
 
-  /* USER CODE BEGIN RTOS_QUEUES */
+    /* USER CODE BEGIN RTOS_QUEUES */
     /* add queues, ... */
-  /* USER CODE END RTOS_QUEUES */
+    /* USER CODE END RTOS_QUEUES */
 
-  /* Create the thread(s) */
-  /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityRealtime, 0, 128);
-  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+    /* Create the thread(s) */
+    /* definition and creation of defaultTask */
+    osThreadDef(defaultTask, StartDefaultTask, osPriorityHigh, 0, 512);
+    defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-  /* definition and creation of LED_TASK */
-  osThreadDef(LED_TASK, led_task, osPriorityLow, 0, 128);
-  LED_TASKHandle = osThreadCreate(osThread(LED_TASK), NULL);
+    /* definition and creation of LED_TASK */
+    osThreadDef(LED_TASK, led_task, osPriorityLow, 0, 128);
+    LED_TASKHandle = osThreadCreate(osThread(LED_TASK), NULL);
 
-  /* definition and creation of KEY_TASK */
-  osThreadDef(KEY_TASK, key_task, osPriorityLow, 0, 128);
-  KEY_TASKHandle = osThreadCreate(osThread(KEY_TASK), NULL);
+    /* definition and creation of KEY_TASK */
+    osThreadDef(KEY_TASK, key_task, osPriorityLow, 0, 128);
+    KEY_TASKHandle = osThreadCreate(osThread(KEY_TASK), NULL);
 
-  /* definition and creation of USART1_TASK */
-  osThreadDef(USART1_TASK, usart1_task, osPriorityLow, 0, 256);
-  USART1_TASKHandle = osThreadCreate(osThread(USART1_TASK), NULL);
+    /* definition and creation of USART1_TASK */
+    osThreadDef(USART1_TASK, usart1_task, osPriorityLow, 0, 256);
+    USART1_TASKHandle = osThreadCreate(osThread(USART1_TASK), NULL);
 
-  /* USER CODE BEGIN RTOS_THREADS */
+    /* USER CODE BEGIN RTOS_THREADS */
     /* add threads, ... */
-  /* USER CODE END RTOS_THREADS */
-
+    /* USER CODE END RTOS_THREADS */
 }
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -153,19 +154,23 @@ void MX_FREERTOS_Init(void) {
  * @retval None
  */
 /* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void const * argument)
+void StartDefaultTask(void const *argument)
 {
-  /* USER CODE BEGIN StartDefaultTask */
+    /* USER CODE BEGIN StartDefaultTask */
     /* Infinite loop */
-	
-    //sht30_init(&g_sht_dev);
-#define TEST_SHT30 0
+    extern uint8_t epd_spi_write_byte(uint8_t data);
+    extern uint8_t edp_pin_ctrl(epd_pin_ctrl_t pin, uint8_t state);
+    extern uint8_t epd_start(void);
+    extern uint8_t epd_end(void);
+    epd_init(&g_epd_dev, delay_xms, epd_spi_write_byte, epd_start, epd_end, edp_pin_ctrl);
+// #defin/ TEST_SHT30 0
 #ifdef TEST_SHT30
+    sht30_init(&g_sht_dev);
     sht30_get_data(&g_sht_dev);
     sht30_data_conversion(&g_sht_dev);
 #endif
-	osThreadSuspend(NULL);
-  /* USER CODE END StartDefaultTask */
+    vTaskDelete(NULL);
+    /* USER CODE END StartDefaultTask */
 }
 
 /* USER CODE BEGIN Header_led_task */
@@ -175,9 +180,9 @@ void StartDefaultTask(void const * argument)
  * @retval None
  */
 /* USER CODE END Header_led_task */
-void led_task(void const * argument)
+void led_task(void const *argument)
 {
-  /* USER CODE BEGIN led_task */
+    /* USER CODE BEGIN led_task */
     /* Infinite loop */
     for (;;)
     {
@@ -185,7 +190,7 @@ void led_task(void const * argument)
         LED0_TOGGLE;
         delay_ms(500);
     }
-  /* USER CODE END led_task */
+    /* USER CODE END led_task */
 }
 
 /* USER CODE BEGIN Header_key_task */
@@ -195,16 +200,16 @@ void led_task(void const * argument)
  * @retval None
  */
 /* USER CODE END Header_key_task */
-void key_task(void const * argument)
+void key_task(void const *argument)
 {
-  /* USER CODE BEGIN key_task */
+    /* USER CODE BEGIN key_task */
     /* Infinite loop */
     for (;;)
     {
 
         osDelay(1);
     }
-  /* USER CODE END key_task */
+    /* USER CODE END key_task */
 }
 
 /* USER CODE BEGIN Header_usart1_task */
@@ -214,9 +219,9 @@ void key_task(void const * argument)
  * @retval None
  */
 /* USER CODE END Header_usart1_task */
-void usart1_task(void const * argument)
+void usart1_task(void const *argument)
 {
-  /* USER CODE BEGIN usart1_task */
+    /* USER CODE BEGIN usart1_task */
     uint8_t len;
     /* Infinite loop */
     for (;;)
@@ -229,7 +234,7 @@ void usart1_task(void const * argument)
         // osDelay(1);
         delay_ms(1);
     }
-  /* USER CODE END usart1_task */
+    /* USER CODE END usart1_task */
 }
 
 /* Private application code --------------------------------------------------*/

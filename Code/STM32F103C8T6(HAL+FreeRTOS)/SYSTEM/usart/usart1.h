@@ -30,25 +30,25 @@ void u1_printf(char *format, ...);
 #define INFO_PRINT(fmt, ...)                                                                  \
     do                                                                                        \
     {                                                                                         \
-        u1_printf("Info %s,%s,%d: " fmt "", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__); \
+        printf("Info %s,%s,%d: " fmt "", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__); \
     } while (0)
 
 #define WARNING_PRINT(fmt, ...)                                                                  \
     do                                                                                           \
     {                                                                                            \
-        u1_printf("Warning %s,%s,%d: " fmt "", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__); \
+        printf("Warning %s,%s,%d: " fmt "", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__); \
     } while (0)
 
 #define DEBUG_PRINT(fmt, ...)                                                                  \
     do                                                                                         \
     {                                                                                          \
-        u1_printf("Debug %s,%s,%d: " fmt "", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__); \
+        printf("Debug %s,%s,%d: " fmt "", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__); \
     } while (0)
 
 #define ERROR_PRINT(fmt, ...)                                                                  \
     do                                                                                         \
     {                                                                                          \
-        u1_printf("Error %s,%s,%d: " fmt "", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__); \
+        printf("Error %s,%s,%d: " fmt "", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__); \
     } while (0)
 
 #else

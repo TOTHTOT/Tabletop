@@ -31,22 +31,67 @@
 #ifndef __EPD_2IN7_V2_H_
 #define __EPD_2IN7_V2_H_
 
-#include "DEV_Config.h"
+#include "main.h"
+#include "usart1.h" // 该头文件包含调试系统
+#include "GUI_Paint.h"
 
 // Display resolution
-#define EPD_2IN7_V2_WIDTH       176
-#define EPD_2IN7_V2_HEIGHT      264
+#define EPD_2IN7_V2_WIDTH 176
+#define EPD_2IN7_V2_HEIGHT 264
+// 缓存大小
+#define EPD_FRAME_BUF_SIZE ((EPD_2IN7_V2_WIDTH % 8 == 0) ? (EPD_2IN7_V2_WIDTH / 8) : (EPD_2IN7_V2_WIDTH / 8 + 1)) * EPD_2IN7_V2_HEIGHT
 
-void EPD_2IN7_V2_Init(void);
-void EPD_2IN7_V2_Init_Fast(void);
-void EPD_2IN7_V2_Init_4GRAY(void);
-void EPD_2IN7_V2_Clear(void);
-void EPD_2IN7_V2_Display(UBYTE *Image);
-void EPD_2IN7_V2_Display_Fast(UBYTE *Image);
-void EPD_2IN7_V2_Display_Base(UBYTE *Image);
-void EPD_2IN7_V2_Display_Base_color(UBYTE color);
-void EPD_2IN7_V2_Display_Partial(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yende);
-void EPD_2IN7_V2_4GrayDisplay(UBYTE *Image);
-void EPD_2IN7_V2_Sleep(void);
+typedef enum
+{
+    EPD_RST_PIN_EM,
+    EPD_DC_PIN_EM,
+    EPD_CS_PIN_EM,
+    EPD_READ_BUSY_PIN_EM,
+    EPD_TOTAL_PIN_EM
+} epd_pin_ctrl_t;
+
+typedef enum
+{
+    EPD_PAGE_NONE,
+    EPD_PAGE_MAIN,
+    EPD_TOTAL_PAGE
+}epd_page_t;
+
+typedef struct epd_dev_v2_t
+{
+    uint8_t frame_buf[EPD_FRAME_BUF_SIZE]; // 一帧图片缓存
+    
+    epd_page_t current_page;
+    PAINT_TIME current_time;
+
+    /* 函数指针 */
+    void (*delay_ms_callback)(uint32_t ms);
+    uint8_t (*spi_write_byte_callback)(uint8_t data);
+    uint8_t (*module_start_callback)(void);
+    uint8_t (*module_end_callback)(void);
+    uint8_t (*pin_ctrl_callback)(epd_pin_ctrl_t pin, uint8_t state);
+} epd_dev_v2_t;
+
+/* 全局变量 */
+extern epd_dev_v2_t g_epd_dev;
+
+/* 全局函数 */
+uint8_t epd_init(epd_dev_v2_t *dev,
+                 void (*delay_callback)(uint32_t ms),
+                 uint8_t (*write_callback)(uint8_t data),
+                 uint8_t (*start_callback)(void),
+                 uint8_t (*end_callback)(void),
+                 uint8_t (*pin_ctrl_callback)(epd_pin_ctrl_t pin, uint8_t state));
+void EPD_2IN7_V2_Init(epd_dev_v2_t *dev);
+void EPD_2IN7_V2_Init_Fast(epd_dev_v2_t *dev);
+void EPD_2IN7_V2_Init_4GRAY(epd_dev_v2_t *dev);
+void EPD_2IN7_V2_Clear(epd_dev_v2_t *dev);
+void EPD_2IN7_V2_Display(epd_dev_v2_t *dev, uint8_t *Image);
+void EPD_2IN7_V2_Display_Fast(epd_dev_v2_t *dev, uint8_t *Image);
+void EPD_2IN7_V2_Display_Base(epd_dev_v2_t *dev, uint8_t *Image);
+void EPD_2IN7_V2_Display_Base_color(epd_dev_v2_t *dev, uint8_t color);
+void EPD_2IN7_V2_Display_Partial(epd_dev_v2_t *dev, const uint8_t *Image, uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yende);
+void EPD_2IN7_V2_4GrayDisplay(epd_dev_v2_t *dev, uint8_t *Image);
+void EPD_2IN7_V2_Sleep(epd_dev_v2_t *dev);
 
 #endif

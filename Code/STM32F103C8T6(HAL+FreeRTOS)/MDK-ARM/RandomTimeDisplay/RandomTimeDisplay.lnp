@@ -15,7 +15,6 @@
 "randomtimedisplay\sht30.o"
 "randomtimedisplay\w25qxx.o"
 "randomtimedisplay\epd_2in7_v2.o"
-"randomtimedisplay\dev_config.o"
 "randomtimedisplay\gui_paint.o"
 "randomtimedisplay\epd_2in7_v2_test.o"
 "randomtimedisplay\font8.o"

@@ -3,6 +3,13 @@
         "string.h": "c",
         "delay.h": "c",
         "string": "c",
-        "spi.h": "c"
+        "spi.h": "c",
+        "epd_2in7_v2.h": "c",
+        "usart1.h": "c",
+        "epd_test.h": "c",
+        "stdlib.h": "c",
+        "stdint.h": "c",
+        "gui_paint.h": "c",
+        "stdio.h": "c"
     }
 }
