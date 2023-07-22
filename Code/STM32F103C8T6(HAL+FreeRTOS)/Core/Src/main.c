@@ -29,6 +29,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "delay.h"
+#include "EPD_Test.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,10 +97,10 @@ int main(void)
   MX_USART1_UART_Init();
   MX_I2C1_Init();
   MX_SPI1_Init();
-  MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
 	delay_init();
+    EPD_test();
 	//HAL_UART_Receive_DMA(&huart1, (uint8_t*)USART_RX_BUF, USART_REC_LEN);     //设置DMA传输，将串口1的数据搬运到recvive_buff中，每次255个字节
   /* USER CODE END 2 */
 

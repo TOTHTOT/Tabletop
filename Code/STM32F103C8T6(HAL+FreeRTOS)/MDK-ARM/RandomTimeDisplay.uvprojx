@@ -621,6 +621,61 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\W25QXX\w25qxx.c</FilePath>
             </File>
+            <File>
+              <FileName>EPD_2in7_V2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\EPD_2in7_V2.c</FilePath>
+            </File>
+            <File>
+              <FileName>DEV_Config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\DEV_Config.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Paint.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\GUI_Paint.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_2in7_V2_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\EPD_2in7_V2_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>font8.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\font8.c</FilePath>
+            </File>
+            <File>
+              <FileName>font12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\font12.c</FilePath>
+            </File>
+            <File>
+              <FileName>font12CN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\font12CN.c</FilePath>
+            </File>
+            <File>
+              <FileName>font16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\font16.c</FilePath>
+            </File>
+            <File>
+              <FileName>font20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\font20.c</FilePath>
+            </File>
+            <File>
+              <FileName>font24.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\font24.c</FilePath>
+            </File>
+            <File>
+              <FileName>font24CN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\font24CN.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

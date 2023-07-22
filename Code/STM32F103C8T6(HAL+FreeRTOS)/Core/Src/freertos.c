@@ -35,6 +35,7 @@
 #include <stdio.h>
 #include "usart1.h"
 #include "sht30.h"
+#include "EPD_Test.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -124,7 +125,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityRealtime, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of LED_TASK */
@@ -156,12 +157,14 @@ void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
     /* Infinite loop */
-    sht30_init(&g_sht_dev);
-#define TEST_SHT30 1
+	
+    //sht30_init(&g_sht_dev);
+#define TEST_SHT30 0
 #ifdef TEST_SHT30
     sht30_get_data(&g_sht_dev);
     sht30_data_conversion(&g_sht_dev);
 #endif
+	osThreadSuspend(NULL);
   /* USER CODE END StartDefaultTask */
 }
 

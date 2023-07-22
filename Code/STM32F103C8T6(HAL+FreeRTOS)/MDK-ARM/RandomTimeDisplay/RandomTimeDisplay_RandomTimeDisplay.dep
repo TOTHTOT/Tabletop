@@ -1,10 +1,10 @@
 Dependencies for Project 'RandomTimeDisplay', Target 'RandomTimeDisplay': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::.\ARMCC
-F (startup_stm32f103xb.s)(0x64B69E79)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1" -I ..\Core\Inc-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xb.lst --xref -o randomtimedisplay\startup_stm32f103xb.o --depend randomtimedisplay\startup_stm32f103xb.d)
-F (../Core/Src/main.c)(0x64AFF0A4)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\main.o --omf_browse randomtimedisplay\main.crf --depend randomtimedisplay\main.d)
-I (../Core/Inc/main.h)(0x64B69E76)
+F (startup_stm32f103xb.s)(0x64BAA596)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1" -I ..\Core\Inc-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xb.lst --xref -o randomtimedisplay\startup_stm32f103xb.o --depend randomtimedisplay\startup_stm32f103xb.d)
+F (../Core/Src/main.c)(0x64BB2F1A)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\main.o --omf_browse randomtimedisplay\main.crf --depend randomtimedisplay\main.d)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -49,14 +49,20 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x63E32F3C
 I (../Core/Inc/dma.h)(0x64AFF0A2)
 I (../Core/Inc/i2c.h)(0x64AFF0A2)
 I (../Core/Inc/spi.h)(0x64AFF0A3)
-I (../Core/Inc/usart.h)(0x64AFF0A3)
+I (../Core/Inc/usart.h)(0x64BAA420)
 I (../Core/Inc/gpio.h)(0x64AFF09F)
 I (../SYSTEM/delay/delay.h)(0x6367A1F6)
-F (../Core/Src/gpio.c)(0x64B69E71)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\gpio.o --omf_browse randomtimedisplay\gpio.crf --depend randomtimedisplay\gpio.d)
+I (../HARDWARE/EPaper/EPD_Test.h)(0x64BAA733)
+I (../HARDWARE/EPaper/DEV_Config.h)(0x64BB2D44)
+I (E:\Keil Programma\ARM\ARMCC\include\stdio.h)(0x5E53505C)
+I (../HARDWARE/EPaper/GUI_Paint.h)(0x64BAA6C0)
+I (../HARDWARE/EPaper/fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdlib.h)(0x5E53505C)
+F (../Core/Src/gpio.c)(0x64BAA41C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\gpio.o --omf_browse randomtimedisplay\gpio.crf --depend randomtimedisplay\gpio.d)
 I (../Core/Inc/gpio.h)(0x64AFF09F)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -84,7 +90,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
-F (../Core/Src/freertos.c)(0x64B69E74)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\freertos.o --omf_browse randomtimedisplay\freertos.crf --depend randomtimedisplay\freertos.d)
+F (../Core/Src/freertos.c)(0x64BB2F03)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\freertos.o --omf_browse randomtimedisplay\freertos.crf --depend randomtimedisplay\freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x63E32F3C)
 I (E:\Keil Programma\ARM\ARMCC\include\stddef.h)(0x5E53505C)
 I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
@@ -96,9 +102,9 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x63E32F3C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x63E32F3C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x63E32F3C)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -133,17 +139,22 @@ I (../SYSTEM/delay/delay.h)(0x6367A1F6)
 I (../HARDWARE/LED/led.h)(0x636DF014)
 I (../Core/Inc/gpio.h)(0x64AFF09F)
 I (../HARDWARE/KEY/key.h)(0x62D232DA)
-I (../Core/Inc/usart.h)(0x64AFF0A3)
+I (../Core/Inc/usart.h)(0x64BAA420)
 I (E:\Keil Programma\ARM\ARMCC\include\string.h)(0x5E53505C)
 I (E:\Keil Programma\ARM\ARMCC\include\stdio.h)(0x5E53505C)
 I (../SYSTEM/usart/usart1.h)(0x63F85E6F)
 I (../HARDWARE/SHT30/sht30.h)(0x64B1F714)
 I (../Core/Inc/i2c.h)(0x64AFF0A2)
+I (../HARDWARE/EPaper/EPD_Test.h)(0x64BAA733)
+I (../HARDWARE/EPaper/DEV_Config.h)(0x64BB2D44)
+I (../HARDWARE/EPaper/GUI_Paint.h)(0x64BAA6C0)
+I (../HARDWARE/EPaper/fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdlib.h)(0x5E53505C)
 F (../Core/Src/dma.c)(0x64AFF0A2)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\dma.o --omf_browse randomtimedisplay\dma.crf --depend randomtimedisplay\dma.d)
 I (../Core/Inc/dma.h)(0x64AFF0A2)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -173,9 +184,9 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Core/Src/i2c.c)(0x64AFF0A2)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\i2c.o --omf_browse randomtimedisplay\i2c.crf --depend randomtimedisplay\i2c.d)
 I (../Core/Inc/i2c.h)(0x64AFF0A2)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -205,9 +216,9 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Core/Src/spi.c)(0x64AFF0A3)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\spi.o --omf_browse randomtimedisplay\spi.crf --depend randomtimedisplay\spi.d)
 I (../Core/Inc/spi.h)(0x64AFF0A3)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -235,11 +246,11 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
-F (../Core/Src/usart.c)(0x64AFF0A3)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\usart.o --omf_browse randomtimedisplay\usart.crf --depend randomtimedisplay\usart.d)
-I (../Core/Inc/usart.h)(0x64AFF0A3)
-I (../Core/Inc/main.h)(0x64B69E76)
+F (../Core/Src/usart.c)(0x64BAA420)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\usart.o --omf_browse randomtimedisplay\usart.crf --depend randomtimedisplay\usart.d)
+I (../Core/Inc/usart.h)(0x64BAA420)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -285,10 +296,10 @@ I (E:\Keil Programma\ARM\ARMCC\include\string.h)(0x5E53505C)
 I (E:\Keil Programma\ARM\ARMCC\include\stdarg.h)(0x5E53505C)
 I (E:\Keil Programma\ARM\ARMCC\include\stdio.h)(0x5E53505C)
 I (../SYSTEM/usart/usart1.h)(0x63F85E6F)
-F (../Core/Src/stm32f1xx_it.c)(0x64AFF0A3)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_it.o --omf_browse randomtimedisplay\stm32f1xx_it.crf --depend randomtimedisplay\stm32f1xx_it.d)
-I (../Core/Inc/main.h)(0x64B69E76)
+F (../Core/Src/stm32f1xx_it.c)(0x64BAA421)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_it.o --omf_browse randomtimedisplay\stm32f1xx_it.crf --depend randomtimedisplay\stm32f1xx_it.d)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -316,13 +327,13 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_it.h)(0x64AFF0A3)
-I (../Core/Inc/usart.h)(0x64AFF0A3)
+I (../Core/Inc/stm32f1xx_it.h)(0x64BAA421)
+I (../Core/Inc/usart.h)(0x64BAA420)
 I (../SYSTEM/usart/usart1.h)(0x63F85E6F)
 F (../Core/Src/stm32f1xx_hal_msp.c)(0x6396A29C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_msp.o --omf_browse randomtimedisplay\stm32f1xx_hal_msp.crf --depend randomtimedisplay\stm32f1xx_hal_msp.d)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -352,7 +363,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Core/Src/stm32f1xx_hal_timebase_tim.c)(0x6396A29C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_timebase_tim.o --omf_browse randomtimedisplay\stm32f1xx_hal_timebase_tim.crf --depend randomtimedisplay\stm32f1xx_hal_timebase_tim.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -383,9 +394,9 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (..\HARDWARE\KEY\key.c)(0x6396A32E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\key.o --omf_browse randomtimedisplay\key.crf --depend randomtimedisplay\key.d)
 I (..\HARDWARE\KEY\key.h)(0x62D232DA)
 I (../Core/Inc/gpio.h)(0x64AFF09F)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -417,9 +428,9 @@ I (../SYSTEM/delay/delay.h)(0x6367A1F6)
 F (..\HARDWARE\LED\led.c)(0x62D0E386)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\led.o --omf_browse randomtimedisplay\led.crf --depend randomtimedisplay\led.d)
 I (..\HARDWARE\LED\led.h)(0x636DF014)
 I (../Core/Inc/gpio.h)(0x64AFF09F)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -449,9 +460,9 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (..\HARDWARE\SHT30\sht30.c)(0x64B1F716)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\sht30.o --omf_browse randomtimedisplay\sht30.crf --depend randomtimedisplay\sht30.d)
 I (..\HARDWARE\SHT30\sht30.h)(0x64B1F714)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -483,9 +494,9 @@ I (../Core/Inc/i2c.h)(0x64AFF0A2)
 I (E:\Keil Programma\ARM\ARMCC\include\string.h)(0x5E53505C)
 F (..\HARDWARE\W25QXX\w25qxx.c)(0x64B6AE24)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\w25qxx.o --omf_browse randomtimedisplay\w25qxx.crf --depend randomtimedisplay\w25qxx.d)
 I (..\HARDWARE\W25QXX\w25qxx.h)(0x64B6AE1D)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -515,11 +526,180 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 I (../Core/Inc/spi.h)(0x64AFF0A3)
 I (../SYSTEM/delay/delay.h)(0x6367A1F6)
+F (..\HARDWARE\EPaper\EPD_2in7_V2.c)(0x64BAB02A)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\epd_2in7_v2.o --omf_browse randomtimedisplay\epd_2in7_v2.crf --depend randomtimedisplay\epd_2in7_v2.d)
+I (..\HARDWARE\EPaper\EPD_2in7_V2.h)(0x62FFECC1)
+I (..\HARDWARE\EPaper\DEV_Config.h)(0x64BB2D44)
+I (../Core/Inc/main.h)(0x64BAA421)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h)(0x63E32F48)
+I (../Drivers/CMSIS/Include/core_cm3.h)(0x63E32F3A)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x63E32F48)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x63E32F49)
+I (E:\Keil Programma\ARM\ARMCC\include\stddef.h)(0x5E53505C)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
+I (E:\Keil Programma\ARM\ARMCC\include\stdio.h)(0x5E53505C)
+I (../SYSTEM/delay/delay.h)(0x6367A1F6)
+F (..\HARDWARE\EPaper\DEV_Config.c)(0x64BAA497)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\dev_config.o --omf_browse randomtimedisplay\dev_config.crf --depend randomtimedisplay\dev_config.d)
+I (..\HARDWARE\EPaper\DEV_Config.h)(0x64BB2D44)
+I (../Core/Inc/main.h)(0x64BAA421)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h)(0x63E32F48)
+I (../Drivers/CMSIS/Include/core_cm3.h)(0x63E32F3A)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x63E32F48)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x63E32F49)
+I (E:\Keil Programma\ARM\ARMCC\include\stddef.h)(0x5E53505C)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
+I (E:\Keil Programma\ARM\ARMCC\include\stdio.h)(0x5E53505C)
+I (../SYSTEM/delay/delay.h)(0x6367A1F6)
+F (..\HARDWARE\EPaper\GUI_Paint.c)(0x64BAA709)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\gui_paint.o --omf_browse randomtimedisplay\gui_paint.crf --depend randomtimedisplay\gui_paint.d)
+I (..\HARDWARE\EPaper\GUI_Paint.h)(0x64BAA6C0)
+I (..\HARDWARE\EPaper\DEV_Config.h)(0x64BB2D44)
+I (../Core/Inc/main.h)(0x64BAA421)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h)(0x63E32F48)
+I (../Drivers/CMSIS/Include/core_cm3.h)(0x63E32F3A)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x63E32F48)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x63E32F49)
+I (E:\Keil Programma\ARM\ARMCC\include\stddef.h)(0x5E53505C)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
+I (E:\Keil Programma\ARM\ARMCC\include\stdio.h)(0x5E53505C)
+I (../SYSTEM/delay/delay.h)(0x6367A1F6)
+I (..\HARDWARE\EPaper\fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdlib.h)(0x5E53505C)
+I (E:\Keil Programma\ARM\ARMCC\include\string.h)(0x5E53505C)
+I (E:\Keil Programma\ARM\ARMCC\include\math.h)(0x5E53505A)
+F (..\HARDWARE\EPaper\EPD_2in7_V2_test.c)(0x64BB2F4B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\epd_2in7_v2_test.o --omf_browse randomtimedisplay\epd_2in7_v2_test.crf --depend randomtimedisplay\epd_2in7_v2_test.d)
+I (..\HARDWARE\EPaper\EPD_Test.h)(0x64BAA733)
+I (..\HARDWARE\EPaper\DEV_Config.h)(0x64BB2D44)
+I (../Core/Inc/main.h)(0x64BAA421)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h)(0x63E32F48)
+I (../Drivers/CMSIS/Include/core_cm3.h)(0x63E32F3A)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x63E32F3A)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x63E32F48)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x63E32F49)
+I (E:\Keil Programma\ARM\ARMCC\include\stddef.h)(0x5E53505C)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
+I (E:\Keil Programma\ARM\ARMCC\include\stdio.h)(0x5E53505C)
+I (../SYSTEM/delay/delay.h)(0x6367A1F6)
+I (..\HARDWARE\EPaper\GUI_Paint.h)(0x64BAA6C0)
+I (..\HARDWARE\EPaper\fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdlib.h)(0x5E53505C)
+I (..\HARDWARE\EPaper\EPD_2in7_V2.h)(0x62FFECC1)
+I (E:\Keil Programma\ARM\ARMCC\include\time.h)(0x5E53505A)
+F (..\HARDWARE\EPaper\font8.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\font8.o --omf_browse randomtimedisplay\font8.crf --depend randomtimedisplay\font8.d)
+I (..\HARDWARE\EPaper\fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+F (..\HARDWARE\EPaper\font12.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\font12.o --omf_browse randomtimedisplay\font12.crf --depend randomtimedisplay\font12.d)
+I (..\HARDWARE\EPaper\fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+F (..\HARDWARE\EPaper\font12CN.c)(0x5A9E48CE)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\font12cn.o --omf_browse randomtimedisplay\font12cn.crf --depend randomtimedisplay\font12cn.d)
+I (..\HARDWARE\EPaper\fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+F (..\HARDWARE\EPaper\font16.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\font16.o --omf_browse randomtimedisplay\font16.crf --depend randomtimedisplay\font16.d)
+I (..\HARDWARE\EPaper\fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+F (..\HARDWARE\EPaper\font20.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\font20.o --omf_browse randomtimedisplay\font20.crf --depend randomtimedisplay\font20.d)
+I (..\HARDWARE\EPaper\fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+F (..\HARDWARE\EPaper\font24.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\font24.o --omf_browse randomtimedisplay\font24.crf --depend randomtimedisplay\font24.d)
+I (..\HARDWARE\EPaper\fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
+F (..\HARDWARE\EPaper\font24CN.c)(0x5A9E4AFB)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\font24cn.o --omf_browse randomtimedisplay\font24cn.crf --depend randomtimedisplay\font24cn.d)
+I (..\HARDWARE\EPaper\fonts.h)(0x5BD6A308)
+I (E:\Keil Programma\ARM\ARMCC\include\stdint.h)(0x63D9C13D)
 F (..\SYSTEM\delay\delay.c)(0x6367A244)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\delay.o --omf_browse randomtimedisplay\delay.crf --depend randomtimedisplay\delay.d)
 I (..\SYSTEM\delay\delay.h)(0x6367A1F6)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -558,9 +738,9 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x63E32F3C
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x63E32F3C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x63E32F3C)
 F (..\SYSTEM\usart\usart1.c)(0x63F85E46)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\usart1.o --omf_browse randomtimedisplay\usart1.crf --depend randomtimedisplay\usart1.d)
-I (../Core/Inc/main.h)(0x64B69E76)
+I (../Core/Inc/main.h)(0x64BAA421)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -588,7 +768,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
-I (../Core/Inc/usart.h)(0x64AFF0A3)
+I (../Core/Inc/usart.h)(0x64BAA420)
 I (..\SYSTEM\usart\usart1.h)(0x63F85E6F)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x63E32F3C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x63E32F3C)
@@ -609,7 +789,7 @@ I (E:\Keil Programma\ARM\ARMCC\include\stdarg.h)(0x5E53505C)
 I (E:\Keil Programma\ARM\ARMCC\include\stdio.h)(0x5E53505C)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_gpio_ex.o --omf_browse randomtimedisplay\stm32f1xx_hal_gpio_ex.crf --depend randomtimedisplay\stm32f1xx_hal_gpio_ex.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -639,7 +819,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal.o --omf_browse randomtimedisplay\stm32f1xx_hal.crf --depend randomtimedisplay\stm32f1xx_hal.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -669,7 +849,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_rcc.o --omf_browse randomtimedisplay\stm32f1xx_hal_rcc.crf --depend randomtimedisplay\stm32f1xx_hal_rcc.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -699,7 +879,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_rcc_ex.o --omf_browse randomtimedisplay\stm32f1xx_hal_rcc_ex.crf --depend randomtimedisplay\stm32f1xx_hal_rcc_ex.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -729,7 +909,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_gpio.o --omf_browse randomtimedisplay\stm32f1xx_hal_gpio.crf --depend randomtimedisplay\stm32f1xx_hal_gpio.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -759,7 +939,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_dma.o --omf_browse randomtimedisplay\stm32f1xx_hal_dma.crf --depend randomtimedisplay\stm32f1xx_hal_dma.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -789,7 +969,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_cortex.o --omf_browse randomtimedisplay\stm32f1xx_hal_cortex.crf --depend randomtimedisplay\stm32f1xx_hal_cortex.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -819,7 +999,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_pwr.o --omf_browse randomtimedisplay\stm32f1xx_hal_pwr.crf --depend randomtimedisplay\stm32f1xx_hal_pwr.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -849,7 +1029,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_flash.o --omf_browse randomtimedisplay\stm32f1xx_hal_flash.crf --depend randomtimedisplay\stm32f1xx_hal_flash.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -879,7 +1059,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_flash_ex.o --omf_browse randomtimedisplay\stm32f1xx_hal_flash_ex.crf --depend randomtimedisplay\stm32f1xx_hal_flash_ex.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -909,7 +1089,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_exti.o --omf_browse randomtimedisplay\stm32f1xx_hal_exti.crf --depend randomtimedisplay\stm32f1xx_hal_exti.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -939,7 +1119,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_i2c.o --omf_browse randomtimedisplay\stm32f1xx_hal_i2c.crf --depend randomtimedisplay\stm32f1xx_hal_i2c.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -969,7 +1149,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_spi.o --omf_browse randomtimedisplay\stm32f1xx_hal_spi.crf --depend randomtimedisplay\stm32f1xx_hal_spi.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -999,7 +1179,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_tim.o --omf_browse randomtimedisplay\stm32f1xx_hal_tim.crf --depend randomtimedisplay\stm32f1xx_hal_tim.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -1029,7 +1209,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_tim_ex.o --omf_browse randomtimedisplay\stm32f1xx_hal_tim_ex.crf --depend randomtimedisplay\stm32f1xx_hal_tim_ex.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -1059,7 +1239,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x63E32F49)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c)(0x63E32F49)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE/KEY -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../HARDWARE/USART -I ../SYSTEM/usart -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../HARDWARE/SHT30 -I ../HARDWARE/EPaper -I ../HARDWARE/W25QXX-I.\RTE\_RandomTimeDisplay-I"E:\Keil Programma\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include"-I"E:\Keil Programma\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o randomtimedisplay\stm32f1xx_hal_uart.o --omf_browse randomtimedisplay\stm32f1xx_hal_uart.crf --depend randomtimedisplay\stm32f1xx_hal_uart.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x63E32F48)
@@ -1097,7 +1277,7 @@ I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x63E32F3A)
 I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x63E32F3A)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x63E32F48)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x63E32F49)
-I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64B69E75)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x64BAA592)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x63E32F49)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x63E32F49)
