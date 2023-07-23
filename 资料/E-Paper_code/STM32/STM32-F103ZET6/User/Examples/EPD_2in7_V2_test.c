@@ -57,7 +57,7 @@ int EPD_test(void)
 		Paint_Clear(WHITE);
 
 
-#if 1  // Fast Drawing on the image
+#if 0  // Fast Drawing on the image
     // Fast refresh
     printf("This is followed by a quick refresh demo\r\n");
     printf("First, clear the screen\r\n");
@@ -104,7 +104,7 @@ int EPD_test(void)
 
 #endif		
 
-#if 1   // show bmp
+#if 0   // show bmp
 
     printf("show window BMP-----------------\r\n");
 		EPD_2IN7_V2_Init();
@@ -151,7 +151,7 @@ int EPD_test(void)
     Paint_DrawString_CN(130, 0,"���abc", &Font12CN, BLACK, WHITE);
     Paint_DrawString_CN(130, 20, "΢ѩ����", &Font24CN, WHITE, BLACK);
 
-    EPD_2IN7_V2_Display_Base(BlackImage);
+    //EPD_2IN7_V2_Display_Base(BlackImage);
     DEV_Delay_ms(3000);
 #endif
 
@@ -205,7 +205,7 @@ int EPD_test(void)
     }
 #endif
 
-#if 1 // show image for array
+#if 0 // show image for array
 		free(BlackImage);
     printf("show Gray------------------------\r\n");
 //    Imagesize = ((EPD_2IN7_V2_WIDTH % 4 == 0)? (EPD_2IN7_V2_WIDTH / 4 ): (EPD_2IN7_V2_WIDTH / 4 + 1)) * EPD_2IN7_V2_HEIGHT;

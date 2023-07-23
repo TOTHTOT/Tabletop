@@ -34,9 +34,10 @@
 #include "string.h"
 #include <stdio.h>
 #include "usart1.h"
-#include "sht30.h"
 #include "EPD_Test.h"
 #include "EPD_2in7_V2.h"
+#include "w25qxx.h"
+#include "ds1307.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -60,9 +61,10 @@
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 osThreadId LED_TASKHandle;
-osThreadId KEY_TASKHandle;
 osThreadId USART1_TASKHandle;
+osThreadId TASK_EPDHandle;
 osSemaphoreId Usart1_Receive_BinSemaphoreHandle;
+osSemaphoreId en_epd_refreshHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -71,8 +73,8 @@ osSemaphoreId Usart1_Receive_BinSemaphoreHandle;
 
 void StartDefaultTask(void const *argument);
 void led_task(void const *argument);
-void key_task(void const *argument);
 void usart1_task(void const *argument);
+void epd_refresh(void const *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -112,9 +114,14 @@ void MX_FREERTOS_Init(void)
     osSemaphoreDef(Usart1_Receive_BinSemaphore);
     Usart1_Receive_BinSemaphoreHandle = osSemaphoreCreate(osSemaphore(Usart1_Receive_BinSemaphore), 1);
 
+    /* definition and creation of en_epd_refresh */
+    osSemaphoreDef(en_epd_refresh);
+    en_epd_refreshHandle = osSemaphoreCreate(osSemaphore(en_epd_refresh), 1);
+
     /* USER CODE BEGIN RTOS_SEMAPHORES */
     /* add semaphores, ... */
     xSemaphoreTake(Usart1_Receive_BinSemaphoreHandle, portMAX_DELAY);
+    xSemaphoreTake(en_epd_refreshHandle, portMAX_DELAY);
     /* USER CODE END RTOS_SEMAPHORES */
 
     /* USER CODE BEGIN RTOS_TIMERS */
@@ -134,13 +141,13 @@ void MX_FREERTOS_Init(void)
     osThreadDef(LED_TASK, led_task, osPriorityLow, 0, 128);
     LED_TASKHandle = osThreadCreate(osThread(LED_TASK), NULL);
 
-    /* definition and creation of KEY_TASK */
-    osThreadDef(KEY_TASK, key_task, osPriorityLow, 0, 128);
-    KEY_TASKHandle = osThreadCreate(osThread(KEY_TASK), NULL);
-
     /* definition and creation of USART1_TASK */
     osThreadDef(USART1_TASK, usart1_task, osPriorityLow, 0, 256);
     USART1_TASKHandle = osThreadCreate(osThread(USART1_TASK), NULL);
+
+    /* definition and creation of TASK_EPD */
+    osThreadDef(TASK_EPD, epd_refresh, osPriorityNormal, 0, 512);
+    TASK_EPDHandle = osThreadCreate(osThread(TASK_EPD), NULL);
 
     /* USER CODE BEGIN RTOS_THREADS */
     /* add threads, ... */
@@ -158,17 +165,18 @@ void StartDefaultTask(void const *argument)
 {
     /* USER CODE BEGIN StartDefaultTask */
     /* Infinite loop */
+    INFO_PRINT("system version %s\r\nbuild date %s, time %s", APP_VERSION, __DATE__, __TIME__);
     extern uint8_t epd_spi_write_byte(uint8_t data);
     extern uint8_t edp_pin_ctrl(epd_pin_ctrl_t pin, uint8_t state);
     extern uint8_t epd_start(void);
     extern uint8_t epd_end(void);
-    epd_init(&g_epd_dev, delay_xms, epd_spi_write_byte, epd_start, epd_end, edp_pin_ctrl);
-// #defin/ TEST_SHT30 0
-#ifdef TEST_SHT30
-    sht30_init(&g_sht_dev);
-    sht30_get_data(&g_sht_dev);
-    sht30_data_conversion(&g_sht_dev);
-#endif
+    extern uint8_t epd_en_refresh(epd_dev_v2_t * dev, epd_screen_element_t element);
+
+    epd_init(&g_epd_dev, delay_xms, epd_spi_write_byte, epd_start, epd_end, edp_pin_ctrl, epd_en_refresh);
+    g_epd_dev.enter_system_flag = 1;
+    // 初始化w25qxx
+    w25qxx_init(&g_w25qxx_dev);
+
     vTaskDelete(NULL);
     /* USER CODE END StartDefaultTask */
 }
@@ -191,25 +199,6 @@ void led_task(void const *argument)
         delay_ms(500);
     }
     /* USER CODE END led_task */
-}
-
-/* USER CODE BEGIN Header_key_task */
-/**
- * @brief Function implementing the KEY_TASK thread.
- * @param argument: Not used
- * @retval None
- */
-/* USER CODE END Header_key_task */
-void key_task(void const *argument)
-{
-    /* USER CODE BEGIN key_task */
-    /* Infinite loop */
-    for (;;)
-    {
-
-        osDelay(1);
-    }
-    /* USER CODE END key_task */
 }
 
 /* USER CODE BEGIN Header_usart1_task */
@@ -235,6 +224,50 @@ void usart1_task(void const *argument)
         delay_ms(1);
     }
     /* USER CODE END usart1_task */
+}
+
+/* USER CODE BEGIN Header_epd_refresh */
+/**
+ * @brief Function implementing the TASK_EPD thread.
+ * @param argument: Not used
+ * @retval None
+ */
+/* USER CODE END Header_epd_refresh */
+void epd_refresh(void const *argument)
+{
+    /* USER CODE BEGIN epd_refresh */
+    /* Infinite loop */
+    for (;;)
+    {
+        osSemaphoreWait(en_epd_refreshHandle, osWaitForever);
+        INFO_PRINT("refresh screen element[%d].\r\n", g_epd_dev.refresh_element);
+        switch (g_epd_dev.refresh_element)
+        {
+        case EPD_MAIN_SCREEN_ELEMENT_TIME:
+            g_epd_dev.module_start_callback();
+            Paint_NewImage(g_epd_dev.frame_buf, 50, 120, 90, WHITE);
+            EPD_2IN7_V2_Display_Base(&g_epd_dev, g_epd_dev.frame_buf);
+
+            printf("Partial refresh\r\n");
+            Paint_SelectImage(g_epd_dev.frame_buf);
+            Paint_SetScale(2);
+            Paint_Clear(WHITE);
+            Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+            Paint_DrawTime(g_epd_dev.main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x,
+                           g_epd_dev.main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x,
+                           &g_epd_dev.current_time, &Font20, WHITE, BLACK);
+            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 60, 134, 110, 254); // Xstart must be a multiple of 8
+            print_current_time(&g_epd_dev.current_time);
+
+            g_epd_dev.module_end_callback();
+            break;
+        default:
+            break;
+        }
+        g_epd_dev.refresh_element = EPD_MAIN_SCREEN_ELEMENT_NONE;
+        osDelay(1);
+    }
+    /* USER CODE END epd_refresh */
 }
 
 /* Private application code --------------------------------------------------*/

@@ -2,7 +2,7 @@
  * @Description: 墨水屏驱动EPD_2in7_V2版本
  * @Author: TOTHTOT
  * @Date: 2023-07-21 23:19:15
- * @LastEditTime: 2023-07-22 21:26:51
+ * @LastEditTime: 2023-07-23 22:32:26
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\EPaper\EPD_2in7_V2.c
  */
@@ -12,6 +12,11 @@
 #include "spi.h"
 #include "GUI_Paint.h"
 #include <stdio.h>
+
+#if (EPD_USE_RTOS == 1)
+#include "FreeRTOS.h"
+#include "cmsis_os.h"
+#endif /* EPD_USE_RTOS */
 
 /* 全局变量 */
 epd_dev_v2_t g_epd_dev = {0};
@@ -90,7 +95,39 @@ uint8_t epd_end(void)
 
     return 0;
 }
+#if (EPD_USE_RTOS == 1)
+/**
+ * @name: epd_en_refresh
+ * @msg: 调用一次就刷新一次屏幕
+ * @param {epd_dev_v2_t} *dev 屏幕设备
+ * @param {epd_screen_element_t} element 要刷新的组件
+ * @return {*}
+ * @author: TOTHTOT
+ * @date:
+ */
+uint8_t epd_en_refresh(epd_dev_v2_t *dev, epd_screen_element_t element)
+{
+    uint8_t ret = 0;
+    osStatus os_ret = osOK;
 
+    extern osSemaphoreId en_epd_refreshHandle;
+    if (dev->enter_system_flag == 1)
+    {
+        dev->refresh_element = element;
+
+        os_ret = osSemaphoreRelease(en_epd_refreshHandle);
+        if (os_ret != osOK)
+        {
+            ERROR_PRINT("release semaphore faile [%d]\r\n", os_ret);
+            ret = 1;
+        }
+    }
+    else 
+        ret = 2;
+
+    return ret;
+}
+#endif /* EPD_USE_RTOS */
 /* 用户代码结束 */
 
 uint8_t LUT_DATA_4Gray[159] =
@@ -164,11 +201,10 @@ static void EPD_2IN7_V2_ReadBusy(epd_dev_v2_t *dev)
     INFO_PRINT("e-Paper busy\r\n");
     do
     {
-        INFO_PRINT("e-Paper busying\r\n");
         if (dev->pin_ctrl_callback(EPD_READ_BUSY_PIN_EM, 0) == 0)
             break;
     } while (1);
-    dev->delay_ms_callback(20);
+    // dev->delay_ms_callback(20);
     INFO_PRINT("e-Paper busy release\r\n");
 }
 
@@ -636,7 +672,11 @@ uint8_t epd_page_main(epd_dev_v2_t *dev)
 
     return 0;
 }
-
+uint8_t epd_page_main_element_init(epd_dev_v2_t *dev)
+{
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x = 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y = 15;
+}
 /**
  * @name: epd_init
  * @msg: 墨水屏初始化
@@ -646,6 +686,7 @@ uint8_t epd_page_main(epd_dev_v2_t *dev)
  * @param { uint8_t } start_callback    模块使能回调函数, 用户实现
  * @param { uint8_t } end_callback       模块失能回调函数, 用户实现
  * @param { uint8_t } pin_ctrl_callback  引脚控制回调函数, 用户实现
+ * @param { uint8_t } en_refresh_callback  RTOS刷新页面回调函数, 用户实现
  * @return {*}
  * @author: TOTHTOT
  * @date:
@@ -655,7 +696,12 @@ uint8_t epd_init(epd_dev_v2_t *dev,
                  uint8_t (*write_callback)(uint8_t data),
                  uint8_t (*start_callback)(void),
                  uint8_t (*end_callback)(void),
-                 uint8_t (*pin_ctrl_callback)(epd_pin_ctrl_t pin, uint8_t state))
+                 uint8_t (*pin_ctrl_callback)(epd_pin_ctrl_t pin, uint8_t state)
+#if (EPD_USE_RTOS == 1)
+                     ,
+                 uint8_t (*en_refresh_callback)(epd_dev_v2_t *dev, epd_screen_element_t element)
+#endif /* EPD_USE_RTOS */
+)
 {
     uint8_t ret = 0;
 
@@ -672,10 +718,13 @@ uint8_t epd_init(epd_dev_v2_t *dev,
     dev->module_start_callback = start_callback;
     dev->spi_write_byte_callback = write_callback;
     dev->pin_ctrl_callback = pin_ctrl_callback;
-
+#if (EPD_USE_RTOS == 1)
+    dev->en_refresh_callback = en_refresh_callback;
+#endif /* EPD_USE_RTOS */
     // 清空缓存
     memset(dev->frame_buf, 0, EPD_FRAME_BUF_SIZE);
 
+    dev->enter_system_flag = 0;
     dev->current_page = EPD_PAGE_MAIN;
     dev->current_time.Year = 2023;
     dev->current_time.Month = 1;
@@ -684,6 +733,7 @@ uint8_t epd_init(epd_dev_v2_t *dev,
     dev->current_time.Min = 0;
     dev->current_time.Sec = 0;
 
+    epd_page_main_element_init(dev);
     epd_page_main(dev);
     return ret;
 }

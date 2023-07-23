@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/STM32F1xx_HAL_Driver/Inc;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../HARDWARE/KEY;../HARDWARE/LED;../SYSTEM/delay;../HARDWARE/USART;../SYSTEM/usart;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../HARDWARE/SHT30;../HARDWARE/EPaper;../HARDWARE/W25QXX</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/STM32F1xx_HAL_Driver/Inc;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../HARDWARE/KEY;../HARDWARE/LED;../SYSTEM/delay;../HARDWARE/USART;../SYSTEM/usart;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../HARDWARE/SHT30;../HARDWARE/EPaper;../HARDWARE/W25QXX;../HARDWARE/DS1307</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -526,24 +526,9 @@
               </FileOption>
             </File>
             <File>
-              <FileName>usart.c</FileName>
+              <FileName>tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Core/Src/usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/stm32f1xx_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_msp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/stm32f1xx_hal_msp.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_timebase_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/stm32f1xx_hal_timebase_tim.c</FilePath>
+              <FilePath>../Core/Src/tim.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -596,6 +581,21 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/stm32f1xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_msp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/stm32f1xx_hal_msp.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -612,11 +612,6 @@
               <FilePath>..\HARDWARE\LED\led.c</FilePath>
             </File>
             <File>
-              <FileName>sht30.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\SHT30\sht30.c</FilePath>
-            </File>
-            <File>
               <FileName>w25qxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\W25QXX\w25qxx.c</FilePath>
@@ -630,11 +625,6 @@
               <FileName>GUI_Paint.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\EPaper\GUI_Paint.c</FilePath>
-            </File>
-            <File>
-              <FileName>EPD_2in7_V2_test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\EPaper\EPD_2in7_V2_test.c</FilePath>
             </File>
             <File>
               <FileName>font8.c</FileName>
@@ -670,6 +660,11 @@
               <FileName>font24CN.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\EPaper\font24CN.c</FilePath>
+            </File>
+            <File>
+              <FileName>ds1307.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\DS1307\ds1307.c</FilePath>
             </File>
           </Files>
         </Group>

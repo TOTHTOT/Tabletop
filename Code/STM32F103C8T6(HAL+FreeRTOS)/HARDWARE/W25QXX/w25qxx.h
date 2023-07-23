@@ -2,7 +2,7 @@
  * @Description: w25qxx 的驱动代码
  * @Author: TOTHTOT
  * @Date: 2023-07-18 21:32:17
- * @LastEditTime: 2023-07-18 22:31:55
+ * @LastEditTime: 2023-07-23 14:51:14
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\W25QXX\w25qxx.h
  */
@@ -36,7 +36,6 @@
 #define W25X_Exit4ByteAddr 0xE9
 
 /* 宏定义 */
-// #define W25QXX_CS_SET HAL_GPIO_WritePin()
 
 typedef struct
 {
@@ -64,6 +63,7 @@ extern w25qxx_device_t g_w25qxx_dev;
 /* 全局函数 */
 void w25qxx_wait_busy(w25qxx_device_t *dev);
 void w25qxx_erase_sector(uint32_t Dst_Addr, w25qxx_device_t *dev);
+int w25qxx_init(w25qxx_device_t *dev);
 
 #endif /* __W25QXX_H__ */
 

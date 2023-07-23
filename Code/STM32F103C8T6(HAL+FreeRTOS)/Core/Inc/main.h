@@ -70,8 +70,10 @@ void Error_Handler(void);
 #define SPI_CS_GPIO_Port GPIOA
 #define W25QXX_CS_Pin GPIO_PIN_0
 #define W25QXX_CS_GPIO_Port GPIOB
+#define DHT11_DAT_Pin GPIO_PIN_11
+#define DHT11_DAT_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
-
+#define APP_VERSION "V1.0"
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

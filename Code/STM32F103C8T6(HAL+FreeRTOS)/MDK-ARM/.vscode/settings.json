@@ -10,6 +10,11 @@
         "stdlib.h": "c",
         "stdint.h": "c",
         "gui_paint.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "ds1307.h": "c",
+        "utility": "c",
+        "freertos.h": "c",
+        "main.h": "c",
+        "cmsis_os.h": "c"
     }
 }

@@ -11,6 +11,9 @@
 #include "spi.h"
 #include "delay.h"
 
+/* 全局变量 */
+w25qxx_device_t g_w25qxx_dev = {0};
+
 /* 用户代码开始 */
 /**
  * @name: w25qxx_wr_byte

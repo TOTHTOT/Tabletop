@@ -55,14 +55,36 @@ typedef enum
     EPD_PAGE_NONE,
     EPD_PAGE_MAIN,
     EPD_TOTAL_PAGE
-}epd_page_t;
+} epd_page_t;
+
+typedef enum
+{
+    EPD_MAIN_SCREEN_ELEMENT_NONE,         // 默认
+    EPD_MAIN_SCREEN_ELEMENT_TIME,         // 刷新主页时间
+    EPD_MAIN_SCREEN_ELEMENT_DATE,         // 刷新主页日期
+    EPD_MAIN_SCREEN_ELEMENT_T_H,          // 刷新主页温湿度
+    EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON, // 刷主页天气图标
+    EPD_MAIN_SCREEN_TOTAL_ELEMENT         // 主页组件总和
+} epd_screen_element_t;                   // 屏幕组件
+
+typedef struct
+{
+    uint16_t x;
+    uint16_t y;
+    DOT_PIXEL dot_pixel;
+    DOT_STYLE dot_style;
+    LINE_STYLE line_style;
+} epd_element_attr_t; // 组件的位置坐标
 
 typedef struct epd_dev_v2_t
 {
     uint8_t frame_buf[EPD_FRAME_BUF_SIZE]; // 一帧图片缓存
-    
-    epd_page_t current_page;
-    PAINT_TIME current_time;
+
+    uint8_t enter_system_flag;                                           // == 1,所有初始化完成进入系统, == 0, 还在初始化, 因为屏幕初始化要很长时间, 此时会触发定时器中断导致屏幕更新
+    epd_page_t current_page;                                             // 当前界面
+    PAINT_TIME current_time;                                             // 当前时间
+    epd_screen_element_t refresh_element;                                // 要刷新的组件
+    epd_element_attr_t main_element_attr[EPD_MAIN_SCREEN_TOTAL_ELEMENT]; // 每个组件元素都有自己的坐标
 
     /* 函数指针 */
     void (*delay_ms_callback)(uint32_t ms);
@@ -70,6 +92,10 @@ typedef struct epd_dev_v2_t
     uint8_t (*module_start_callback)(void);
     uint8_t (*module_end_callback)(void);
     uint8_t (*pin_ctrl_callback)(epd_pin_ctrl_t pin, uint8_t state);
+#define EPD_USE_RTOS 1
+#if (EPD_USE_RTOS == 1) // 如果使用RTOS则建议使用单独一个任务控制屏幕刷新动作
+    uint8_t (*en_refresh_callback)(struct epd_dev_v2_t *dev, epd_screen_element_t element);
+#endif /* EPD_USE_RTOS */
 } epd_dev_v2_t;
 
 /* 全局变量 */
@@ -81,7 +107,12 @@ uint8_t epd_init(epd_dev_v2_t *dev,
                  uint8_t (*write_callback)(uint8_t data),
                  uint8_t (*start_callback)(void),
                  uint8_t (*end_callback)(void),
-                 uint8_t (*pin_ctrl_callback)(epd_pin_ctrl_t pin, uint8_t state));
+                 uint8_t (*pin_ctrl_callback)(epd_pin_ctrl_t pin, uint8_t state)
+#if (EPD_USE_RTOS == 1)
+                     ,
+                 uint8_t (*en_refresh_callback)(struct epd_dev_v2_t *dev, epd_screen_element_t element)
+#endif /* EPD_USE_RTOS */
+);
 void EPD_2IN7_V2_Init(epd_dev_v2_t *dev);
 void EPD_2IN7_V2_Init_Fast(epd_dev_v2_t *dev);
 void EPD_2IN7_V2_Init_4GRAY(epd_dev_v2_t *dev);

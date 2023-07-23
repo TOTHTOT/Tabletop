@@ -175,14 +175,14 @@ typedef enum
  **/
 typedef struct
 {
-    uint16_t Year;  // 0000
+    uint16_t Year; // 0000
     uint8_t Month; // 1 - 12
     uint8_t Day;   // 1 - 30
     uint8_t Hour;  // 0 - 23
     uint8_t Min;   // 0 - 59
     uint8_t Sec;   // 0 - 59
+    uint16_t Msec; // 0 - 999
 } PAINT_TIME;
-extern PAINT_TIME sPaint_time;
 
 // init and Clear
 void Paint_NewImage(uint8_t *image, uint16_t Width, uint16_t Height, uint16_t Rotate, uint16_t Color);
