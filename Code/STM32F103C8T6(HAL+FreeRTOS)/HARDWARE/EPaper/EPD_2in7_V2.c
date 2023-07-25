@@ -2,7 +2,7 @@
  * @Description: 墨水屏驱动EPD_2in7_V2版本
  * @Author: TOTHTOT
  * @Date: 2023-07-21 23:19:15
- * @LastEditTime: 2023-07-23 22:32:26
+ * @LastEditTime: 2023-07-25 21:07:24
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\EPaper\EPD_2in7_V2.c
  */
@@ -105,24 +105,26 @@ uint8_t epd_end(void)
  * @author: TOTHTOT
  * @date:
  */
+extern osSemaphoreId en_epd_refreshHandle;
 uint8_t epd_en_refresh(epd_dev_v2_t *dev, epd_screen_element_t element)
 {
     uint8_t ret = 0;
     osStatus os_ret = osOK;
+    BaseType_t pxHigherPriorityTaskWoken;
 
-    extern osSemaphoreId en_epd_refreshHandle;
     if (dev->enter_system_flag == 1)
     {
         dev->refresh_element = element;
-
-        os_ret = osSemaphoreRelease(en_epd_refreshHandle);
-        if (os_ret != osOK)
+        // os_ret = osSemaphoreRelease(en_epd_refreshHandle);
+        if (xSemaphoreGiveFromISR(en_epd_refreshHandle, &pxHigherPriorityTaskWoken) == pdFALSE)
         {
-            ERROR_PRINT("release semaphore faile [%d]\r\n", os_ret);
+            ERROR_PRINT("release semaphore faile\r\n");
             ret = 1;
         }
+        else
+            INFO_PRINT("release refresh screen\r\n");
     }
-    else 
+    else
         ret = 2;
 
     return ret;
@@ -199,12 +201,11 @@ parameter:
 static void EPD_2IN7_V2_ReadBusy(epd_dev_v2_t *dev)
 {
     INFO_PRINT("e-Paper busy\r\n");
-    do
+    while (1)
     {
         if (dev->pin_ctrl_callback(EPD_READ_BUSY_PIN_EM, 0) == 0)
             break;
-    } while (1);
-    // dev->delay_ms_callback(20);
+    }
     INFO_PRINT("e-Paper busy release\r\n");
 }
 
@@ -486,7 +487,7 @@ void EPD_2IN7_V2_Display_Base_color(epd_dev_v2_t *dev, uint8_t color)
             EPD_2IN7_V2_SendData(dev, color);
         }
     }
-    // EPD_2IN7_V2_TurnOnDisplay();
+    EPD_2IN7_V2_TurnOnDisplay(dev);
 }
 
 void EPD_2IN7_V2_Display_Partial(epd_dev_v2_t *dev, const uint8_t *Image, uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yend)
@@ -676,7 +677,13 @@ uint8_t epd_page_main_element_init(epd_dev_v2_t *dev)
 {
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x = 10;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y = 15;
+    return 0;
 }
+
+uint8_t epd_page_main_time(epd_dev_v2_t *dev)
+{
+}
+
 /**
  * @name: epd_init
  * @msg: 墨水屏初始化
@@ -734,6 +741,24 @@ uint8_t epd_init(epd_dev_v2_t *dev,
     dev->current_time.Sec = 0;
 
     epd_page_main_element_init(dev);
-    epd_page_main(dev);
+    // epd_page_main(dev);
+
+    // time init
+    dev->module_start_callback();
+    EPD_2IN7_V2_Init_Fast(dev);
+    EPD_2IN7_V2_Clear(dev);
+    Paint_NewImage(dev->frame_buf, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
+    Paint_Clear(WHITE);
+
+    EPD_2IN7_V2_Display_Base_color(dev, WHITE);
+    EPD_2IN7_V2_Display_Base(dev, dev->frame_buf);
+
+    Paint_NewImage(dev->frame_buf, 50, 120, 90, WHITE);
+
+    Paint_SelectImage(dev->frame_buf);
+    Paint_SetScale(2);
+    Paint_Clear(WHITE);
+    // dev->module_end_callback();
+
     return ret;
 }

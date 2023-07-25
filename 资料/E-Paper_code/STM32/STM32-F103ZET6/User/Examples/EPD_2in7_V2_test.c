@@ -116,7 +116,7 @@ int EPD_test(void)
 
 #endif
 
-#if 1  // Drawing on the image
+#if 0  // Drawing on the image
 		Paint_NewImage(BlackImage, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);  	
     printf("Drawing\r\n");
     //1.Select Image
@@ -162,12 +162,12 @@ int EPD_test(void)
     // use the EPD_2IN7_V2_Display_Base_color() function to refresh the background color, 
     // otherwise the background color will be garbled 
     EPD_2IN7_V2_Init();
-    // EPD_2IN7_V2_Display_Base_color(WHITE);
+    EPD_2IN7_V2_Display_Base_color(WHITE);
 		Paint_NewImage(BlackImage, 50, 120, 90, WHITE);
     
     printf("Partial refresh\r\n");
     Paint_SelectImage(BlackImage);
-		Paint_SetScale(2);
+	Paint_SetScale(2);
     Paint_Clear(WHITE);
     
     PAINT_TIME sPaint_time;
@@ -192,6 +192,7 @@ int EPD_test(void)
         }
         
         Paint_Clear(WHITE);
+		Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
 				Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
         Paint_DrawTime(10, 15, &sPaint_time, &Font20, WHITE, BLACK);
 

@@ -121,7 +121,7 @@ void MX_FREERTOS_Init(void)
     /* USER CODE BEGIN RTOS_SEMAPHORES */
     /* add semaphores, ... */
     xSemaphoreTake(Usart1_Receive_BinSemaphoreHandle, portMAX_DELAY);
-    xSemaphoreTake(en_epd_refreshHandle, portMAX_DELAY);
+    // xSemaphoreTake(en_epd_refreshHandle, portMAX_DELAY);
     /* USER CODE END RTOS_SEMAPHORES */
 
     /* USER CODE BEGIN RTOS_TIMERS */
@@ -146,7 +146,7 @@ void MX_FREERTOS_Init(void)
     USART1_TASKHandle = osThreadCreate(osThread(USART1_TASK), NULL);
 
     /* definition and creation of TASK_EPD */
-    osThreadDef(TASK_EPD, epd_refresh, osPriorityNormal, 0, 512);
+    osThreadDef(TASK_EPD, epd_refresh, osPriorityLow, 0, 256);
     TASK_EPDHandle = osThreadCreate(osThread(TASK_EPD), NULL);
 
     /* USER CODE BEGIN RTOS_THREADS */
@@ -165,13 +165,14 @@ void StartDefaultTask(void const *argument)
 {
     /* USER CODE BEGIN StartDefaultTask */
     /* Infinite loop */
-    INFO_PRINT("system version %s\r\nbuild date %s, time %s", APP_VERSION, __DATE__, __TIME__);
+    INFO_PRINT("system version %s\r\nbuild date %s, time %s\r\n", APP_VERSION, __DATE__, __TIME__);
     extern uint8_t epd_spi_write_byte(uint8_t data);
     extern uint8_t edp_pin_ctrl(epd_pin_ctrl_t pin, uint8_t state);
     extern uint8_t epd_start(void);
     extern uint8_t epd_end(void);
     extern uint8_t epd_en_refresh(epd_dev_v2_t * dev, epd_screen_element_t element);
 
+    delay_xms(500);
     epd_init(&g_epd_dev, delay_xms, epd_spi_write_byte, epd_start, epd_end, edp_pin_ctrl, epd_en_refresh);
     g_epd_dev.enter_system_flag = 1;
     // 初始化w25qxx
@@ -194,7 +195,7 @@ void led_task(void const *argument)
     /* Infinite loop */
     for (;;)
     {
-        INFO_PRINT("led\r\n");
+        // INFO_PRINT("led\r\n");
         LED0_TOGGLE;
         delay_ms(500);
     }
@@ -237,35 +238,33 @@ void epd_refresh(void const *argument)
 {
     /* USER CODE BEGIN epd_refresh */
     /* Infinite loop */
+    BaseType_t pxHigherPriorityTaskWoken;
+    g_epd_dev.module_start_callback();
     for (;;)
     {
-        osSemaphoreWait(en_epd_refreshHandle, osWaitForever);
+        // xSemaphoreTake(en_epd_refreshHandle, portMAX_DELAY);
+        osSemaphoreWait(en_epd_refreshHandle, 1000);
+        // xSemaphoreTakeFromISR(en_epd_refreshHandle, &pxHigherPriorityTaskWoken);
         INFO_PRINT("refresh screen element[%d].\r\n", g_epd_dev.refresh_element);
         switch (g_epd_dev.refresh_element)
         {
         case EPD_MAIN_SCREEN_ELEMENT_TIME:
-            g_epd_dev.module_start_callback();
-            Paint_NewImage(g_epd_dev.frame_buf, 50, 120, 90, WHITE);
-            EPD_2IN7_V2_Display_Base(&g_epd_dev, g_epd_dev.frame_buf);
-
-            printf("Partial refresh\r\n");
-            Paint_SelectImage(g_epd_dev.frame_buf);
-            Paint_SetScale(2);
+            // g_epd_dev.module_start_callback();
             Paint_Clear(WHITE);
             Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
-            Paint_DrawTime(g_epd_dev.main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x,
-                           g_epd_dev.main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x,
-                           &g_epd_dev.current_time, &Font20, WHITE, BLACK);
-            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 60, 134, 110, 254); // Xstart must be a multiple of 8
-            print_current_time(&g_epd_dev.current_time);
+            Paint_DrawLine(0, 0, 40, 20, BLACK, DOT_PIXEL_4X4, LINE_STYLE_SOLID);
+            Paint_DrawTime(10, 15, &g_epd_dev.current_time, &Font20, WHITE, BLACK);
+            uint16_t x = 8;
+            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, x, 0, x+50, 254); // Xstart must be a multiple of 8
 
-            g_epd_dev.module_end_callback();
+            print_current_time(&g_epd_dev.current_time);
+            // g_epd_dev.module_end_callback();
             break;
         default:
             break;
         }
         g_epd_dev.refresh_element = EPD_MAIN_SCREEN_ELEMENT_NONE;
-        osDelay(1);
+        delay_ms(10);
     }
     /* USER CODE END epd_refresh */
 }
@@ -274,5 +273,3 @@ void epd_refresh(void const *argument)
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
