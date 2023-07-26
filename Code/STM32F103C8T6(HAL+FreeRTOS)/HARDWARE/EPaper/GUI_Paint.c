@@ -296,6 +296,7 @@ void Paint_Clear(uint16_t Color)
             { // 8 pixel =  1 byte
                 uint32_t Addr = X + Y * Paint.WidthByte;
                 Paint.Image[Addr] = Color;
+                // INFO_PRINT("x = %d, y = %d, w = %d, h = %d, adder = %d\r\n",X, Y, Paint.WidthByte, Paint.HeightByte, Addr);
             }
         }
     }

@@ -238,7 +238,8 @@ void epd_refresh(void const *argument)
 {
     /* USER CODE BEGIN epd_refresh */
     /* Infinite loop */
-    BaseType_t pxHigherPriorityTaskWoken;
+    double t_ = 0.0;
+    uint16_t x = 8;
     g_epd_dev.module_start_callback();
     for (;;)
     {
@@ -248,17 +249,24 @@ void epd_refresh(void const *argument)
         INFO_PRINT("refresh screen element[%d].\r\n", g_epd_dev.refresh_element);
         switch (g_epd_dev.refresh_element)
         {
-        case EPD_MAIN_SCREEN_ELEMENT_TIME:
-            // g_epd_dev.module_start_callback();
+        case EPD_MAIN_SCREEN_ELEMENT_TIME: // 时钟
+            Paint_SelectImage(g_epd_dev.time_frame_buf);
             Paint_Clear(WHITE);
             Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
-            Paint_DrawLine(0, 0, 40, 20, BLACK, DOT_PIXEL_4X4, LINE_STYLE_SOLID);
             Paint_DrawTime(10, 15, &g_epd_dev.current_time, &Font20, WHITE, BLACK);
-            uint16_t x = 8;
-            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, x, 0, x+50, 254); // Xstart must be a multiple of 8
+            x = 8;
+            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.time_frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
 
             print_current_time(&g_epd_dev.current_time);
-            // g_epd_dev.module_end_callback();
+            // break;
+        case EPD_MAIN_SCREEN_ELEMENT_T_H: // 温湿度
+            EPD_2IN7_V2_Display_Base(&g_epd_dev, g_epd_dev.t_h_frame_buf);
+            Paint_SelectImage(g_epd_dev.t_h_frame_buf);
+            Paint_Clear(WHITE);
+            Paint_DrawNumDecimals(0, 0, t_++, &Font16, 3, BLACK, WHITE);
+            Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+            x = 80;
+            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.t_h_frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
             break;
         default:
             break;

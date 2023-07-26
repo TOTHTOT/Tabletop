@@ -2,7 +2,7 @@
  * @Description: 墨水屏驱动EPD_2in7_V2版本
  * @Author: TOTHTOT
  * @Date: 2023-07-21 23:19:15
- * @LastEditTime: 2023-07-25 21:07:24
+ * @LastEditTime: 2023-07-26 21:53:33
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\EPaper\EPD_2in7_V2.c
  */
@@ -200,13 +200,13 @@ parameter:
 ******************************************************************************/
 static void EPD_2IN7_V2_ReadBusy(epd_dev_v2_t *dev)
 {
-    INFO_PRINT("e-Paper busy\r\n");
+    // INFO_PRINT("e-Paper busy\r\n");
     while (1)
     {
         if (dev->pin_ctrl_callback(EPD_READ_BUSY_PIN_EM, 0) == 0)
             break;
     }
-    INFO_PRINT("e-Paper busy release\r\n");
+    // INFO_PRINT("e-Paper busy release\r\n");
 }
 
 /******************************************************************************
@@ -639,49 +639,64 @@ void EPD_2IN7_V2_Sleep(epd_dev_v2_t *dev)
 
 uint8_t epd_page_main(epd_dev_v2_t *dev)
 {
-    uint8_t *BlackImage = dev->frame_buf;
-
-    // 启动模块
-    g_epd_dev.module_start_callback();
-    // 设置屏幕参数以及缓存
-    Paint_NewImage(BlackImage, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
-    // 初始化屏幕
-    EPD_2IN7_V2_Init(&g_epd_dev);
-    // 清屏
-    EPD_2IN7_V2_Clear(&g_epd_dev);
-
-    EPD_2IN7_V2_Init_Fast(&g_epd_dev);
-    // 设置一帧图片缓存, 接下来就是绘制缓存内容, 最后将一帧数据输出到屏幕
-    Paint_NewImage(BlackImage, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
-    // 屏幕显存设置颜色
-    Paint_Clear(WHITE);
-    Paint_SelectImage(BlackImage);
-
-    INFO_PRINT("Drawing:BlackImage\r\n");
-
-    Paint_DrawLine(20, 70, 70, 120, BLACK, DOT_PIXEL_4X4, LINE_STYLE_SOLID);
-    Paint_DrawTime(0, 0, &dev->current_time, &Font20, WHITE, BLACK);
-
-    // 显存内容输出到屏幕
-    EPD_2IN7_V2_Display_Fast(&g_epd_dev, BlackImage);
-    g_epd_dev.delay_ms_callback(3000); // 等待输出完成
-
-    EPD_2IN7_V2_Sleep(&g_epd_dev);
-
-    g_epd_dev.delay_ms_callback(2000); // important, at least 2s
-    g_epd_dev.module_end_callback();
 
     return 0;
 }
+
+/**
+ * @name:
+ * @msg:
+ * @param {epd_dev_v2_t} *dev
+ * @return {*}
+ * @author: TOTHTOT
+ * @date:
+ */
+static uint8_t epd_page_main_time_init(epd_dev_v2_t *dev)
+{
+    INFO_PRINT("time_buf_size = %d\r\n", sizeof(dev->time_frame_buf));
+
+    EPD_2IN7_V2_Display_Base_color(dev, WHITE);
+    // EPD_2IN7_V2_Display_Base(dev, dev->time_frame_buf);
+
+    Paint_NewImage(dev->time_frame_buf, 50, 120, 90, WHITE);
+
+    Paint_SelectImage(dev->time_frame_buf);
+    Paint_SetScale(2);
+    Paint_Clear(WHITE);
+}
+
+static uint8_t epd_page_main_t_h_init(epd_dev_v2_t *dev)
+{
+    INFO_PRINT("t_h_buf_size = %d\r\n", sizeof(dev->t_h_frame_buf));
+
+    EPD_2IN7_V2_Display_Base_color(dev, WHITE);
+    // EPD_2IN7_V2_Display_Base(dev, dev->t_h_frame_buf);
+
+    Paint_NewImage(dev->t_h_frame_buf, 50, 120, 90, WHITE);
+
+    Paint_SelectImage(dev->t_h_frame_buf);
+    Paint_SetScale(2);
+    Paint_Clear(WHITE);
+}
+
 uint8_t epd_page_main_element_init(epd_dev_v2_t *dev)
 {
+    dev->module_start_callback(); // 激活屏幕
+
+    EPD_2IN7_V2_Init_Fast(dev); //
+    EPD_2IN7_V2_Clear(dev);     // 清屏
+
+    // 设置一帧图片缓存, 接下来就是绘制缓存内容, 最后将一帧数据输出到屏幕
+    Paint_NewImage(dev->frame_buf, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
+    // 屏幕显存设置颜色
+    Paint_Clear(WHITE);
+
+    epd_page_main_time_init(dev); // 初始化时钟组件
+    epd_page_main_t_h_init(dev);  // 初始化温湿度组件
+
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x = 10;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y = 15;
     return 0;
-}
-
-uint8_t epd_page_main_time(epd_dev_v2_t *dev)
-{
 }
 
 /**
@@ -743,21 +758,6 @@ uint8_t epd_init(epd_dev_v2_t *dev,
     epd_page_main_element_init(dev);
     // epd_page_main(dev);
 
-    // time init
-    dev->module_start_callback();
-    EPD_2IN7_V2_Init_Fast(dev);
-    EPD_2IN7_V2_Clear(dev);
-    Paint_NewImage(dev->frame_buf, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
-    Paint_Clear(WHITE);
-
-    EPD_2IN7_V2_Display_Base_color(dev, WHITE);
-    EPD_2IN7_V2_Display_Base(dev, dev->frame_buf);
-
-    Paint_NewImage(dev->frame_buf, 50, 120, 90, WHITE);
-
-    Paint_SelectImage(dev->frame_buf);
-    Paint_SetScale(2);
-    Paint_Clear(WHITE);
     // dev->module_end_callback();
 
     return ret;
