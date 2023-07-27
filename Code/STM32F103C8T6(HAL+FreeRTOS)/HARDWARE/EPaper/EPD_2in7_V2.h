@@ -79,8 +79,8 @@ typedef struct
 typedef struct epd_dev_v2_t
 {
     uint8_t frame_buf[EPD_FRAME_BUF_SIZE];                  // 一帧图片缓存
-    uint8_t time_frame_buf[EPD_CALCULATE_BUF_SIZE(50, 120)]; // 时钟缓存
-    uint8_t t_h_frame_buf[EPD_CALCULATE_BUF_SIZE(50, 120)];  // 温湿度缓存
+    // uint8_t time_frame_buf[EPD_CALCULATE_BUF_SIZE(50, 120)]; // 时钟缓存
+    // uint8_t t_h_frame_buf[EPD_CALCULATE_BUF_SIZE(50, 120)];  // 温湿度缓存
 
     uint8_t enter_system_flag;                                           // == 1,所有初始化完成进入系统, == 0, 还在初始化, 因为屏幕初始化要很长时间, 此时会触发定时器中断导致屏幕更新
     epd_page_t current_page;                                             // 当前界面

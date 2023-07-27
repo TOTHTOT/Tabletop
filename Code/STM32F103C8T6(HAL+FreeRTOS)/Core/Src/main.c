@@ -33,6 +33,7 @@
 #include "EPD_Test.h"
 #include "EPD_2in7_V2.h"
 #include "ds1307.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -180,7 +181,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         ds1307_time_increase(&g_epd_dev.current_time);
         if (g_epd_dev.en_refresh_callback != NULL)
         {
-            g_epd_dev.en_refresh_callback(&g_epd_dev, EPD_MAIN_SCREEN_ELEMENT_TIME);
+            if (g_epd_dev.enter_system_flag == 1)
+                g_epd_dev.en_refresh_callback(&g_epd_dev, EPD_MAIN_SCREEN_ELEMENT_TIME);
         }
         else
         {
