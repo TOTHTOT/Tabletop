@@ -2,7 +2,7 @@
  * @Description: 墨水屏驱动EPD_2in7_V2版本
  * @Author: TOTHTOT
  * @Date: 2023-07-21 23:19:15
- * @LastEditTime: 2023-07-26 21:53:33
+ * @LastEditTime: 2023-07-27 22:33:52
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\EPaper\EPD_2in7_V2.c
  */
@@ -109,7 +109,6 @@ extern osSemaphoreId en_epd_refreshHandle;
 uint8_t epd_en_refresh(epd_dev_v2_t *dev, epd_screen_element_t element)
 {
     uint8_t ret = 0;
-    osStatus os_ret = osOK;
     BaseType_t pxHigherPriorityTaskWoken;
 
     if (dev->enter_system_flag == 1)
@@ -653,38 +652,47 @@ uint8_t epd_page_main(epd_dev_v2_t *dev)
  */
 static uint8_t epd_page_main_time_init(epd_dev_v2_t *dev)
 {
-    INFO_PRINT("time_buf_size = %d\r\n", sizeof(dev->time_frame_buf));
+    uint8_t x = 8;
+    INFO_PRINT("time_buf_size = %d\r\n", sizeof(dev->frame_buf));
 
-    EPD_2IN7_V2_Display_Base_color(dev, WHITE);
-    // EPD_2IN7_V2_Display_Base(dev, dev->time_frame_buf);
+    // // EPD_2IN7_V2_Display_Base(dev, dev->frame_buf);
+    // EPD_2IN7_V2_Init(dev);
+    Paint_NewImage(dev->frame_buf, 50, 120, 90, WHITE);
 
-    Paint_NewImage(dev->time_frame_buf, 50, 120, 90, WHITE);
-
-    Paint_SelectImage(dev->time_frame_buf);
+    Paint_SelectImage(dev->frame_buf);
     Paint_SetScale(2);
     Paint_Clear(WHITE);
+    // EPD_2IN7_V2_Display_Base_color(dev, WHITE);
+
+    EPD_2IN7_V2_Display_Partial(dev, dev->frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
+    return 0;
 }
 
 static uint8_t epd_page_main_t_h_init(epd_dev_v2_t *dev)
 {
-    INFO_PRINT("t_h_buf_size = %d\r\n", sizeof(dev->t_h_frame_buf));
+    uint8_t x = 80;
+    INFO_PRINT("t_h_buf_size = %d\r\n", sizeof(dev->frame_buf));
+    // EPD_2IN7_V2_Init(dev);
 
-    EPD_2IN7_V2_Display_Base_color(dev, WHITE);
-    // EPD_2IN7_V2_Display_Base(dev, dev->t_h_frame_buf);
+    // EPD_2IN7_V2_Display_Base(dev, dev->frame_buf);
 
-    Paint_NewImage(dev->t_h_frame_buf, 50, 120, 90, WHITE);
+    Paint_NewImage(dev->frame_buf, 50, 120, 90, WHITE);
 
-    Paint_SelectImage(dev->t_h_frame_buf);
+    Paint_SelectImage(dev->frame_buf);
     Paint_SetScale(2);
     Paint_Clear(WHITE);
+    // EPD_2IN7_V2_Display_Base_color(dev, WHITE);
+    EPD_2IN7_V2_Display_Partial(dev, dev->frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
+
+    return 0;
 }
 
 uint8_t epd_page_main_element_init(epd_dev_v2_t *dev)
 {
     dev->module_start_callback(); // 激活屏幕
 
-    EPD_2IN7_V2_Init_Fast(dev); //
-    EPD_2IN7_V2_Clear(dev);     // 清屏
+    EPD_2IN7_V2_Init(dev);  //
+    EPD_2IN7_V2_Clear(dev); // 清屏
 
     // 设置一帧图片缓存, 接下来就是绘制缓存内容, 最后将一帧数据输出到屏幕
     Paint_NewImage(dev->frame_buf, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);

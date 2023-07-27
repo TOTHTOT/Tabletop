@@ -247,26 +247,31 @@ void epd_refresh(void const *argument)
         osSemaphoreWait(en_epd_refreshHandle, 1000);
         // xSemaphoreTakeFromISR(en_epd_refreshHandle, &pxHigherPriorityTaskWoken);
         INFO_PRINT("refresh screen element[%d].\r\n", g_epd_dev.refresh_element);
+        // EPD_2IN7_V2_Init(&g_epd_dev);
+        // EPD_2IN7_V2_Display_Base(&g_epd_dev, g_epd_dev.frame_buf);
         switch (g_epd_dev.refresh_element)
         {
         case EPD_MAIN_SCREEN_ELEMENT_TIME: // 时钟
-            Paint_SelectImage(g_epd_dev.time_frame_buf);
+            Paint_NewImage(g_epd_dev.frame_buf, 50, 120, 90, WHITE);
+            Paint_SelectImage(g_epd_dev.frame_buf);
             Paint_Clear(WHITE);
             Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
             Paint_DrawTime(10, 15, &g_epd_dev.current_time, &Font20, WHITE, BLACK);
             x = 8;
-            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.time_frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
+            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
 
             print_current_time(&g_epd_dev.current_time);
+            // EPD_2IN7_V2_Display_Base(&g_epd_dev, g_epd_dev.frame_buf);
             // break;
-        case EPD_MAIN_SCREEN_ELEMENT_T_H: // 温湿度
-            EPD_2IN7_V2_Display_Base(&g_epd_dev, g_epd_dev.t_h_frame_buf);
-            Paint_SelectImage(g_epd_dev.t_h_frame_buf);
+            case EPD_MAIN_SCREEN_ELEMENT_T_H: // 温湿度
+            Paint_NewImage(g_epd_dev.frame_buf, 50, 120, 90, WHITE);
+            // EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, )
+            Paint_SelectImage(g_epd_dev.frame_buf);
             Paint_Clear(WHITE);
-            Paint_DrawNumDecimals(0, 0, t_++, &Font16, 3, BLACK, WHITE);
+            Paint_DrawNumDecimals(0, 0, t_++, &Font20, 3, BLACK, WHITE);
             Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
             x = 80;
-            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.t_h_frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
+            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
             break;
         default:
             break;

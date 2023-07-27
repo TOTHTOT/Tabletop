@@ -116,7 +116,7 @@ int EPD_test(void)
 
 #endif
 
-#if 0  // Drawing on the image
+#if 1  // Drawing on the image
 		Paint_NewImage(BlackImage, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);  	
     printf("Drawing\r\n");
     //1.Select Image
@@ -151,7 +151,7 @@ int EPD_test(void)
     Paint_DrawString_CN(130, 0,"���abc", &Font12CN, BLACK, WHITE);
     Paint_DrawString_CN(130, 20, "΢ѩ����", &Font24CN, WHITE, BLACK);
 
-    //EPD_2IN7_V2_Display_Base(BlackImage);
+    EPD_2IN7_V2_Display_Base(BlackImage);
     DEV_Delay_ms(3000);
 #endif
 
@@ -162,7 +162,7 @@ int EPD_test(void)
     // use the EPD_2IN7_V2_Display_Base_color() function to refresh the background color, 
     // otherwise the background color will be garbled 
     EPD_2IN7_V2_Init();
-    EPD_2IN7_V2_Display_Base_color(WHITE);
+    //EPD_2IN7_V2_Display_Base_color(WHITE);
 		Paint_NewImage(BlackImage, 50, 120, 90, WHITE);
     
     printf("Partial refresh\r\n");
