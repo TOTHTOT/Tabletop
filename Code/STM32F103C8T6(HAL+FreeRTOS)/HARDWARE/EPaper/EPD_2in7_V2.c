@@ -2,7 +2,7 @@
  * @Description: 墨水屏驱动EPD_2in7_V2版本
  * @Author: TOTHTOT
  * @Date: 2023-07-21 23:19:15
- * @LastEditTime: 2023-07-27 23:03:37
+ * @LastEditTime: 2023-07-29 23:25:05
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\EPaper\EPD_2in7_V2.c
  */
@@ -12,6 +12,7 @@
 #include "spi.h"
 #include "GUI_Paint.h"
 #include <stdio.h>
+#include <string.h>
 
 #if (EPD_USE_RTOS == 1)
 #include "FreeRTOS.h"
@@ -640,7 +641,7 @@ uint8_t epd_page_main(epd_dev_v2_t *dev)
 
     return 0;
 }
-
+#if (USE_ELEMENT_BUF == 1)
 /**
  * @name:
  * @msg:
@@ -652,11 +653,11 @@ uint8_t epd_page_main(epd_dev_v2_t *dev)
 static uint8_t epd_page_main_time_init(epd_dev_v2_t *dev)
 {
     uint8_t x = 8;
-    INFO_PRINT("time_buf_size = %d\r\n", sizeof(dev->frame_buf));
+    INFO_PRINT("time_buf_size = %d\r\n", sizeof(dev->time_frame_buf));
 
-    Paint_NewImage(dev->frame_buf, 50, 120, 90, WHITE);
+    Paint_NewImage(dev->time_frame_buf, 50, 120, 90, WHITE);
 
-    Paint_SelectImage(dev->frame_buf);
+    Paint_SelectImage(dev->time_frame_buf);
     Paint_SetScale(2);
     Paint_Clear(WHITE);
     EPD_2IN7_V2_Display_Base_color(dev, WHITE);
@@ -668,11 +669,11 @@ static uint8_t epd_page_main_time_init(epd_dev_v2_t *dev)
 static uint8_t epd_page_main_t_h_init(epd_dev_v2_t *dev)
 {
     uint8_t x = 80;
-    INFO_PRINT("t_h_buf_size = %d\r\n", sizeof(dev->frame_buf));
+    INFO_PRINT("t_h_buf_size = %d\r\n", sizeof(dev->t_h_frame_buf));
 
-    Paint_NewImage(dev->frame_buf, 50, 120, 90, WHITE);
+    Paint_NewImage(dev->t_h_frame_buf, 50, 120, 90, WHITE);
 
-    Paint_SelectImage(dev->frame_buf);
+    Paint_SelectImage(dev->t_h_frame_buf);
     Paint_SetScale(2);
     Paint_Clear(WHITE);
     EPD_2IN7_V2_Display_Base_color(dev, WHITE);
@@ -680,7 +681,6 @@ static uint8_t epd_page_main_t_h_init(epd_dev_v2_t *dev)
 
     return 0;
 }
-
 uint8_t epd_page_main_element_init(epd_dev_v2_t *dev)
 {
     dev->module_start_callback(); // 激活屏幕
@@ -693,14 +693,82 @@ uint8_t epd_page_main_element_init(epd_dev_v2_t *dev)
     // 屏幕显存设置颜色
     Paint_Clear(WHITE);
 
-    epd_page_main_time_init(dev); // 初始化时钟组件
-    epd_page_main_t_h_init(dev);  // 初始化温湿度组件
-
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x = 10;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y = 15;
     return 0;
 }
+#endif /* USE_ELEMENT_BUF */
 
+uint8_t epd_main_updata(epd_dev_v2_t *dev)
+{
+    Paint_SelectImage(dev->frame_buf);
+
+    Paint_Clear(WHITE);
+
+    // 两条横线
+    Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3, EPD_2IN7_V2_HEIGHT, EPD_2IN7_V2_WIDTH / 3,
+                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
+    Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3 * 2, EPD_2IN7_V2_HEIGHT, EPD_2IN7_V2_WIDTH / 3 * 2,
+                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
+    // 两条竖线在第一行
+    Paint_DrawLine(EPD_2IN7_V2_HEIGHT / 3, 0, EPD_2IN7_V2_HEIGHT / 3, EPD_2IN7_V2_WIDTH / 3,
+                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
+    Paint_DrawLine(EPD_2IN7_V2_HEIGHT / 3 * 2, 0, EPD_2IN7_V2_HEIGHT / 3 * 2, EPD_2IN7_V2_WIDTH / 3,
+                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
+
+    sprintf((char *)dev->temperature, "%3dC", 26);
+    Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x,
+                        dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y,
+                        (char *)dev->temperature, &Font20, WHITE, BLACK); // 温度显示
+    sprintf((char *)dev->humidity, "%3d%%", 50);
+    Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x,
+                        dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y,
+                        (char *)dev->humidity, &Font20, WHITE, BLACK); // 湿度显示
+
+    Paint_DrawTime(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x,
+                   dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y,
+                   &dev->current_time, &Font20, WHITE, BLACK); // 时间显示
+
+    sprintf((char *)dev->date, "%4d/%2d/%2d", dev->current_time.Year, dev->current_time.Month, dev->current_time.Day);
+    Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x,
+                        dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y,
+                        (char *)dev->date, &Font20, WHITE, BLACK); // 日期显示
+
+    return 0;
+}
+
+uint8_t epd_page_main_init(epd_dev_v2_t *dev)
+{
+    dev->module_start_callback(); // 激活屏幕
+
+    EPD_2IN7_V2_Init(dev);  //
+    EPD_2IN7_V2_Clear(dev); // 清屏
+
+    // 设置一帧图片缓存, 接下来就是绘制缓存内容, 最后将一帧数据输出到屏幕
+    Paint_NewImage(dev->frame_buf, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT, 90, WHITE);
+    // 屏幕显存设置颜色
+    Paint_Clear(WHITE);
+    Paint_SelectImage(dev->frame_buf);
+
+    // 初始化屏幕组件坐标
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x = EPD_2IN7_V2_WIDTH / 2;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y = 80; // 时间
+
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x = EPD_2IN7_V2_HEIGHT / 5 + 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y = EPD_2IN7_V2_WIDTH / 6 * 5; // 日期
+
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x = EPD_2IN7_V2_HEIGHT / 3 + 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y = 10; // 温度
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x = EPD_2IN7_V2_HEIGHT / 3 + 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y = 30; // 湿度
+
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].x = 0;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].y = 0; // 天气图片
+
+    epd_main_updata(dev);
+    EPD_2IN7_V2_Display_Base(dev, dev->frame_buf);
+    return 0;
+}
 /**
  * @name: epd_init
  * @msg: 墨水屏初始化
@@ -745,7 +813,7 @@ uint8_t epd_init(epd_dev_v2_t *dev,
 #if (EPD_USE_RTOS == 1)
     dev->en_refresh_callback = en_refresh_callback;
 #endif /* EPD_USE_RTOS */
-    // 清空缓存
+       // 清空缓存
     memset(dev->frame_buf, 0, EPD_FRAME_BUF_SIZE);
 
     dev->enter_system_flag = 0;
@@ -755,9 +823,9 @@ uint8_t epd_init(epd_dev_v2_t *dev,
     dev->current_time.Day = 1;
     dev->current_time.Hour = 12;
     dev->current_time.Min = 0;
-    dev->current_time.Sec = 0;
+    dev->current_time.Sec = 50;
 
-    epd_page_main_element_init(dev);
+    epd_page_main_init(dev);
     // epd_page_main(dev);
 
     // dev->module_end_callback();

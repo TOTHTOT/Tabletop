@@ -104,7 +104,7 @@ int EPD_test(void)
 
 #endif		
 
-#if 0   // show bmp
+#if 1   // show bmp
 
     printf("show window BMP-----------------\r\n");
 		EPD_2IN7_V2_Init();

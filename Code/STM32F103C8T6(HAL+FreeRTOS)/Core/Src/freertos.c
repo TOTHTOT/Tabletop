@@ -71,15 +71,15 @@ osSemaphoreId en_epd_refreshHandle;
 
 /* USER CODE END FunctionPrototypes */
 
-void StartDefaultTask(void const * argument);
-void led_task(void const * argument);
-void usart1_task(void const * argument);
-void epd_refresh(void const * argument);
+void StartDefaultTask(void const *argument);
+void led_task(void const *argument);
+void usart1_task(void const *argument);
+void epd_refresh(void const *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -95,64 +95,64 @@ void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackTyp
 /* USER CODE END GET_IDLE_TASK_MEMORY */
 
 /**
-  * @brief  FreeRTOS initialization
-  * @param  None
-  * @retval None
-  */
-void MX_FREERTOS_Init(void) {
-  /* USER CODE BEGIN Init */
+ * @brief  FreeRTOS initialization
+ * @param  None
+ * @retval None
+ */
+void MX_FREERTOS_Init(void)
+{
+    /* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+    /* USER CODE END Init */
 
-  /* USER CODE BEGIN RTOS_MUTEX */
+    /* USER CODE BEGIN RTOS_MUTEX */
     /* add mutexes, ... */
-  /* USER CODE END RTOS_MUTEX */
+    /* USER CODE END RTOS_MUTEX */
 
-  /* Create the semaphores(s) */
-  /* definition and creation of Usart1_Receive_BinSemaphore */
-  osSemaphoreDef(Usart1_Receive_BinSemaphore);
-  Usart1_Receive_BinSemaphoreHandle = osSemaphoreCreate(osSemaphore(Usart1_Receive_BinSemaphore), 1);
+    /* Create the semaphores(s) */
+    /* definition and creation of Usart1_Receive_BinSemaphore */
+    osSemaphoreDef(Usart1_Receive_BinSemaphore);
+    Usart1_Receive_BinSemaphoreHandle = osSemaphoreCreate(osSemaphore(Usart1_Receive_BinSemaphore), 1);
 
-  /* definition and creation of en_epd_refresh */
-  osSemaphoreDef(en_epd_refresh);
-  en_epd_refreshHandle = osSemaphoreCreate(osSemaphore(en_epd_refresh), 1);
+    /* definition and creation of en_epd_refresh */
+    osSemaphoreDef(en_epd_refresh);
+    en_epd_refreshHandle = osSemaphoreCreate(osSemaphore(en_epd_refresh), 1);
 
-  /* USER CODE BEGIN RTOS_SEMAPHORES */
+    /* USER CODE BEGIN RTOS_SEMAPHORES */
     /* add semaphores, ... */
     xSemaphoreTake(Usart1_Receive_BinSemaphoreHandle, portMAX_DELAY);
     xSemaphoreTake(en_epd_refreshHandle, osWaitForever);
     // xSemaphoreTake(en_epd_refreshHandle, portMAX_DELAY);
-  /* USER CODE END RTOS_SEMAPHORES */
+    /* USER CODE END RTOS_SEMAPHORES */
 
-  /* USER CODE BEGIN RTOS_TIMERS */
+    /* USER CODE BEGIN RTOS_TIMERS */
     /* start timers, add new ones, ... */
-  /* USER CODE END RTOS_TIMERS */
+    /* USER CODE END RTOS_TIMERS */
 
-  /* USER CODE BEGIN RTOS_QUEUES */
+    /* USER CODE BEGIN RTOS_QUEUES */
     /* add queues, ... */
-  /* USER CODE END RTOS_QUEUES */
+    /* USER CODE END RTOS_QUEUES */
 
-  /* Create the thread(s) */
-  /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityHigh, 0, 512);
-  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+    /* Create the thread(s) */
+    /* definition and creation of defaultTask */
+    osThreadDef(defaultTask, StartDefaultTask, osPriorityHigh, 0, 512);
+    defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-  /* definition and creation of LED_TASK */
-  osThreadDef(LED_TASK, led_task, osPriorityLow, 0, 128);
-  LED_TASKHandle = osThreadCreate(osThread(LED_TASK), NULL);
+    /* definition and creation of LED_TASK */
+    osThreadDef(LED_TASK, led_task, osPriorityLow, 0, 128);
+    LED_TASKHandle = osThreadCreate(osThread(LED_TASK), NULL);
 
-  /* definition and creation of USART1_TASK */
-  osThreadDef(USART1_TASK, usart1_task, osPriorityLow, 0, 256);
-  USART1_TASKHandle = osThreadCreate(osThread(USART1_TASK), NULL);
+    /* definition and creation of USART1_TASK */
+    osThreadDef(USART1_TASK, usart1_task, osPriorityLow, 0, 256);
+    USART1_TASKHandle = osThreadCreate(osThread(USART1_TASK), NULL);
 
-  /* definition and creation of TASK_EPD */
-  osThreadDef(TASK_EPD, epd_refresh, osPriorityLow, 0, 512);
-  TASK_EPDHandle = osThreadCreate(osThread(TASK_EPD), NULL);
+    /* definition and creation of TASK_EPD */
+    osThreadDef(TASK_EPD, epd_refresh, osPriorityLow, 0, 512);
+    TASK_EPDHandle = osThreadCreate(osThread(TASK_EPD), NULL);
 
-  /* USER CODE BEGIN RTOS_THREADS */
+    /* USER CODE BEGIN RTOS_THREADS */
     /* add threads, ... */
-  /* USER CODE END RTOS_THREADS */
-
+    /* USER CODE END RTOS_THREADS */
 }
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -162,9 +162,9 @@ void MX_FREERTOS_Init(void) {
  * @retval None
  */
 /* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void const * argument)
+void StartDefaultTask(void const *argument)
 {
-  /* USER CODE BEGIN StartDefaultTask */
+    /* USER CODE BEGIN StartDefaultTask */
     /* Infinite loop */
     INFO_PRINT("system version %s\r\nbuild date %s, time %s\r\n", APP_VERSION, __DATE__, __TIME__);
     extern uint8_t epd_spi_write_byte(uint8_t data);
@@ -180,7 +180,7 @@ void StartDefaultTask(void const * argument)
     w25qxx_init(&g_w25qxx_dev);
 
     vTaskDelete(NULL);
-  /* USER CODE END StartDefaultTask */
+    /* USER CODE END StartDefaultTask */
 }
 
 /* USER CODE BEGIN Header_led_task */
@@ -190,9 +190,9 @@ void StartDefaultTask(void const * argument)
  * @retval None
  */
 /* USER CODE END Header_led_task */
-void led_task(void const * argument)
+void led_task(void const *argument)
 {
-  /* USER CODE BEGIN led_task */
+    /* USER CODE BEGIN led_task */
     /* Infinite loop */
     for (;;)
     {
@@ -200,7 +200,7 @@ void led_task(void const * argument)
         LED0_TOGGLE;
         delay_ms(500);
     }
-  /* USER CODE END led_task */
+    /* USER CODE END led_task */
 }
 
 /* USER CODE BEGIN Header_usart1_task */
@@ -210,9 +210,9 @@ void led_task(void const * argument)
  * @retval None
  */
 /* USER CODE END Header_usart1_task */
-void usart1_task(void const * argument)
+void usart1_task(void const *argument)
 {
-  /* USER CODE BEGIN usart1_task */
+    /* USER CODE BEGIN usart1_task */
     uint8_t len;
     /* Infinite loop */
     for (;;)
@@ -225,7 +225,7 @@ void usart1_task(void const * argument)
         // osDelay(1);
         delay_ms(1);
     }
-  /* USER CODE END usart1_task */
+    /* USER CODE END usart1_task */
 }
 
 /* USER CODE BEGIN Header_epd_refresh */
@@ -235,53 +235,62 @@ void usart1_task(void const * argument)
  * @retval None
  */
 /* USER CODE END Header_epd_refresh */
-void epd_refresh(void const * argument)
+void epd_refresh(void const *argument)
 {
-  /* USER CODE BEGIN epd_refresh */
+    /* USER CODE BEGIN epd_refresh */
     /* Infinite loop */
-    double t_ = 0.0;
-    uint16_t x = 8;
-    g_epd_dev.module_start_callback();
+
+    // g_epd_dev.module_start_callback();
     for (;;)
     {
         osSemaphoreWait(en_epd_refreshHandle, osWaitForever);
         INFO_PRINT("refresh screen element[%d].\r\n", g_epd_dev.refresh_element);
+        epd_main_updata(&g_epd_dev);
         // EPD_2IN7_V2_Init(&g_epd_dev);
-        // EPD_2IN7_V2_Display_Base(&g_epd_dev, g_epd_dev.frame_buf);
+        // EPD_2IN7_V2_Display(&g_epd_dev, g_epd_dev.frame_buf);
+        EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
+
+#if (USE_ELEMENT_BUF == 1)
+        double t_ = 0.0;
+        uint16_t x = 8;
+        uint16_t x_pre = 8;
+        uint8_t *p_output_buf = NULL;
+        uint8_t *p_output_buf_pre = NULL;
+        p_output_buf_pre = p_output_buf;
+        x_pre = x;
         switch (g_epd_dev.refresh_element)
         {
         case EPD_MAIN_SCREEN_ELEMENT_TIME: // 时钟
-            Paint_NewImage(g_epd_dev.frame_buf, 50, 120, 90, WHITE);
-            Paint_SelectImage(g_epd_dev.frame_buf);
+            Paint_NewImage(g_epd_dev.time_frame_buf, 50, 120, 90, WHITE);
+            Paint_SelectImage(g_epd_dev.time_frame_buf);
             Paint_Clear(WHITE);
             Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
             Paint_DrawTime(10, 15, &g_epd_dev.current_time, &Font20, WHITE, BLACK);
             x = 8;
-            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
-
-            // print_current_time(&g_epd_dev.current_time);
-            // EPD_2IN7_V2_Display_Base(&g_epd_dev, g_epd_dev.frame_buf);
-            // break;
-            case EPD_MAIN_SCREEN_ELEMENT_T_H: // 温湿�??
-            Paint_NewImage(g_epd_dev.frame_buf, 50, 120, 90, WHITE);
-            Paint_SelectImage(g_epd_dev.frame_buf);
+            p_output_buf = g_epd_dev.time_frame_buf;
+            break;
+        case EPD_MAIN_SCREEN_ELEMENT_T_H: // 温湿
+            Paint_NewImage(g_epd_dev.t_h_frame_buf, 50, 120, 90, WHITE);
+            Paint_SelectImage(g_epd_dev.t_h_frame_buf);
             Paint_Clear(WHITE);
             Paint_DrawNumDecimals(0, 0, t_++, &Font20, 3, BLACK, WHITE);
             Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
             x = 80;
-            EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, x, 0, x + 50, 120); // Xstart must be a multiple of 8
+            p_output_buf = g_epd_dev.t_h_frame_buf;
             break;
         default:
             break;
         }
+        // EPD_2IN7_V2_Display_Partial(&g_epd_dev, p_output_buf_pre, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT); // Xstart must be a multiple of 8
+        // EPD_2IN7_V2_Display_Partial(&g_epd_dev, p_output_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);     // Xstart must be a multiple of 8
         g_epd_dev.refresh_element = EPD_MAIN_SCREEN_ELEMENT_NONE;
+#endif /* USE_ELEMENT_BUF */
         delay_ms(10);
     }
-  /* USER CODE END epd_refresh */
+    /* USER CODE END epd_refresh */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
-

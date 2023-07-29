@@ -62,8 +62,10 @@ typedef enum
     EPD_MAIN_SCREEN_ELEMENT_NONE,         // 默认
     EPD_MAIN_SCREEN_ELEMENT_TIME,         // 刷新主页时间
     EPD_MAIN_SCREEN_ELEMENT_DATE,         // 刷新主页日期
-    EPD_MAIN_SCREEN_ELEMENT_T_H,          // 刷新主页温湿度
+    EPD_MAIN_SCREEN_ELEMENT_T,            // 刷新主页温度
+    EPD_MAIN_SCREEN_ELEMENT_H,            // 刷新主页湿度
     EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON, // 刷主页天气图标
+    EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON, // 刷主页天气图标
     EPD_MAIN_SCREEN_TOTAL_ELEMENT         // 主页组件总和
 } epd_screen_element_t;                   // 屏幕组件
 
@@ -78,13 +80,17 @@ typedef struct
 
 typedef struct epd_dev_v2_t
 {
-    uint8_t frame_buf[EPD_FRAME_BUF_SIZE];                  // 一帧图片缓存
-    // uint8_t time_frame_buf[EPD_CALCULATE_BUF_SIZE(50, 120)]; // 时钟缓存
-    // uint8_t t_h_frame_buf[EPD_CALCULATE_BUF_SIZE(50, 120)];  // 温湿度缓存
-
+    uint8_t frame_buf[EPD_FRAME_BUF_SIZE]; // 一帧图片缓存
+#if (USE_ELEMENT_BUF == 1)
+    uint8_t time_frame_buf[EPD_CALCULATE_BUF_SIZE(50, 120)];             // 时钟缓存
+    uint8_t t_h_frame_buf[EPD_CALCULATE_BUF_SIZE(50, 120)];              // 温湿度缓存
+#endif                                                                   /* USE_ELEMENT_BUF */
     uint8_t enter_system_flag;                                           // == 1,所有初始化完成进入系统, == 0, 还在初始化, 因为屏幕初始化要很长时间, 此时会触发定时器中断导致屏幕更新
     epd_page_t current_page;                                             // 当前界面
     PAINT_TIME current_time;                                             // 当前时间
+    int8_t date[30];                                                     // 日期
+    int8_t temperature[20];                                              // 温度
+    int8_t humidity[20];                                                 // 湿度
     epd_screen_element_t refresh_element;                                // 要刷新的组件
     epd_element_attr_t main_element_attr[EPD_MAIN_SCREEN_TOTAL_ELEMENT]; // 每个组件元素都有自己的坐标
 
@@ -115,6 +121,8 @@ uint8_t epd_init(epd_dev_v2_t *dev,
                  uint8_t (*en_refresh_callback)(struct epd_dev_v2_t *dev, epd_screen_element_t element)
 #endif /* EPD_USE_RTOS */
 );
+uint8_t epd_main_updata(epd_dev_v2_t *dev);
+
 void EPD_2IN7_V2_Init(epd_dev_v2_t *dev);
 void EPD_2IN7_V2_Init_Fast(epd_dev_v2_t *dev);
 void EPD_2IN7_V2_Init_4GRAY(epd_dev_v2_t *dev);
