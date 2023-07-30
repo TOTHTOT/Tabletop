@@ -78,7 +78,7 @@
 #include <string.h> //memset()
 #include <math.h>
 #include "usart1.h"
-
+#include "EPD_2in7_V2.h"
 PAINT Paint;
 
 /******************************************************************************
@@ -427,6 +427,8 @@ void Paint_DrawLine(uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Ye
 
     for (;;)
     {
+        // INFO_PRINT("time[%2d:%2d:%2d]\r\n", g_epd_dev.current_time.Hour, g_epd_dev.current_time.Min, g_epd_dev.current_time.Sec);
+        // INFO_PRINT("len = %d, x = %d, y = %d\r\n", Dotted_Len, Xpoint, Ypoint);
         Dotted_Len++;
         // Painted dotted line, 2 point is really virtual
         if (Line_Style == LINE_STYLE_DOTTED && Dotted_Len % 3 == 0)

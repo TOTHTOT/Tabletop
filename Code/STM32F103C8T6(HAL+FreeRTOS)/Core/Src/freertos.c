@@ -240,16 +240,17 @@ void epd_refresh(void const *argument)
     /* USER CODE BEGIN epd_refresh */
     /* Infinite loop */
 
-    // g_epd_dev.module_start_callback();
     for (;;)
     {
         osSemaphoreWait(en_epd_refreshHandle, osWaitForever);
-        INFO_PRINT("refresh screen element[%d].\r\n", g_epd_dev.refresh_element);
+        // INFO_PRINT("refresh screen element[%d].\r\n", g_epd_dev.refresh_element);
+        g_epd_dev.module_start_callback();
+        EPD_2IN7_V2_Init(&g_epd_dev);
         epd_main_updata(&g_epd_dev);
-        // EPD_2IN7_V2_Init(&g_epd_dev);
-        // EPD_2IN7_V2_Display(&g_epd_dev, g_epd_dev.frame_buf);
-        EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
 
+        EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
+        EPD_2IN7_V2_Sleep(&g_epd_dev);
+        g_epd_dev.module_end_callback();
 #if (USE_ELEMENT_BUF == 1)
         double t_ = 0.0;
         uint16_t x = 8;

@@ -78,6 +78,7 @@ typedef struct
     LINE_STYLE line_style;
 } epd_element_attr_t; // 组件的位置坐标
 
+#pragma pack(1)
 typedef struct epd_dev_v2_t
 {
     uint8_t frame_buf[EPD_FRAME_BUF_SIZE]; // 一帧图片缓存
@@ -105,6 +106,7 @@ typedef struct epd_dev_v2_t
     uint8_t (*en_refresh_callback)(struct epd_dev_v2_t *dev, epd_screen_element_t element);
 #endif /* EPD_USE_RTOS */
 } epd_dev_v2_t;
+#pragma pack()
 
 /* 全局变量 */
 extern epd_dev_v2_t g_epd_dev;

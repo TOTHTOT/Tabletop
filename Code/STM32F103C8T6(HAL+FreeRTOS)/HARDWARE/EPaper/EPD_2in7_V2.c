@@ -1,8 +1,34 @@
 /*
+ *                        _oo0oo_
+ *                       o8888888o
+ *                       88" . "88
+ *                       (| -_- |)
+ *                       0\  =  /0
+ *                     ___/`---'\___
+ *                   .' \\|     |// '.
+ *                  / \\|||  :  |||// \
+ *                 / _||||| -:- |||||- \
+ *                |   | \\\  - /// |   |
+ *                | \_|  ''\---/''  |_/ |
+ *                \  .-\__  '-'  ___/-. /
+ *              ___'. .'  /--.--\  `. .'___
+ *           ."" '<  `.___\_<|>_/___.' >' "".
+ *          | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *          \  \ `_.   \_ __\ /__ _/   .-` /  /
+ *      =====`-.____`.___ \_____/___.-`___.-'=====
+ *                        `=---='
+ *
+ *
+ *      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *
+ *            佛祖保佑     永不宕机     永无BUG
+ */
+
+/*
  * @Description: 墨水屏驱动EPD_2in7_V2版本
  * @Author: TOTHTOT
  * @Date: 2023-07-21 23:19:15
- * @LastEditTime: 2023-07-29 23:25:05
+ * @LastEditTime: 2023-07-30 08:52:21
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\EPaper\EPD_2in7_V2.c
  */
@@ -708,13 +734,14 @@ uint8_t epd_main_updata(epd_dev_v2_t *dev)
     // 两条横线
     Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3, EPD_2IN7_V2_HEIGHT, EPD_2IN7_V2_WIDTH / 3,
                    BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
-    Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3 * 2, EPD_2IN7_V2_HEIGHT, EPD_2IN7_V2_WIDTH / 3 * 2,
+    Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3 * 2, EPD_2IN7_V2_HEIGHT - 1, EPD_2IN7_V2_WIDTH / 3 * 2,
                    BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
+
     // 两条竖线在第一行
     Paint_DrawLine(EPD_2IN7_V2_HEIGHT / 3, 0, EPD_2IN7_V2_HEIGHT / 3, EPD_2IN7_V2_WIDTH / 3,
                    BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
-    Paint_DrawLine(EPD_2IN7_V2_HEIGHT / 3 * 2, 0, EPD_2IN7_V2_HEIGHT / 3 * 2, EPD_2IN7_V2_WIDTH / 3,
-                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
+    Paint_DrawLine((EPD_2IN7_V2_HEIGHT / 3 * 2 - 1), 0, (EPD_2IN7_V2_HEIGHT / 3 * 2) - 1, (EPD_2IN7_V2_WIDTH / 3),
+                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID); // 这里的xend必须减1 不然指针越界造成时间值错误!!!!!
 
     sprintf((char *)dev->temperature, "%3dC", 26);
     Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x,
@@ -751,7 +778,7 @@ uint8_t epd_page_main_init(epd_dev_v2_t *dev)
     Paint_SelectImage(dev->frame_buf);
 
     // 初始化屏幕组件坐标
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x = EPD_2IN7_V2_WIDTH / 2;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x = EPD_2IN7_V2_WIDTH / 2 + 15;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y = 80; // 时间
 
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x = EPD_2IN7_V2_HEIGHT / 5 + 10;
@@ -822,8 +849,8 @@ uint8_t epd_init(epd_dev_v2_t *dev,
     dev->current_time.Month = 1;
     dev->current_time.Day = 1;
     dev->current_time.Hour = 12;
-    dev->current_time.Min = 0;
-    dev->current_time.Sec = 50;
+    dev->current_time.Min = 3;
+    dev->current_time.Sec = 20;
 
     epd_page_main_init(dev);
     // epd_page_main(dev);
