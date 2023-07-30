@@ -678,7 +678,7 @@ uint8_t epd_page_main(epd_dev_v2_t *dev)
  */
 static uint8_t epd_page_main_time_init(epd_dev_v2_t *dev)
 {
-    uint8_t x = 8;
+    uint8_t x_start = 8;
     INFO_PRINT("time_buf_size = %d\r\n", sizeof(dev->time_frame_buf));
 
     Paint_NewImage(dev->time_frame_buf, 50, 120, 90, WHITE);
@@ -694,7 +694,7 @@ static uint8_t epd_page_main_time_init(epd_dev_v2_t *dev)
 
 static uint8_t epd_page_main_t_h_init(epd_dev_v2_t *dev)
 {
-    uint8_t x = 80;
+    uint8_t x_start = 80;
     INFO_PRINT("t_h_buf_size = %d\r\n", sizeof(dev->t_h_frame_buf));
 
     Paint_NewImage(dev->t_h_frame_buf, 50, 120, 90, WHITE);
@@ -719,48 +719,367 @@ uint8_t epd_page_main_element_init(epd_dev_v2_t *dev)
     // 屏幕显存设置颜色
     Paint_Clear(WHITE);
 
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x = 10;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y = 15;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_start = 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start = 15;
     return 0;
 }
 #endif /* USE_ELEMENT_BUF */
+
+const unsigned char gImage_wifi_linked_icon[288] = {
+    /* 0X00,0X01,0X30,0X00,0X30,0X00, */
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X1F,
+    0XF8,
+    0X00,
+    0X00,
+    0X00,
+    0X03,
+    0XFF,
+    0XFF,
+    0XC0,
+    0X00,
+    0X00,
+    0X0F,
+    0XFF,
+    0XFF,
+    0XF0,
+    0X00,
+    0X00,
+    0X7F,
+    0XFF,
+    0XFF,
+    0XFE,
+    0X00,
+    0X01,
+    0XFF,
+    0XFF,
+    0XFF,
+    0XFF,
+    0X00,
+    0X03,
+    0XFF,
+    0XFF,
+    0XFF,
+    0XFF,
+    0XC0,
+    0X07,
+    0XFF,
+    0XFF,
+    0XFF,
+    0XFF,
+    0XE0,
+    0X1F,
+    0XFF,
+    0X80,
+    0X01,
+    0XFF,
+    0XF8,
+    0X3F,
+    0XFC,
+    0X00,
+    0X00,
+    0X3F,
+    0XFC,
+    0X7F,
+    0XF0,
+    0X00,
+    0X00,
+    0X0F,
+    0XFE,
+    0XFF,
+    0XC0,
+    0X00,
+    0X00,
+    0X03,
+    0XFF,
+    0X7F,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0XFE,
+    0X3E,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X7C,
+    0X1C,
+    0X00,
+    0X0F,
+    0XF0,
+    0X00,
+    0X38,
+    0X08,
+    0X00,
+    0X7F,
+    0XFE,
+    0X00,
+    0X10,
+    0X00,
+    0X03,
+    0XFF,
+    0XFF,
+    0XC0,
+    0X00,
+    0X00,
+    0X0F,
+    0XFF,
+    0XFF,
+    0XE0,
+    0X00,
+    0X00,
+    0X1F,
+    0XFF,
+    0XFF,
+    0XF8,
+    0X00,
+    0X00,
+    0X3F,
+    0XFF,
+    0XFF,
+    0XFC,
+    0X00,
+    0X00,
+    0X7F,
+    0XFF,
+    0XFF,
+    0XFE,
+    0X00,
+    0X00,
+    0X7F,
+    0XF0,
+    0X0F,
+    0XFE,
+    0X00,
+    0X00,
+    0X3F,
+    0X80,
+    0X01,
+    0XFC,
+    0X00,
+    0X00,
+    0X1F,
+    0X00,
+    0X00,
+    0XF8,
+    0X00,
+    0X00,
+    0X0C,
+    0X00,
+    0X00,
+    0X30,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X03,
+    0XC0,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X1F,
+    0XF8,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X3F,
+    0XFC,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X3F,
+    0XFC,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X1F,
+    0XF8,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X0F,
+    0XF0,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X07,
+    0XE0,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X03,
+    0XC0,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X01,
+    0X80,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+};
 
 uint8_t epd_main_updata(epd_dev_v2_t *dev)
 {
     Paint_SelectImage(dev->frame_buf);
 
-    Paint_Clear(WHITE);
+    // Paint_Clear(WHITE);
+    Paint_ClearWindows(20, 20, 20 + Font20.Width * 7, 20 + Font20.Height, WHITE);
 
-    // 两条横线
-    Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3, EPD_2IN7_V2_HEIGHT, EPD_2IN7_V2_WIDTH / 3,
-                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
-    Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3 * 2, EPD_2IN7_V2_HEIGHT - 1, EPD_2IN7_V2_WIDTH / 3 * 2,
-                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
+    Paint_ClearWindows(dev->main_element_attr[dev->refresh_element].x_start,
+                       dev->main_element_attr[dev->refresh_element].y_start,
+                       dev->main_element_attr[dev->refresh_element].x_end,
+                       dev->main_element_attr[dev->refresh_element].y_end,
+                       WHITE);
 
-    // 两条竖线在第一行
-    Paint_DrawLine(EPD_2IN7_V2_HEIGHT / 3, 0, EPD_2IN7_V2_HEIGHT / 3, EPD_2IN7_V2_WIDTH / 3,
-                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
-    Paint_DrawLine((EPD_2IN7_V2_HEIGHT / 3 * 2 - 1), 0, (EPD_2IN7_V2_HEIGHT / 3 * 2) - 1, (EPD_2IN7_V2_WIDTH / 3),
-                   BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID); // 这里的xend必须减1 不然指针越界造成时间值错误!!!!!
+    switch (dev->refresh_element)
+    {
+    case EPD_MAIN_SCREEN_ELEMENT_TIME:
+        sprintf((char *)dev->time, "%2d:%2d", dev->current_time.Hour, dev->current_time.Min);
+        Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_start,
+                            dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start,
+                            (char *)dev->time, &Font24, WHITE, BLACK); // 时间显示
 
-    sprintf((char *)dev->temperature, "%3dC", 26);
-    Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x,
-                        dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y,
-                        (char *)dev->temperature, &Font20, WHITE, BLACK); // 温度显示
-    sprintf((char *)dev->humidity, "%3d%%", 50);
-    Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x,
-                        dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y,
-                        (char *)dev->humidity, &Font20, WHITE, BLACK); // 湿度显示
+        // Paint_DrawTime(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_start ,
+        //                dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start ,
+        //                &dev->current_time, &Font24, WHITE, BLACK); // 时间显示
+        break;
+    case EPD_MAIN_SCREEN_ELEMENT_DATE:
+        sprintf((char *)dev->date, "%4d/%2d/%2d", dev->current_time.Year, dev->current_time.Month, dev->current_time.Day);
+        Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x_start,
+                            dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y_start,
+                            (char *)dev->date, &Font20, WHITE, BLACK); // 日期显示
+        break;
 
-    Paint_DrawTime(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x,
-                   dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y,
-                   &dev->current_time, &Font20, WHITE, BLACK); // 时间显示
+    case EPD_MAIN_SCREEN_ELEMENT_LINE:
+        // 两条横线
+        Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3, EPD_2IN7_V2_HEIGHT, EPD_2IN7_V2_WIDTH / 3,
+                       BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
+        Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3 * 2, EPD_2IN7_V2_HEIGHT - 1, EPD_2IN7_V2_WIDTH / 3 * 2,
+                       BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
 
-    sprintf((char *)dev->date, "%4d/%2d/%2d", dev->current_time.Year, dev->current_time.Month, dev->current_time.Day);
-    Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x,
-                        dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y,
-                        (char *)dev->date, &Font20, WHITE, BLACK); // 日期显示
-
+        // 两条竖线在第一行
+        Paint_DrawLine(EPD_2IN7_V2_HEIGHT / 3, 0, EPD_2IN7_V2_HEIGHT / 3, EPD_2IN7_V2_WIDTH / 3,
+                       BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID);
+        Paint_DrawLine((EPD_2IN7_V2_HEIGHT / 3 * 2 - 1), 0, (EPD_2IN7_V2_HEIGHT / 3 * 2) - 1, (EPD_2IN7_V2_WIDTH / 3),
+                       BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID); // 这里的xend必须减1 不然指针越界造成时间值错误!!!!!
+        break;
+    case EPD_MAIN_SCREEN_ELEMENT_T:
+    case EPD_MAIN_SCREEN_ELEMENT_H:
+        sprintf((char *)dev->temperature, "%3dC", 26);
+        Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x_start,
+                            dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y_start,
+                            (char *)dev->temperature, &Font20, WHITE, BLACK); // 温度显示
+        sprintf((char *)dev->humidity, "%3d%%", 50);
+        Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x_start,
+                            dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y_start,
+                            (char *)dev->humidity, &Font20, WHITE, BLACK); // 湿度显示
+        break;
+    default:
+        break;
+    }
+    Paint_DrawBitMap_Paste(gImage_wifi_linked_icon,
+                           dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].x_start,
+                           dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].y_start,
+                           48, 48, 1);
     return 0;
 }
 
@@ -778,19 +1097,24 @@ uint8_t epd_page_main_init(epd_dev_v2_t *dev)
     Paint_SelectImage(dev->frame_buf);
 
     // 初始化屏幕组件坐标
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x = EPD_2IN7_V2_WIDTH / 2 + 15;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y = 80; // 时间
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_start = EPD_2IN7_V2_WIDTH / 2 + 15;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_end = EPD_2IN7_V2_WIDTH / 2 + 15 + Font24.Width * 7;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start = 80;               // 时间
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_end = 80 + Font24.Heigh1t; // 时间
 
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x = EPD_2IN7_V2_HEIGHT / 5 + 10;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y = EPD_2IN7_V2_WIDTH / 6 * 5; // 日期
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x_start = EPD_2IN7_V2_HEIGHT / 5 + 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y_start = EPD_2IN7_V2_WIDTH / 6 * 5; // 日期
 
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x = EPD_2IN7_V2_HEIGHT / 3 + 10;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y = 10; // 温度
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x = EPD_2IN7_V2_HEIGHT / 3 + 10;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y = 30; // 湿度
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x_start = EPD_2IN7_V2_HEIGHT / 3 + 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y_start = 10; // 温度
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x_start = EPD_2IN7_V2_HEIGHT / 3 + 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y_start = 30; // 湿度
 
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].x = 0;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].y = 0; // 天气图片
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].x_start = 0;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].y_start = 0; // 天气图片
+
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].x_start = EPD_2IN7_V2_HEIGHT / 3 * 2 + 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].y_start = 0; // WiFi图片
 
     epd_main_updata(dev);
     EPD_2IN7_V2_Display_Base(dev, dev->frame_buf);
@@ -849,7 +1173,7 @@ uint8_t epd_init(epd_dev_v2_t *dev,
     dev->current_time.Month = 1;
     dev->current_time.Day = 1;
     dev->current_time.Hour = 12;
-    dev->current_time.Min = 3;
+    dev->current_time.Min = 0;
     dev->current_time.Sec = 20;
 
     epd_page_main_init(dev);

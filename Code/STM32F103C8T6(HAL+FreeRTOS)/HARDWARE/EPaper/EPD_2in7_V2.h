@@ -60,6 +60,7 @@ typedef enum
 typedef enum
 {
     EPD_MAIN_SCREEN_ELEMENT_NONE,         // 默认
+    EPD_MAIN_SCREEN_ELEMENT_LINE,         // 刷新主页线条
     EPD_MAIN_SCREEN_ELEMENT_TIME,         // 刷新主页时间
     EPD_MAIN_SCREEN_ELEMENT_DATE,         // 刷新主页日期
     EPD_MAIN_SCREEN_ELEMENT_T,            // 刷新主页温度
@@ -71,8 +72,8 @@ typedef enum
 
 typedef struct
 {
-    uint16_t x;
-    uint16_t y;
+    uint16_t x_start, x_end;
+    uint16_t y_start, y_end;
     DOT_PIXEL dot_pixel;
     DOT_STYLE dot_style;
     LINE_STYLE line_style;
@@ -92,6 +93,7 @@ typedef struct epd_dev_v2_t
     int8_t date[30];                                                     // 日期
     int8_t temperature[20];                                              // 温度
     int8_t humidity[20];                                                 // 湿度
+    int8_t time[20];                                                 // 湿度
     epd_screen_element_t refresh_element;                                // 要刷新的组件
     epd_element_attr_t main_element_attr[EPD_MAIN_SCREEN_TOTAL_ELEMENT]; // 每个组件元素都有自己的坐标
 

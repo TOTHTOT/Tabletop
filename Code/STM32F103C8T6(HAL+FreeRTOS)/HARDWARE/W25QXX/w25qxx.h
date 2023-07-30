@@ -2,7 +2,7 @@
  * @Description: w25qxx 的驱动代码
  * @Author: TOTHTOT
  * @Date: 2023-07-18 21:32:17
- * @LastEditTime: 2023-07-23 14:51:14
+ * @LastEditTime: 2023-07-30 16:35:26
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\W25QXX\w25qxx.h
  */
@@ -35,9 +35,10 @@
 #define W25X_Enable4ByteAddr 0xB7
 #define W25X_Exit4ByteAddr 0xE9
 
-/* 宏定义 */
-
-typedef struct
+/* 结构体定义 */
+typedef struct w25qxx_device_t w25qxx_device_t;
+#pragma pack(1)
+struct w25qxx_device_t
 {
 #define W25QXX_READ_BUF_SIZE 4096
     uint8_t read_buf[W25QXX_READ_BUF_SIZE]; // 读缓存
@@ -51,19 +52,38 @@ typedef struct
 #define W25Q256 0XEF18    // W25Q256 ID
     uint32_t device_type; // 设备类型
 
-    /* 函数指针 */
-    uint8_t (*wr_callback)(uint8_t send_data);      // 底层读写函数指针
-    int (*cs_ctrl_callback)(uint8_t state); // 片选控制
+    /* 保存在 flash 中的数据有一下:
+    1. WiFi的图标;
+    2. 天气图标, 很多个;
+    3. 历史的温湿度数据一天存100个;
+    4. 各个组件的位置信息(未实现);
+    5. 连接的WIFI以及密码; */
+    struct save_data_t
+    {
+#define FLASH_WiFi_ICON_ADDER 0x00000000
+#define FLASH_WiFi_ICON_SIZE 0x2000
+#define FLASH_WEATHER_ICON_ADDER 0x2000
+#define FLASH_WEATHER_ICON_SIZE 0x2000
+#define FLASH_HISTORY_DATA_ADDER
 
-} w25qxx_device_t;
+        char a;
 
+    } save_data_st;
+
+    /* 函数指针底层驱动, 用户提供 */
+    uint8_t (*wr_callback)(uint8_t send_data); // 底层读写函数指针
+    int (*cs_ctrl_callback)(uint8_t state);    // 片选控制
+    void (*set_speed_callback)(uint8_t speed); // 设置速度
+    /* 函数指针, 外部使用 */
+    void (*erase_sector_cb)(uint32_t Dst_Addr, w25qxx_device_t *dev);                                           // 擦除扇区
+    void (*write_data_cb)(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev); // 写入数据
+    void (*read_data_cb)(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead, w25qxx_device_t *dev);    // 读取数据
+};
+#pragma pack()
 /* 全局变量 */
 extern w25qxx_device_t g_w25qxx_dev;
 
 /* 全局函数 */
-void w25qxx_wait_busy(w25qxx_device_t *dev);
-void w25qxx_erase_sector(uint32_t Dst_Addr, w25qxx_device_t *dev);
-int w25qxx_init(w25qxx_device_t *dev);
+uint32_t w25qxx_init(w25qxx_device_t *dev);
 
 #endif /* __W25QXX_H__ */
-

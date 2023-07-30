@@ -1,8 +1,8 @@
 /*
- * @Description: w25qxx 的驱动代码
+ * @Description: w25qxx 的驱动代码, 项目中使用的是W25Q128
  * @Author: TOTHTOT
  * @Date: 2023-07-18 21:32:10
- * @LastEditTime: 2023-07-18 23:22:12
+ * @LastEditTime: 2023-07-30 16:14:38
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\W25QXX\w25qxx.c
  */
@@ -13,6 +13,9 @@
 
 /* 全局变量 */
 w25qxx_device_t g_w25qxx_dev = {0};
+/* 内部函数 */
+void w25qxx_wait_busy(w25qxx_device_t *dev);
+void w25qxx_erase_sector(uint32_t Dst_Addr, w25qxx_device_t *dev);
 
 /* 用户代码开始 */
 /**
@@ -50,6 +53,22 @@ int w25qxx_cs_ctrl(uint8_t state)
     return 0;
 }
 
+/**
+ * @name: w25qxx_spi_set_speed
+ * @msg: 设置spi速度
+ * @param {uint8_t} speed 速度
+ * @return {*}
+ * @author: TOTHTOT
+ * @date:
+ */
+void w25qxx_spi_set_speed(uint8_t speed)
+{
+    assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); // 判断有效性
+    __HAL_SPI_DISABLE(&hspi1);                                      // 关闭SPI
+    hspi1.Instance->CR1 &= 0XFFC7;                                  // 位3-5清零，用来设置波特率
+    hspi1.Instance->CR1 |= speed;                                   // 设置SPI速度
+    __HAL_SPI_ENABLE(&hspi1);                                       // 使能SPI
+}
 /* 用户代码结束 */
 
 /**
@@ -198,7 +217,7 @@ uint16_t w25qxx_readid(w25qxx_device_t *dev)
 }
 
 /**
- * @name: w25qxx_read
+ * @name: w25qxx_read_data
  * @msg: 读取SPI FLASH, 在指定地址开始读取指定长度的数据
  * @param {uint8_t} *pBuffer    数据存储区
  * @param {uint32_t} ReadAddr   开始读取的地址(24bit)
@@ -208,7 +227,7 @@ uint16_t w25qxx_readid(w25qxx_device_t *dev)
  * @author: TOTHTOT
  * @date: 2023年7月18日22:55:47
  */
-void w25qxx_read(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead, w25qxx_device_t *dev)
+void w25qxx_read_data(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead, w25qxx_device_t *dev)
 {
     uint16_t i;
 
@@ -307,7 +326,7 @@ void w25qxx_write_nocheck(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByte
 }
 
 /**
- * @name: w25qxx_write
+ * @name: w25qxx_write_data
  * @msg: 写SPI FLASH, 在指定地址开始写入指定长度的数据,
  *       该函数带擦除操作!
  * @param {uint8_t} *pBuffer    数据存储区
@@ -318,7 +337,7 @@ void w25qxx_write_nocheck(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByte
  * @author: TOTHTOT
  * @date:
  */
-void w25qxx_write(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev)
+void w25qxx_write_data(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev)
 {
     uint32_t secpos;
     uint16_t secoff;
@@ -335,16 +354,16 @@ void w25qxx_write(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite,
         secremain = NumByteToWrite; // 不大于4096个字节
     while (1)
     {
-        w25qxx_read(W25QXX_BUF, secpos * 4096, 4096, dev); // 读出整个扇区的内容
-        for (i = 0; i < secremain; i++)               // 校验数据
+        w25qxx_read_data(W25QXX_BUF, secpos * 4096, 4096, dev); // 读出整个扇区的内容
+        for (i = 0; i < secremain; i++)                    // 校验数据
         {
             if (W25QXX_BUF[secoff + i] != 0XFF)
                 break; // 需要擦除
         }
         if (i < secremain) // 需要擦除
         {
-            w25qxx_erase_sector(secpos, dev);    // 擦除这个扇区
-            for (i = 0; i < secremain; i++) // 复制
+            w25qxx_erase_sector(secpos, dev); // 擦除这个扇区
+            for (i = 0; i < secremain; i++)   // 复制
             {
                 W25QXX_BUF[i + secoff] = pBuffer[i];
             }
@@ -388,7 +407,7 @@ void w25qxx_erase_chip(w25qxx_device_t *dev)
     dev->wr_callback(W25X_ChipErase); // 发送片擦除命令
     dev->cs_ctrl_callback(1);         // 取消片选
 
-    w25qxx_wait_busy(dev);            // 等待芯片擦除结束
+    w25qxx_wait_busy(dev); // 等待芯片擦除结束
 }
 
 /**
@@ -415,7 +434,7 @@ void w25qxx_erase_sector(uint32_t Dst_Addr, w25qxx_device_t *dev)
     dev->wr_callback((uint8_t)((Dst_Addr) >> 8));
     dev->wr_callback((uint8_t)Dst_Addr);
     dev->cs_ctrl_callback(1); // 取消片选
-    w25qxx_wait_busy(dev);       // 等待擦除完成
+    w25qxx_wait_busy(dev);    // 等待擦除完成
 }
 
 /**
@@ -424,7 +443,7 @@ void w25qxx_erase_sector(uint32_t Dst_Addr, w25qxx_device_t *dev)
  * @param {w25qxx_device_t} *dev    设备
  * @return {*}
  * @author: TOTHTOT
- * @date: 
+ * @date:
  */
 void w25qxx_wait_busy(w25qxx_device_t *dev)
 {
@@ -438,7 +457,7 @@ void w25qxx_wait_busy(w25qxx_device_t *dev)
  * @param {w25qxx_device_t} *dev
  * @return {*}
  * @author: TOTHTOT
- * @date: 
+ * @date:
  */
 void w25qxx_power_down(w25qxx_device_t *dev)
 {
@@ -454,7 +473,7 @@ void w25qxx_power_down(w25qxx_device_t *dev)
  * @param {w25qxx_device_t} *dev
  * @return {*}
  * @author: TOTHTOT
- * @date: 
+ * @date:
  */
 void w25qxx_wakeup(w25qxx_device_t *dev)
 {
@@ -472,12 +491,35 @@ void w25qxx_wakeup(w25qxx_device_t *dev)
  * @author: TOTHTOT
  * @date: 2023年7月18日21:52:59
  */
-int w25qxx_init(w25qxx_device_t *dev)
+uint32_t w25qxx_init(w25qxx_device_t *dev)
 {
-    int ret = 0;
+    uint32_t ret = 0;
+    uint8_t temp = 0;
 
     // 初始化函数指针
     dev->wr_callback = w25qxx_wr_byte;
     dev->cs_ctrl_callback = w25qxx_cs_ctrl;
+    dev->set_speed_callback = w25qxx_spi_set_speed;
+    dev->read_data_cb = w25qxx_read_data;
+    dev->write_data_cb = w25qxx_write_data;
+    dev->erase_sector_cb = w25qxx_erase_sector;
+
+    dev->cs_ctrl_callback(1); // 取消选中
+
+    dev->set_speed_callback(SPI_BAUDRATEPRESCALER_2); // 设置为42M时钟,高速模式
+    dev->device_type = w25qxx_readid(dev);            // 读取FLASH ID.
+    if (dev->device_type == W25Q256)                  // SPI FLASH为W25Q256
+    {
+        temp = w25qxx_read_sr(3, dev); // 读取状态寄存器3，判断地址模式
+        if ((temp & 0X01) == 0)  // 如果不是4字节地址模式,则进入4字节地址模式
+        {
+            dev->cs_ctrl_callback(0);               // 选中
+            dev->wr_callback(W25X_Enable4ByteAddr); // 发送进入4字节地址模式指令
+            dev->cs_ctrl_callback(1);               // 取消片选
+        }
+    }
+    
+    ret = dev->device_type;
+    
     return ret;
 }

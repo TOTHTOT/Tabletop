@@ -166,6 +166,7 @@ void StartDefaultTask(void const *argument)
 {
     /* USER CODE BEGIN StartDefaultTask */
     /* Infinite loop */
+    uint32_t ret = 0;
     INFO_PRINT("system version %s\r\nbuild date %s, time %s\r\n", APP_VERSION, __DATE__, __TIME__);
     extern uint8_t epd_spi_write_byte(uint8_t data);
     extern uint8_t edp_pin_ctrl(epd_pin_ctrl_t pin, uint8_t state);
@@ -177,7 +178,8 @@ void StartDefaultTask(void const *argument)
     epd_init(&g_epd_dev, delay_xms, epd_spi_write_byte, epd_start, epd_end, edp_pin_ctrl, epd_en_refresh);
     g_epd_dev.enter_system_flag = 1;
     // 初始化w25qxx
-    w25qxx_init(&g_w25qxx_dev);
+    ret = w25qxx_init(&g_w25qxx_dev);
+    INFO_PRINT("flash device type = %x\r\n", ret);
 
     vTaskDelete(NULL);
     /* USER CODE END StartDefaultTask */
@@ -248,6 +250,8 @@ void epd_refresh(void const *argument)
         EPD_2IN7_V2_Init(&g_epd_dev);
         epd_main_updata(&g_epd_dev);
 
+        g_epd_dev.refresh_element = EPD_MAIN_SCREEN_ELEMENT_NONE;
+        
         EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
         EPD_2IN7_V2_Sleep(&g_epd_dev);
         g_epd_dev.module_end_callback();
