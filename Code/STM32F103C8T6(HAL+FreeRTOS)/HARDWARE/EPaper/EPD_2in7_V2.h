@@ -66,9 +66,19 @@ typedef enum
     EPD_MAIN_SCREEN_ELEMENT_T,            // 刷新主页温度
     EPD_MAIN_SCREEN_ELEMENT_H,            // 刷新主页湿度
     EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON, // 刷主页天气图标
-    EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON, // 刷主页天气图标
+    EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON,    // 刷主页天气图标
     EPD_MAIN_SCREEN_TOTAL_ELEMENT         // 主页组件总和
 } epd_screen_element_t;                   // 屏幕组件
+
+typedef enum
+{
+    EPD_WEATHER_TYPE_NONE,
+    EPD_WEATHER_TYPE_SUNNY,  // 晴天
+    EPD_WEATHER_TYPE_RAINY,  // 雨天
+    EPD_WEATHER_TYPE_CLOUDY, // 阴天
+    EPD_WEATHER_TYPE_SNOW,   // 下雪
+    EPD_WEATHER_TOTAL_TYPE
+} epd_weather_type_t; // 天气类型
 
 typedef struct
 {
@@ -93,10 +103,11 @@ typedef struct epd_dev_v2_t
     int8_t date[30];                                                     // 日期
     int8_t temperature[20];                                              // 温度
     int8_t humidity[20];                                                 // 湿度
-    int8_t time[20];                                                 // 湿度
+    int8_t time[20];                                                     // 湿度
     epd_screen_element_t refresh_element;                                // 要刷新的组件
     epd_element_attr_t main_element_attr[EPD_MAIN_SCREEN_TOTAL_ELEMENT]; // 每个组件元素都有自己的坐标
-
+    epd_weather_type_t current_weather_type_em;                          // 当前天气类型
+    
     /* 函数指针 */
     void (*delay_ms_callback)(uint32_t ms);
     uint8_t (*spi_write_byte_callback)(uint8_t data);
@@ -125,7 +136,7 @@ uint8_t epd_init(epd_dev_v2_t *dev,
                  uint8_t (*en_refresh_callback)(struct epd_dev_v2_t *dev, epd_screen_element_t element)
 #endif /* EPD_USE_RTOS */
 );
-uint8_t epd_main_updata(epd_dev_v2_t *dev);
+uint8_t epd_main_updata(epd_dev_v2_t *dev, epd_screen_element_t element);
 
 void EPD_2IN7_V2_Init(epd_dev_v2_t *dev);
 void EPD_2IN7_V2_Init_Fast(epd_dev_v2_t *dev);

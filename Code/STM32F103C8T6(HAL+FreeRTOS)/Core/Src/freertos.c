@@ -248,10 +248,12 @@ void epd_refresh(void const *argument)
         // INFO_PRINT("refresh screen element[%d].\r\n", g_epd_dev.refresh_element);
         g_epd_dev.module_start_callback();
         EPD_2IN7_V2_Init(&g_epd_dev);
-        epd_main_updata(&g_epd_dev);
+        epd_main_updata(&g_epd_dev, g_epd_dev.refresh_element);
 
         g_epd_dev.refresh_element = EPD_MAIN_SCREEN_ELEMENT_NONE;
         
+        // 必须两次 不然显示不正确!!!!
+        EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
         EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
         EPD_2IN7_V2_Sleep(&g_epd_dev);
         g_epd_dev.module_end_callback();

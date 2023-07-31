@@ -1016,31 +1016,312 @@ const unsigned char gImage_wifi_linked_icon[288] = {
     0X00,
     0X00,
 };
+const unsigned char gImage_cloudy[288] = {
+    /* 0X00,0X01,0X30,0X00,0X30,0X00, */
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0XFE,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X03,
+    0XFF,
+    0X80,
+    0X00,
+    0X00,
+    0X00,
+    0X07,
+    0XC7,
+    0XE0,
+    0X00,
+    0X00,
+    0X00,
+    0X0F,
+    0X00,
+    0XE0,
+    0X00,
+    0X00,
+    0X00,
+    0X0E,
+    0X00,
+    0X70,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X38,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X3F,
+    0X00,
+    0X00,
+    0X00,
+    0X1F,
+    0XE0,
+    0X3F,
+    0XC0,
+    0X00,
+    0X00,
+    0X7F,
+    0XF8,
+    0X1F,
+    0XE0,
+    0X00,
+    0X00,
+    0XFF,
+    0XFC,
+    0X10,
+    0X70,
+    0X00,
+    0X01,
+    0XE0,
+    0X1E,
+    0X00,
+    0X38,
+    0X00,
+    0X03,
+    0XC0,
+    0X0F,
+    0X00,
+    0X38,
+    0X00,
+    0X07,
+    0X80,
+    0X07,
+    0X00,
+    0X38,
+    0X00,
+    0X07,
+    0X00,
+    0X03,
+    0X80,
+    0X38,
+    0X00,
+    0XFF,
+    0X00,
+    0X03,
+    0XFC,
+    0X38,
+    0X03,
+    0XFE,
+    0X00,
+    0X03,
+    0XFF,
+    0X10,
+    0X07,
+    0XFE,
+    0X00,
+    0X03,
+    0XFF,
+    0X80,
+    0X0F,
+    0X8E,
+    0X00,
+    0X01,
+    0XC7,
+    0XC0,
+    0X0E,
+    0X02,
+    0X00,
+    0X01,
+    0X01,
+    0XC0,
+    0X1C,
+    0X00,
+    0X00,
+    0X00,
+    0X01,
+    0XC0,
+    0X1C,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0XE0,
+    0X1C,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0XE0,
+    0X1C,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0XE0,
+    0X1E,
+    0X00,
+    0X00,
+    0X00,
+    0X01,
+    0XE0,
+    0X0E,
+    0X00,
+    0X00,
+    0X00,
+    0X01,
+    0XC0,
+    0X0F,
+    0X00,
+    0X00,
+    0X00,
+    0X07,
+    0XC0,
+    0X07,
+    0XFF,
+    0XFF,
+    0XFF,
+    0XFF,
+    0X80,
+    0X03,
+    0XFF,
+    0XFF,
+    0XFF,
+    0XFF,
+    0X00,
+    0X00,
+    0XFF,
+    0XFF,
+    0XFF,
+    0XFC,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+    0X00,
+};
 
-uint8_t epd_main_updata(epd_dev_v2_t *dev)
+uint8_t epd_main_updata(epd_dev_v2_t *dev, epd_screen_element_t elememt)
 {
-    Paint_SelectImage(dev->frame_buf);
-
-    // Paint_Clear(WHITE);
-    Paint_ClearWindows(20, 20, 20 + Font20.Width * 7, 20 + Font20.Height, WHITE);
-
-    Paint_ClearWindows(dev->main_element_attr[dev->refresh_element].x_start,
-                       dev->main_element_attr[dev->refresh_element].y_start,
-                       dev->main_element_attr[dev->refresh_element].x_end,
-                       dev->main_element_attr[dev->refresh_element].y_end,
+    Paint_ClearWindows(dev->main_element_attr[elememt].x_start,
+                       dev->main_element_attr[elememt].y_start,
+                       dev->main_element_attr[elememt].x_end,
+                       dev->main_element_attr[elememt].y_end,
                        WHITE);
 
-    switch (dev->refresh_element)
+    switch (elememt)
     {
     case EPD_MAIN_SCREEN_ELEMENT_TIME:
-        sprintf((char *)dev->time, "%2d:%2d", dev->current_time.Hour, dev->current_time.Min);
-        Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_start,
-                            dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start,
-                            (char *)dev->time, &Font24, WHITE, BLACK); // 时间显示
-
-        // Paint_DrawTime(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_start ,
-        //                dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start ,
-        //                &dev->current_time, &Font24, WHITE, BLACK); // 时间显示
+        Paint_DrawTime(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_start,
+                       dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start,
+                       &dev->current_time, &Font24, WHITE, BLACK); // 时间显示
         break;
     case EPD_MAIN_SCREEN_ELEMENT_DATE:
         sprintf((char *)dev->date, "%4d/%2d/%2d", dev->current_time.Year, dev->current_time.Month, dev->current_time.Day);
@@ -1073,13 +1354,23 @@ uint8_t epd_main_updata(epd_dev_v2_t *dev)
                             dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y_start,
                             (char *)dev->humidity, &Font20, WHITE, BLACK); // 湿度显示
         break;
+    case EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON:
+        Paint_DrawBitMap_Paste(gImage_wifi_linked_icon,
+                               dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].x_start,
+                               dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].y_start,
+                               48, 48, 1);
+        break;
+    case EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON:
+        Paint_DrawBitMap_Paste(gImage_cloudy,
+                               dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].x_start,
+                               dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].y_start,
+                               48, 48, 1);
+
+        break;
     default:
+
         break;
     }
-    Paint_DrawBitMap_Paste(gImage_wifi_linked_icon,
-                           dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].x_start,
-                           dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].y_start,
-                           48, 48, 1);
     return 0;
 }
 
@@ -1098,11 +1389,13 @@ uint8_t epd_page_main_init(epd_dev_v2_t *dev)
 
     // 初始化屏幕组件坐标
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_start = EPD_2IN7_V2_WIDTH / 2 + 15;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_end = EPD_2IN7_V2_WIDTH / 2 + 15 + Font24.Width * 7;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start = 80;               // 时间
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_end = 80 + Font24.Heigh1t; // 时间
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_end = EPD_2IN7_V2_WIDTH / 2 + 115;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start = 80;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_end = 80 + Font24.Height; // 时间
 
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x_start = EPD_2IN7_V2_HEIGHT / 5 + 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x_end = EPD_2IN7_V2_HEIGHT / 5 + 10 + 10 * Font20.Width;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y_end = EPD_2IN7_V2_WIDTH / 6 * 5 + Font20.Height;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y_start = EPD_2IN7_V2_WIDTH / 6 * 5; // 日期
 
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x_start = EPD_2IN7_V2_HEIGHT / 3 + 10;
@@ -1110,13 +1403,21 @@ uint8_t epd_page_main_init(epd_dev_v2_t *dev)
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x_start = EPD_2IN7_V2_HEIGHT / 3 + 10;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y_start = 30; // 湿度
 
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].x_start = 0;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].y_start = 0; // 天气图片
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].x_start = 20;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].y_start = 5; // 天气图片0
 
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].x_start = EPD_2IN7_V2_HEIGHT / 3 * 2 + 10;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].y_start = 0; // WiFi图片
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].x_start = EPD_2IN7_V2_HEIGHT / 3 * 2 + 20;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].y_start = 5; // WiFi图片
 
-    epd_main_updata(dev);
+    // 显示主页面组件
+    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_LINE);
+    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_TIME);
+    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_DATE);
+    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_T);
+    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_H);
+    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON);
+    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON);
+
     EPD_2IN7_V2_Display_Base(dev, dev->frame_buf);
     return 0;
 }
