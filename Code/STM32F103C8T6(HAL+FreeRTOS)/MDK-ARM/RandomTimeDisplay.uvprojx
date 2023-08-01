@@ -666,6 +666,11 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\DS1307\ds1307.c</FilePath>
             </File>
+            <File>
+              <FileName>epd_icon.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EPaper\epd_icon.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

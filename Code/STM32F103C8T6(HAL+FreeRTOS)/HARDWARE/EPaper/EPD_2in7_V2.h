@@ -34,6 +34,7 @@
 #include "main.h"
 #include "usart1.h" // 该头文件包含调试系统
 #include "GUI_Paint.h"
+#include "w25qxx.h"
 
 // Display resolution
 #define EPD_2IN7_V2_WIDTH 176
@@ -107,7 +108,18 @@ typedef struct epd_dev_v2_t
     epd_screen_element_t refresh_element;                                // 要刷新的组件
     epd_element_attr_t main_element_attr[EPD_MAIN_SCREEN_TOTAL_ELEMENT]; // 每个组件元素都有自己的坐标
     epd_weather_type_t current_weather_type_em;                          // 当前天气类型
-    
+
+#define EPD_MAIN_PAGE_ICON_WEIGHT 48                                                          // 图标宽
+#define EPD_MAIN_PAGE_ICON_HEIGHT 48                                                          // 图标高
+#define EPD_MAIN_PAGE_ICON_SIZE ((EPD_MAIN_PAGE_ICON_HEIGHT * EPD_MAIN_PAGE_ICON_WEIGHT) / 8) // 保存图标需要的字节数
+#define WEATHER_SUNNY_ICON_ADDER 0x0000008                                                    // 图标地址
+#define WEATHER_CLOUDY_ICON_ADDER (WEATHER_SUNNY_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
+#define WEATHER_RAINY_ICON_ADDER (WEATHER_CLOUDY_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
+#define WEATHER_SNOWY_ICON_ADDER (WEATHER_RAINY_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
+#define WIFI_LINKED_ICON_ADDER (WEATHER_SNOWY_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
+#define WIFI_UNLINKED_ICON_ADDER (WIFI_LINKED_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
+    w25qxx_device_t *p_w25qxx_dev_st; // 需要从W25QXX中读取图片数据
+
     /* 函数指针 */
     void (*delay_ms_callback)(uint32_t ms);
     uint8_t (*spi_write_byte_callback)(uint8_t data);
@@ -126,6 +138,7 @@ extern epd_dev_v2_t g_epd_dev;
 
 /* 全局函数 */
 uint8_t epd_init(epd_dev_v2_t *dev,
+                 w25qxx_device_t *p_w25qxx_dev,
                  void (*delay_callback)(uint32_t ms),
                  uint8_t (*write_callback)(uint8_t data),
                  uint8_t (*start_callback)(void),

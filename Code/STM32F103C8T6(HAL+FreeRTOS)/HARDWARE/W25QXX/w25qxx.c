@@ -2,7 +2,7 @@
  * @Description: w25qxx 的驱动代码, 项目中使用的是W25Q128
  * @Author: TOTHTOT
  * @Date: 2023-07-18 21:32:10
- * @LastEditTime: 2023-07-30 16:14:38
+ * @LastEditTime: 2023-08-01 21:38:17
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\W25QXX\w25qxx.c
  */
@@ -10,9 +10,12 @@
 #include "w25qxx.h"
 #include "spi.h"
 #include "delay.h"
+#include <string.h>
+#include "usart1.h"
+#include <stdio.h>
 
 /* 全局变量 */
-w25qxx_device_t g_w25qxx_dev = {0};
+w25qxx_device_t g_w25qxx_dev_st = {0};
 /* 内部函数 */
 void w25qxx_wait_busy(w25qxx_device_t *dev);
 void w25qxx_erase_sector(uint32_t Dst_Addr, w25qxx_device_t *dev);
@@ -262,7 +265,7 @@ void w25qxx_read_data(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRea
  * @author: TOTHTOT
  * @date: 2023年7月18日22:58:33
  */
-void w25qxx_write_page(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev)
+void w25qxx_write_page(const uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev)
 {
     uint16_t i;
 
@@ -300,7 +303,7 @@ void w25qxx_write_page(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToW
  * @author: TOTHTOT
  * @date: 2023年7月18日23:03:41
  */
-void w25qxx_write_nocheck(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev)
+void w25qxx_write_nocheck(const uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev)
 {
     uint16_t pageremain;
     pageremain = 256 - WriteAddr % 256; // 单页剩余的字节数
@@ -337,7 +340,7 @@ void w25qxx_write_nocheck(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByte
  * @author: TOTHTOT
  * @date:
  */
-void w25qxx_write_data(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev)
+void w25qxx_write_data(const uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev)
 {
     uint32_t secpos;
     uint16_t secoff;
@@ -355,7 +358,7 @@ void w25qxx_write_data(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToW
     while (1)
     {
         w25qxx_read_data(W25QXX_BUF, secpos * 4096, 4096, dev); // 读出整个扇区的内容
-        for (i = 0; i < secremain; i++)                    // 校验数据
+        for (i = 0; i < secremain; i++)                         // 校验数据
         {
             if (W25QXX_BUF[secoff + i] != 0XFF)
                 break; // 需要擦除
@@ -484,6 +487,38 @@ void w25qxx_wakeup(w25qxx_device_t *dev)
 }
 
 /**
+ * @name:
+ * @msg:
+ * @param {w25qxx_device_t} *dev 结构体
+ * @return {== 0 数据有效, == 1 数据无效}
+ * @author: TOTHTOT
+ * @date:
+ */
+/**
+ * @name: w25qxx_check_flag
+ * @msg: 检查芯片数据是否有效
+ * @param {w25qxx_device_t} *dev
+ * @param {uint32_t} *flag_adder 检查的标志的地址
+ * @param {uint8_t} *flag 检查的标志
+ * @param {uint8_t} flag_len 标志长度
+ * @return {== 0 数据有效, == 1 数据无效}
+ * @author: TOTHTOT
+ * @date: 2023年8月1日
+ */
+uint8_t w25qxx_check_flag(w25qxx_device_t *dev, uint32_t flag_adder, const uint8_t *flag, uint8_t flag_len)
+{
+    uint8_t ret = 0;
+
+    dev->read_data_cb(dev->read_buf, flag_adder, flag_len, dev);
+    if (strncmp((const char *)dev->read_buf, (const char *)flag, flag_len) != 0)
+    {
+        ret = 1;
+    }
+
+    return ret;
+}
+
+/**
  * @name: w25qxx_init
  * @msg: w25qxx 初始化
  * @param {w25qxx_device_t} *dev
@@ -503,23 +538,37 @@ uint32_t w25qxx_init(w25qxx_device_t *dev)
     dev->read_data_cb = w25qxx_read_data;
     dev->write_data_cb = w25qxx_write_data;
     dev->erase_sector_cb = w25qxx_erase_sector;
+    dev->check_flag_cb = w25qxx_check_flag;
 
     dev->cs_ctrl_callback(1); // 取消选中
 
     dev->set_speed_callback(SPI_BAUDRATEPRESCALER_2); // 设置为42M时钟,高速模式
     dev->device_type = w25qxx_readid(dev);            // 读取FLASH ID.
-    if (dev->device_type == W25Q256)                  // SPI FLASH为W25Q256
+
+    // 读取ID错误的话就标记设备不在线
+    if (dev->device_type == 0 || dev->device_type == 0xffff)
+    {
+        INFO_PRINT("offline\r\n");
+        dev->state_em = W25QXX_STATE_OFFLINE;
+    }
+    else
+    {
+        INFO_PRINT("online\r\n");
+        dev->state_em = W25QXX_STATE_ONLINE;
+    }
+
+    if (dev->device_type == W25Q256) // SPI FLASH为W25Q256
     {
         temp = w25qxx_read_sr(3, dev); // 读取状态寄存器3，判断地址模式
-        if ((temp & 0X01) == 0)  // 如果不是4字节地址模式,则进入4字节地址模式
+        if ((temp & 0X01) == 0)        // 如果不是4字节地址模式,则进入4字节地址模式
         {
             dev->cs_ctrl_callback(0);               // 选中
             dev->wr_callback(W25X_Enable4ByteAddr); // 发送进入4字节地址模式指令
             dev->cs_ctrl_callback(1);               // 取消片选
         }
     }
-    
+
     ret = dev->device_type;
-    
+
     return ret;
 }

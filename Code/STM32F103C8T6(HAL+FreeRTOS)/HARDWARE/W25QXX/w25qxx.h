@@ -2,7 +2,7 @@
  * @Description: w25qxx 的驱动代码
  * @Author: TOTHTOT
  * @Date: 2023-07-18 21:32:17
- * @LastEditTime: 2023-07-30 16:35:26
+ * @LastEditTime: 2023-08-01 22:02:04
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\W25QXX\w25qxx.h
  */
@@ -35,23 +35,35 @@
 #define W25X_Enable4ByteAddr 0xB7
 #define W25X_Exit4ByteAddr 0xE9
 
+#define W25QXX_FLAG_ADDER 0x00000000
+#define W25QXX_FLAG_DATA "OK"
+#define W25QXX_FLAG_LEN 2
+
 /* 结构体定义 */
 typedef struct w25qxx_device_t w25qxx_device_t;
 #pragma pack(1)
+typedef enum
+{
+    W25QXX_STATE_NONE,
+    W25QXX_STATE_ONLINE,
+    W25QXX_STATE_OFFLINE,
+    W25QXX_TOTAL_STATE
+} w25qxx_state_t;
+
 struct w25qxx_device_t
 {
 #define W25QXX_READ_BUF_SIZE 4096
     uint8_t read_buf[W25QXX_READ_BUF_SIZE]; // 读缓存
 
 // W25X系列Q系列芯片列表
-#define W25Q80 0XEF13     // W25Q80  ID
-#define W25Q16 0XEF14     // W25Q16  ID
-#define W25Q32 0XEF15     // W25Q32  ID
-#define W25Q64 0XEF16     // W25Q64  ID
-#define W25Q128 0XEF17    // W25Q128 ID
-#define W25Q256 0XEF18    // W25Q256 ID
-    uint32_t device_type; // 设备类型
-
+#define W25Q80 0XEF13        // W25Q80  ID
+#define W25Q16 0XEF14        // W25Q16  ID
+#define W25Q32 0XEF15        // W25Q32  ID
+#define W25Q64 0XEF16        // W25Q64  ID
+#define W25Q128 0XEF17       // W25Q128 ID
+#define W25Q256 0XEF18       // W25Q256 ID
+    uint32_t device_type;    // 设备类型
+    w25qxx_state_t state_em; // 设备状态
     /* 保存在 flash 中的数据有一下:
     1. WiFi的图标;
     2. 天气图标, 很多个;
@@ -60,11 +72,6 @@ struct w25qxx_device_t
     5. 连接的WIFI以及密码; */
     struct save_data_t
     {
-#define FLASH_WiFi_ICON_ADDER 0x00000000
-#define FLASH_WiFi_ICON_SIZE 0x2000
-#define FLASH_WEATHER_ICON_ADDER 0x2000
-#define FLASH_WEATHER_ICON_SIZE 0x2000
-#define FLASH_HISTORY_DATA_ADDER
 
         char a;
 
@@ -76,12 +83,13 @@ struct w25qxx_device_t
     void (*set_speed_callback)(uint8_t speed); // 设置速度
     /* 函数指针, 外部使用 */
     void (*erase_sector_cb)(uint32_t Dst_Addr, w25qxx_device_t *dev);                                           // 擦除扇区
-    void (*write_data_cb)(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev); // 写入数据
+    void (*write_data_cb)(const uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev); // 写入数据
     void (*read_data_cb)(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead, w25qxx_device_t *dev);    // 读取数据
+    uint8_t (*check_flag_cb)(w25qxx_device_t *dev, uint32_t flag_adder, const uint8_t *flag, uint8_t flag_len); // 检查标志位是否有效
 };
 #pragma pack()
 /* 全局变量 */
-extern w25qxx_device_t g_w25qxx_dev;
+extern w25qxx_device_t g_w25qxx_dev_st;
 
 /* 全局函数 */
 uint32_t w25qxx_init(w25qxx_device_t *dev);

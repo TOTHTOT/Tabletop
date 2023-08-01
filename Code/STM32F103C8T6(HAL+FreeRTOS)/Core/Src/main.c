@@ -178,7 +178,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     if (htim->Instance == TIM3)
     {
         ds1307_time_increase(&g_epd_dev.current_time);
-        print_current_time(&g_epd_dev.current_time);
+        // print_current_time(&g_epd_dev.current_time);
         if (g_epd_dev.en_refresh_callback != NULL)
         {
             if (g_epd_dev.enter_system_flag == 1)
