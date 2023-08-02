@@ -2,7 +2,7 @@
  * @Description: w25qxx 的驱动代码
  * @Author: TOTHTOT
  * @Date: 2023-07-18 21:32:17
- * @LastEditTime: 2023-08-01 22:02:04
+ * @LastEditTime: 2023-08-02 20:59:49
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\W25QXX\w25qxx.h
  */
@@ -35,20 +35,17 @@
 #define W25X_Enable4ByteAddr 0xB7
 #define W25X_Exit4ByteAddr 0xE9
 
-#define W25QXX_FLAG_ADDER 0x00000000
-#define W25QXX_FLAG_DATA "OK"
-#define W25QXX_FLAG_LEN 2
-
 /* 结构体定义 */
 typedef struct w25qxx_device_t w25qxx_device_t;
+typedef struct sensor_data_t sensor_data_t;
+
 #pragma pack(1)
-typedef enum
-{
-    W25QXX_STATE_NONE,
-    W25QXX_STATE_ONLINE,
-    W25QXX_STATE_OFFLINE,
-    W25QXX_TOTAL_STATE
-} w25qxx_state_t;
+    typedef enum {
+        W25QXX_STATE_NONE,
+        W25QXX_STATE_ONLINE,
+        W25QXX_STATE_OFFLINE,
+        W25QXX_TOTAL_STATE
+    } w25qxx_state_t;
 
 struct w25qxx_device_t
 {
@@ -64,17 +61,44 @@ struct w25qxx_device_t
 #define W25Q256 0XEF18       // W25Q256 ID
     uint32_t device_type;    // 设备类型
     w25qxx_state_t state_em; // 设备状态
-    /* 保存在 flash 中的数据有一下:
-    1. WiFi的图标;
-    2. 天气图标, 很多个;
-    3. 历史的温湿度数据一天存100个;
-    4. 各个组件的位置信息(未实现);
-    5. 连接的WIFI以及密码; */
+
+    // 保存写写入到flash的格式
     struct save_data_t
     {
+// 标志参数信息
+#define W25QXX_FLAG_ADDER 0x00000000
+#define W25QXX_FLAG_DATA "OK"
+#define W25QXX_FLAG_LEN 2
+// 历史数据信息
+#define W25QXX_DATA_ADDER (W25QXX_FLAG_ADDER + W25QXX_FLAG_LEN)
+#define W25QXX_DATA_MAX_DAYS 10   // 保存的天数最大值
+#define W25QXX_DATA_MAX_NUM 100   // 一天保存数据最大数目
+#define W25QXX_SENSOR_HEAD_SIZE 4 // 一天信息中的头部信息大小 字节
+        // 系统的配置参数, 在 W25QXX_FLAG_ADDER 后面, 这个结构体总体大小小于500字节!!
+        struct save_data_config
+        {
+            uint8_t wifi_name[20];
+            uint8_t wifi_password[25];
+            uint16_t current_write_counter; // 当前写入到 flash 中的数量, 每写一次就加1, 每过一天就重置为0 小于W25QXX_DATA_MAX_NUM
+            uint32_t current_write_day;     // 当前写入的天数等于0时写入在, 写入地址计算公式如下:
+                                            // (W25QXX_DATA_MAX_NUM*sizeof(sensor_data_t)*(current_write_day%W25QXX_DATA_MAX_DAYS)) + W25QXX_DATA_ADDER + (W25QXX_SENSOR_HEAD_SIZE*(current_write_day%W25QXX_DATA_MAX_DAYS)) + current_write_counter*sizeof(sensor_data_t)
+                                            // current_write_day 每过一天加1, 永不清0, 上电时与前一条的数据的日期对比, 如果大于就+1
+                                            // 等于就继续写, 小于就覆盖上一条数据.
+        } system_config_st;
 
-        char a;
-
+        // 写入传感器数据到flash格式
+        // 头四个字节分别表示:年(2 byte), 月(1 byte), 日(1 byte), 后面紧跟着 W25QXX_DATA_MAX_NUM 个传感器数据
+        struct one_day_sensor_data_t
+        {
+            uint16_t year;
+            uint8_t mon;
+            uint8_t day;
+            struct sensor_data_t
+            {
+                uint8_t temp;
+                uint8_t humi;
+            } sensor_data_st[W25QXX_DATA_MAX_NUM];
+        } one_day_data_t;
     } save_data_st;
 
     /* 函数指针底层驱动, 用户提供 */
@@ -82,10 +106,11 @@ struct w25qxx_device_t
     int (*cs_ctrl_callback)(uint8_t state);    // 片选控制
     void (*set_speed_callback)(uint8_t speed); // 设置速度
     /* 函数指针, 外部使用 */
-    void (*erase_sector_cb)(uint32_t Dst_Addr, w25qxx_device_t *dev);                                           // 擦除扇区
+    void (*erase_sector_cb)(uint32_t Dst_Addr, w25qxx_device_t *dev);                                                 // 擦除扇区
     void (*write_data_cb)(const uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite, w25qxx_device_t *dev); // 写入数据
-    void (*read_data_cb)(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead, w25qxx_device_t *dev);    // 读取数据
-    uint8_t (*check_flag_cb)(w25qxx_device_t *dev, uint32_t flag_adder, const uint8_t *flag, uint8_t flag_len); // 检查标志位是否有效
+    void (*read_data_cb)(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead, w25qxx_device_t *dev);          // 读取数据
+    uint8_t (*check_flag_cb)(w25qxx_device_t *dev, uint32_t flag_adder, const uint8_t *flag, uint8_t flag_len);       // 检查标志位是否有效
+    uint32_t (*write_sensor_adder_cb)(uint32_t current_write_counter, uint32_t current_write_day);                    // 传感器写入地址计算
 };
 #pragma pack()
 /* 全局变量 */

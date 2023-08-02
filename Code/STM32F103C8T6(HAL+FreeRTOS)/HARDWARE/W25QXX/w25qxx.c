@@ -2,7 +2,7 @@
  * @Description: w25qxx 的驱动代码, 项目中使用的是W25Q128
  * @Author: TOTHTOT
  * @Date: 2023-07-18 21:32:10
- * @LastEditTime: 2023-08-01 21:38:17
+ * @LastEditTime: 2023-08-02 21:09:14
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\W25QXX\w25qxx.c
  */
@@ -519,6 +519,23 @@ uint8_t w25qxx_check_flag(w25qxx_device_t *dev, uint32_t flag_adder, const uint8
 }
 
 /**
+ * @name: w25qxx_cal_write_sensor_adder
+ * @msg: 计算传感器数据写入到flash中的地址
+ * @param {uint32_t} current_write_counter 一天中已经写入的个数
+ * @param {uint32_t} current_write_day 第几天
+ * @return {地址}
+ * @author: TOTHTOT
+ * @date:2023年8月2日
+ */
+uint32_t w25qxx_cal_write_sensor_adder(uint32_t current_write_counter, uint32_t current_write_day)
+{
+    uint32_t result = (W25QXX_DATA_MAX_NUM * sizeof(sensor_data_t) * (current_write_day % W25QXX_DATA_MAX_DAYS)) +
+                 W25QXX_DATA_ADDER + (W25QXX_SENSOR_HEAD_SIZE * (current_write_day % W25QXX_DATA_MAX_DAYS)) +
+                 (current_write_counter * sizeof(sensor_data_t));
+    return result;
+}
+
+/**
  * @name: w25qxx_init
  * @msg: w25qxx 初始化
  * @param {w25qxx_device_t} *dev
@@ -539,6 +556,7 @@ uint32_t w25qxx_init(w25qxx_device_t *dev)
     dev->write_data_cb = w25qxx_write_data;
     dev->erase_sector_cb = w25qxx_erase_sector;
     dev->check_flag_cb = w25qxx_check_flag;
+    dev->write_sensor_adder_cb = w25qxx_cal_write_sensor_adder;
 
     dev->cs_ctrl_callback(1); // 取消选中
 

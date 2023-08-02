@@ -112,7 +112,7 @@ typedef struct epd_dev_v2_t
 #define EPD_MAIN_PAGE_ICON_WEIGHT 48                                                          // 图标宽
 #define EPD_MAIN_PAGE_ICON_HEIGHT 48                                                          // 图标高
 #define EPD_MAIN_PAGE_ICON_SIZE ((EPD_MAIN_PAGE_ICON_HEIGHT * EPD_MAIN_PAGE_ICON_WEIGHT) / 8) // 保存图标需要的字节数
-#define WEATHER_SUNNY_ICON_ADDER 0x0000008                                                    // 图标地址
+#define WEATHER_SUNNY_ICON_ADDER 0x00000200                                                   // 图标地址, 0x0000 00000到0x0000 01ff保存参数
 #define WEATHER_CLOUDY_ICON_ADDER (WEATHER_SUNNY_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
 #define WEATHER_RAINY_ICON_ADDER (WEATHER_CLOUDY_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
 #define WEATHER_SNOWY_ICON_ADDER (WEATHER_RAINY_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
