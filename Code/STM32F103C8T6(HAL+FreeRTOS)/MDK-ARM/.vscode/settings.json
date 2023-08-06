@@ -16,6 +16,7 @@
         "freertos.h": "c",
         "main.h": "c",
         "cmsis_os.h": "c",
-        "fonts.h": "c"
+        "fonts.h": "c",
+        "dht11.h": "c"
     }
 }

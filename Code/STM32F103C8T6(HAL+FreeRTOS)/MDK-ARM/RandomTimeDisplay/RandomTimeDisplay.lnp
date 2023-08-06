@@ -24,6 +24,7 @@
 "randomtimedisplay\font24cn.o"
 "randomtimedisplay\ds1307.o"
 "randomtimedisplay\epd_icon.o"
+"randomtimedisplay\dht11.o"
 "randomtimedisplay\delay.o"
 "randomtimedisplay\usart1.o"
 "randomtimedisplay\stm32f1xx_hal_gpio_ex.o"

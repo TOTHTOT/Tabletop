@@ -38,6 +38,7 @@
 #include "EPD_2in7_V2.h"
 #include "w25qxx.h"
 #include "ds1307.h"
+#include "dht11.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -170,12 +171,11 @@ void StartDefaultTask(void const *argument)
     INFO_PRINT("system version %s\r\nbuild date %s, time %s\r\n", APP_VERSION, __DATE__, __TIME__);
     ret = w25qxx_init(&g_w25qxx_dev_st); // 先初始化 w25qxx
 
-    
     // 初始化w25qxx
     INFO_PRINT("flash device type = %x\r\n", ret);
-    if (g_w25qxx_dev_st.state_em == W25QXX_STATE_ONLINE) // W25QXX 在线的前提下才需要检查标志, 如果不在线就用默认的图标
+    if (g_w25qxx_dev_st.state_em == W25QXX_STATE_ONLINE) // W25QXX 在线的前提下才需要检查标�?, 如果不在线就用默认的图标
     {
-        // 检查标志位不符合, 写入icon数据以及其他配置数据
+        // �?查标志位不符�?, 写入icon数据以及其他配置数据
         if (g_w25qxx_dev_st.check_flag_cb(&g_w25qxx_dev_st, W25QXX_FLAG_ADDER, W25QXX_FLAG_DATA, W25QXX_FLAG_LEN) != 0)
         {
             INFO_PRINT("w25qxx flag not ok\r\n");
@@ -188,14 +188,12 @@ void StartDefaultTask(void const *argument)
             g_w25qxx_dev_st.write_data_cb(gImage_rain_icon, WEATHER_RAINY_ICON_ADDER, EPD_MAIN_PAGE_ICON_SIZE, &g_w25qxx_dev_st);
             g_w25qxx_dev_st.write_data_cb(gImage_snow_icon, WEATHER_SNOWY_ICON_ADDER, EPD_MAIN_PAGE_ICON_SIZE, &g_w25qxx_dev_st);
             g_w25qxx_dev_st.write_data_cb(gImage_sunny_icon, WEATHER_SUNNY_ICON_ADDER, EPD_MAIN_PAGE_ICON_SIZE, &g_w25qxx_dev_st);
-
         }
         else
         {
             INFO_PRINT("w25qxx flag ok\r\n");
         }
     }
-    
 
     extern uint8_t epd_spi_write_byte(uint8_t data);
     extern uint8_t edp_pin_ctrl(epd_pin_ctrl_t pin, uint8_t state);
@@ -203,7 +201,19 @@ void StartDefaultTask(void const *argument)
     extern uint8_t epd_end(void);
     extern uint8_t epd_en_refresh(epd_dev_v2_t * dev, epd_screen_element_t element);
 
-    epd_init(&g_epd_dev, &g_w25qxx_dev_st, delay_xms, epd_spi_write_byte, epd_start, epd_end, edp_pin_ctrl, epd_en_refresh);
+    if (dht11_init(&g_dht11_device_st) != 0)
+    {
+        g_dht11_device_st.state_em = DHT11_STATUS_OFFLINE;
+        ERROR_PRINT("dht11 init failed\r\n");
+    }
+    else
+    {
+        INFO_PRINT("dht11 init success\r\n");
+        g_dht11_device_st.state_em = DHT11_STATUS_ONLINE;
+    }
+
+    ds1307_init(&g_ds1307_dev_st, NULL);
+    // epd_init(&g_epd_dev, &g_w25qxx_dev_st, delay_xms, epd_spi_write_byte, epd_start, epd_end, edp_pin_ctrl, epd_en_refresh);
     g_epd_dev.enter_system_flag = 1;
     vTaskDelete(NULL);
     /* USER CODE END StartDefaultTask */
@@ -219,10 +229,21 @@ void StartDefaultTask(void const *argument)
 void led_task(void const *argument)
 {
     /* USER CODE BEGIN led_task */
+    uint8_t ret = 0;
     /* Infinite loop */
     for (;;)
     {
-        // INFO_PRINT("led\r\n");
+        if (g_dht11_device_st.read_data_cb != NULL)
+        {
+            ret = g_dht11_device_st.read_data_cb(&g_dht11_device_st);
+            if (ret != 0)
+                ERROR_PRINT("read_data_cb() fault[%d]\r\n", ret);
+            else
+                INFO_PRINT("temp = %dC humi = %d%%\r\n", g_dht11_device_st.temp, g_dht11_device_st.humi);
+        }
+        else
+            ERROR_PRINT("read_data_cb() is null\r\n");
+
         LED0_TOGGLE;
         delay_ms(500);
     }
@@ -248,7 +269,6 @@ void usart1_task(void const *argument)
         printf("data:%s len:%d\r\n", USART_RX_BUF, len);
         memset(USART_RX_BUF, '\0', sizeof(USART_RX_BUF)); // initialization buf
         USART_RX_STA = 0;
-        // osDelay(1);
         delay_ms(1);
     }
     /* USER CODE END usart1_task */
@@ -276,7 +296,7 @@ void epd_refresh(void const *argument)
 
         g_epd_dev.refresh_element = EPD_MAIN_SCREEN_ELEMENT_NONE;
 
-        // 必须两次 不然显示不正确!!!!
+        // 必须两次 不然显示不正�?!!!!
         EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
         EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
         EPD_2IN7_V2_Sleep(&g_epd_dev);
