@@ -745,7 +745,6 @@ uint8_t epd_main_updata(epd_dev_v2_t *dev, epd_screen_element_t elememt)
                             dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y_start,
                             (char *)dev->date, &Font20, WHITE, BLACK); // 日期显示
         break;
-
     case EPD_MAIN_SCREEN_ELEMENT_LINE:
         // 两条横线
         Paint_DrawLine(0, EPD_2IN7_V2_WIDTH / 3, EPD_2IN7_V2_HEIGHT, EPD_2IN7_V2_WIDTH / 3,
@@ -760,12 +759,13 @@ uint8_t epd_main_updata(epd_dev_v2_t *dev, epd_screen_element_t elememt)
                        BLACK, DOT_PIXEL_2X2, LINE_STYLE_SOLID); // 这里的xend必须减1 不然指针越界造成时间值错误!!!!!
         break;
     case EPD_MAIN_SCREEN_ELEMENT_T:
-    case EPD_MAIN_SCREEN_ELEMENT_H:
-        sprintf((char *)dev->temperature, "%3dC", 26);
+        sprintf((char *)dev->temperature, "%3dC", dev->p_dht11_dev_st->temp);
         Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x_start,
                             dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y_start,
                             (char *)dev->temperature, &Font20, WHITE, BLACK); // 温度显示
-        sprintf((char *)dev->humidity, "%3d%%", 50);
+        break;
+    case EPD_MAIN_SCREEN_ELEMENT_H:
+        sprintf((char *)dev->humidity, "%3d%%", dev->p_dht11_dev_st->humi);
         Paint_DrawString_EN(dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x_start,
                             dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y_start,
                             (char *)dev->humidity, &Font20, WHITE, BLACK); // 湿度显示
@@ -795,7 +795,7 @@ uint8_t epd_main_updata(epd_dev_v2_t *dev, epd_screen_element_t elememt)
         if (dev->p_w25qxx_dev_st->state_em == W25QXX_STATE_ONLINE) // 如果在线就读取flash中的数据否则使用默认图标
         {
             INFO_PRINT("read wrather icon from w25qxx\r\n");
-            dev->p_w25qxx_dev_st->read_data_cb(dev->p_w25qxx_dev_st->read_buf, WEATHER_CLOUDY_ICON_ADDER,
+            dev->p_w25qxx_dev_st->read_data_cb(dev->p_w25qxx_dev_st->read_buf, WEATHER_SNOWY_ICON_ADDER,
                                                EPD_MAIN_PAGE_ICON_SIZE, dev->p_w25qxx_dev_st);
             Paint_DrawBitMap_Paste(dev->p_w25qxx_dev_st->read_buf,
                                    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].x_start,
@@ -832,20 +832,27 @@ uint8_t epd_page_main_init(epd_dev_v2_t *dev)
     Paint_SelectImage(dev->frame_buf);
 
     // 初始化屏幕组件坐标
+    // 时间
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_start = EPD_2IN7_V2_WIDTH / 2 + 15;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].x_end = EPD_2IN7_V2_WIDTH / 2 + 115;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_start = 80;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_end = 80 + Font24.Height; // 时间
-
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_TIME].y_end = 80 + Font24.Height;
+    // 日期
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x_start = EPD_2IN7_V2_HEIGHT / 5 + 10;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].x_end = EPD_2IN7_V2_HEIGHT / 5 + 10 + 10 * Font20.Width;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y_start = EPD_2IN7_V2_WIDTH / 6 * 5;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y_end = EPD_2IN7_V2_WIDTH / 6 * 5 + Font20.Height;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_DATE].y_start = EPD_2IN7_V2_WIDTH / 6 * 5; // 日期
 
+    // 温度
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x_start = EPD_2IN7_V2_HEIGHT / 3 + 10;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y_start = 10; // 温度
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].x_end = EPD_2IN7_V2_HEIGHT / 3 + 10 + 3 * Font20.Width;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y_start = 10;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_T].y_end = 10 + Font20.Height;
+    // 湿度
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x_start = EPD_2IN7_V2_HEIGHT / 3 + 10;
-    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y_start = 30; // 湿度
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].x_end = EPD_2IN7_V2_HEIGHT / 3 + 10 + 3 * Font20.Width;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y_start = 30;
+    dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_H].y_end = 30 + Font20.Height;
 
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].x_start = 20;
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON].y_start = 5; // 天气图片0
@@ -854,13 +861,13 @@ uint8_t epd_page_main_init(epd_dev_v2_t *dev)
     dev->main_element_attr[EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON].y_start = 5; // WiFi图片
 
     // 显示主页面组件
-    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_LINE);
-    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_TIME);
     epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_DATE);
     epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_T);
     epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_H);
     epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_WEATHER_ICON);
     epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_WiFi_ICON);
+    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_LINE);
+    epd_main_updata(dev, EPD_MAIN_SCREEN_ELEMENT_TIME);
     EPD_2IN7_V2_Display_Base(dev, dev->frame_buf);
     return 0;
 }
@@ -881,6 +888,7 @@ uint8_t epd_page_main_init(epd_dev_v2_t *dev)
  */
 uint8_t epd_init(epd_dev_v2_t *dev,
                  w25qxx_device_t *p_w25qxx_dev,
+                 dht11_dev_t *p_dht11_dev,
                  void (*delay_callback)(uint32_t ms),
                  uint8_t (*write_callback)(uint8_t data),
                  uint8_t (*start_callback)(void),
@@ -901,6 +909,10 @@ uint8_t epd_init(epd_dev_v2_t *dev,
         ret = 1;
     }
 
+    /* 初始化参数 */
+    dev->p_w25qxx_dev_st = p_w25qxx_dev;
+    dev->p_dht11_dev_st = p_dht11_dev;
+
     /* 函数指针初始化 */
     dev->delay_ms_callback = delay_callback;
     dev->module_end_callback = end_callback;
@@ -915,17 +927,8 @@ uint8_t epd_init(epd_dev_v2_t *dev,
 
     dev->enter_system_flag = 0;
     dev->current_page = EPD_PAGE_MAIN;
-    dev->current_time.Year = 2023;
-    dev->current_time.Month = 1;
-    dev->current_time.Day = 1;
-    dev->current_time.Hour = 12;
-    dev->current_time.Min = 0;
-    dev->current_time.Sec = 20;
-    dev->enter_system_flag = 0;
-    dev->p_w25qxx_dev_st = p_w25qxx_dev;
-    epd_page_main_init(dev);
 
-    // dev->module_end_callback();
+    epd_page_main_init(dev);
 
     return ret;
 }

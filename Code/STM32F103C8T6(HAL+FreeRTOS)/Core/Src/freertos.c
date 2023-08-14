@@ -173,9 +173,9 @@ void StartDefaultTask(void const *argument)
 
     // 初始化w25qxx
     INFO_PRINT("flash device type = %x\r\n", ret);
-    if (g_w25qxx_dev_st.state_em == W25QXX_STATE_ONLINE) // W25QXX 在线的前提下才需要检查标�?, 如果不在线就用默认的图标
+    if (g_w25qxx_dev_st.state_em == W25QXX_STATE_ONLINE) // W25QXX 在线的前提下才需要检查标�??, 如果不在线就用默认的图标
     {
-        // �?查标志位不符�?, 写入icon数据以及其他配置数据
+        // �??查标志位不符�??, 写入icon数据以及其他配置数据
         if (g_w25qxx_dev_st.check_flag_cb(&g_w25qxx_dev_st, W25QXX_FLAG_ADDER, W25QXX_FLAG_DATA, W25QXX_FLAG_LEN) != 0)
         {
             INFO_PRINT("w25qxx flag not ok\r\n");
@@ -209,12 +209,33 @@ void StartDefaultTask(void const *argument)
     else
     {
         INFO_PRINT("dht11 init success\r\n");
+        delay_xms(1500);
+        ret = g_dht11_device_st.read_data_cb(&g_dht11_device_st);
+        ret = g_dht11_device_st.read_data_cb(&g_dht11_device_st);
+        ret = g_dht11_device_st.read_data_cb(&g_dht11_device_st);
+        ret = g_dht11_device_st.read_data_cb(&g_dht11_device_st);
+        if (ret != 0)
+            ERROR_PRINT("read_data_cb() fault[%d]\r\n", ret);
+        else
+            INFO_PRINT("temp = %dC humi = %d%%\r\n", g_dht11_device_st.temp, g_dht11_device_st.humi);
+        INFO_PRINT("T:%d, H:%d\r\n", g_dht11_device_st.temp, g_dht11_device_st.humi);
         g_dht11_device_st.state_em = DHT11_STATUS_ONLINE;
     }
 
-    ds1307_init(&g_ds1307_dev_st, NULL);
-    // epd_init(&g_epd_dev, &g_w25qxx_dev_st, delay_xms, epd_spi_write_byte, epd_start, epd_end, edp_pin_ctrl, epd_en_refresh);
-    g_epd_dev.enter_system_flag = 1;
+#ifdef REDEFINE_TIME
+    g_epd_dev.current_time.Hour = 12;
+    g_epd_dev.current_time.Min = 31;
+    g_epd_dev.current_time.Sec = 0;
+    g_epd_dev.current_time.Day = 13;
+    g_epd_dev.current_time.Month = 8;
+    g_epd_dev.current_time.Year = 2023;
+#endif /* REDEFINE_TIME */
+
+    ds1307_init(&g_ds1307_dev_st, &g_epd_dev.current_time);
+    epd_init(&g_epd_dev, &g_w25qxx_dev_st, &g_dht11_device_st, delay_xms, epd_spi_write_byte,
+             epd_start, epd_end, edp_pin_ctrl, epd_en_refresh);
+    g_epd_dev.enter_system_flag = 1; // 系统初始化完成标志
+
     vTaskDelete(NULL);
     /* USER CODE END StartDefaultTask */
 }
@@ -245,7 +266,7 @@ void led_task(void const *argument)
             ERROR_PRINT("read_data_cb() is null\r\n");
 
         LED0_TOGGLE;
-        delay_ms(500);
+        delay_ms(1000);
     }
     /* USER CODE END led_task */
 }
@@ -292,11 +313,16 @@ void epd_refresh(void const *argument)
         // INFO_PRINT("refresh screen element[%d].\r\n", g_epd_dev.refresh_element);
         g_epd_dev.module_start_callback();
         EPD_2IN7_V2_Init(&g_epd_dev);
+
+        epd_main_updata(&g_epd_dev, g_epd_dev.refresh_element);
+        g_epd_dev.refresh_element = EPD_MAIN_SCREEN_ELEMENT_T;
+        epd_main_updata(&g_epd_dev, g_epd_dev.refresh_element);
+        g_epd_dev.refresh_element = EPD_MAIN_SCREEN_ELEMENT_H;
         epd_main_updata(&g_epd_dev, g_epd_dev.refresh_element);
 
         g_epd_dev.refresh_element = EPD_MAIN_SCREEN_ELEMENT_NONE;
 
-        // 必须两次 不然显示不正�?!!!!
+        // 必须两次 不然显示不正显示
         EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
         EPD_2IN7_V2_Display_Partial(&g_epd_dev, g_epd_dev.frame_buf, 0, 0, EPD_2IN7_V2_WIDTH, EPD_2IN7_V2_HEIGHT);
         EPD_2IN7_V2_Sleep(&g_epd_dev);

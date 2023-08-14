@@ -35,6 +35,7 @@
 #include "usart1.h" // 该头文件包含调试系统
 #include "GUI_Paint.h"
 #include "w25qxx.h"
+#include "dht11.h"
 
 // Display resolution
 #define EPD_2IN7_V2_WIDTH 176
@@ -119,6 +120,7 @@ typedef struct epd_dev_v2_t
 #define WIFI_LINKED_ICON_ADDER (WEATHER_SNOWY_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
 #define WIFI_UNLINKED_ICON_ADDER (WIFI_LINKED_ICON_ADDER + EPD_MAIN_PAGE_ICON_SIZE)
     w25qxx_device_t *p_w25qxx_dev_st; // 需要从W25QXX中读取图片数据
+    dht11_dev_t *p_dht11_dev_st;      // 温湿度数据
 
     /* 函数指针 */
     void (*delay_ms_callback)(uint32_t ms);
@@ -139,6 +141,7 @@ extern epd_dev_v2_t g_epd_dev;
 /* 全局函数 */
 uint8_t epd_init(epd_dev_v2_t *dev,
                  w25qxx_device_t *p_w25qxx_dev,
+                 dht11_dev_t *p_dht11_dev,
                  void (*delay_callback)(uint32_t ms),
                  uint8_t (*write_callback)(uint8_t data),
                  uint8_t (*start_callback)(void),

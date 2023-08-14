@@ -2,7 +2,7 @@
  * @Description: ds1307 驱动代码
  * @Author: TOTHTOT
  * @Date: 2023-07-23 14:59:53
- * @LastEditTime: 2023-08-06 20:24:58
+ * @LastEditTime: 2023-08-13 22:17:57
  * @LastEditors: TOTHTOT
  * @FilePath: \MDK-ARMe:\Learn\stm32\My_Project\Tabletop\Code\STM32F103C8T6(HAL+FreeRTOS)\HARDWARE\DS1307\ds1307.h
  */
@@ -26,12 +26,10 @@
 #define DS1307_REG_CENT 0x10
 #define DS1307_REG_RAM 0x11
 
-// typedef enum
-// {
+// #define REDEFINE_TIME 1
 
-// }ds1307_get_reg
-
-typedef struct
+typedef struct ds1307_device ds1307_device_t;
+struct ds1307_device
 {
     // 时间结构体来自 GUI_Paint.h, 为了兼容GUI的时间刷新函数,
     // 指向墨水屏设备里的时间结构体。
@@ -39,15 +37,18 @@ typedef struct
 
     /* 用户实现的回调函数 */
     uint8_t (*set_reg_byte_cb)(uint8_t reg_adder, uint8_t value);
-    uint8_t (*get_reg_byte_cb)(uint8_t reg_adder);
-} ds1307_device_t;
+    uint8_t (*get_reg_byte_cb)(uint8_t reg_addr, uint8_t *reg_value);
+    /* 外部函数 */
+    uint8_t (*get_time)(ds1307_device_t *dev);
+    uint8_t (*set_time)(ds1307_device_t *dev, PAINT_TIME *current_time);
+    void (*printf_time)(PAINT_TIME *time_st);
+    void (*time_increase)(PAINT_TIME *time_st);
+};
 
 /* 全局变量 */
 extern ds1307_device_t g_ds1307_dev_st;
 
 /* 全局函数 */
-void ds1307_time_increase(PAINT_TIME *time_st);
-void print_current_time(PAINT_TIME *time);
 uint8_t ds1307_init(ds1307_device_t *dev, PAINT_TIME *time);
 
 #endif /* __DS1307_H__ */
